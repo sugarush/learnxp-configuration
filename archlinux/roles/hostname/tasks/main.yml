@@ -1,0 +1,10 @@
+---
+
+- name: set hostname
+  command: hostnamectl set-hostname "{{ lookup('env', 'HOSTNAME') }}"
+
+- name: set instance name tag
+  ec2_tag:
+    resource: "{{ ansible_ec2_instance_id }}"
+    tags:
+      Name: "{{ lookup('env', 'HOSTNAME') }}"
