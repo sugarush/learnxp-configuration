@@ -1,10 +1,14 @@
 ---
 
-- name: set hostname
-  command: hostnamectl set-hostname "{{ lookup('env', 'HOSTNAME') }}"
+  - name: get ec2 metadata
+    ec2_metadata_facts:
 
-- name: set instance name tag
-  ec2_tag:
-    resource: "{{ ansible_ec2_instance_id }}"
-    tags:
-      Name: "{{ lookup('env', 'HOSTNAME') }}"
+  - name: set hostname
+    command: hostnamectl set-hostname "{{ lookup('env', 'HOSTNAME') }}"
+
+  - name: set instance name tag
+    ec2_tag:
+      region: "{{ lookup('env', 'REGION') }}"
+      resource: "{{ ansible_ec2_instance_id }}"
+      tags:
+        Name: "{{ lookup('env', 'HOSTNAME') }}"
