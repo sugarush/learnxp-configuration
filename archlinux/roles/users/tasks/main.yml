@@ -1,0 +1,12 @@
+---
+
+  - name: add user lava
+    user:
+      name: lava
+      group: users
+      groups: wheel
+
+  - name: set lava's authorized key
+    authorized_key:
+      user: lava
+      key: https://github.com/luciferavada.keys
