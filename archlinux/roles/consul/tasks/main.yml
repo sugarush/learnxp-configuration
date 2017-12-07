@@ -2,8 +2,8 @@
 
   - name: get consul package from s3
     aws_s3:
-      bucket: {{ bucket }}
-      object: {{ consul }}
+      bucket: "{{ bucket }}"
+      object: "{{ consul }}"
       dest: /tmp/consul.pkg.tar.xz
       mode: get
 
