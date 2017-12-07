@@ -8,4 +8,4 @@
       mode: get
 
   - name: install consul
-    command: pacman -U /tmp/consul.pkg.tar.xz
+    command: pacman --noconfirm -U /tmp/consul.pkg.tar.xz
