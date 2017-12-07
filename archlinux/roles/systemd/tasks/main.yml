@@ -1,0 +1,68 @@
+---
+
+- name: copy environment.py
+  copy:
+    dest: /usr/local/bin/environment.py
+    src: environment.py
+    mode: 0700
+
+- name: copy environment.service
+  copy:
+    dest: /etc/systemd/system/environment.service
+    src: system/environment.service
+
+- name: create journald.conf.d directory
+  file:
+    dest: /etc/systemd/journald.conf.d
+    state: directory
+
+- name: create systemd-networkd.service.d directory
+  file:
+    dest: /etc/systemd/system/systemd-networkd.service.d
+    state: directory
+
+- name: create systemd-journal-gatewayd.socket.d
+  file:
+    dest: /etc/systemd/system/systemd-journal-gatewayd.socket.d
+    state: directory
+
+- name: copy persistent journal configuration
+  copy:
+    dest: /etc/systemd/journald.conf.d/00-persistent.conf
+    src: journald.conf.d/00-persistent.conf
+  notify:
+    - daemon-reload
+    - restart systemd-journald
+    - enable systemd-journal-gatewayd.socket
+
+- name: copy systemd-journal-gatewayd socket configuration
+  copy:
+    dest: /etc/systemd/system/systemd-journal-gatewayd.socket.d/00-socket.conf
+    src: system/systemd-journal-gatewayd.socket.d/00-socket.conf
+  notify:
+    - daemon-reload
+    - restart systemd-journal-gatewayd.socket
+
+- name: create interface configuration files
+  file:
+    dest: /etc/systemd/network/{{ item }}.network
+    state: touch
+  with_items:
+    "{{ interfaces }}"
+
+- name: set interfaces to use domain names
+  lineinfile:
+    dest: /etc/systemd/network/{{ item }}.network
+    line: UseDomains=yes
+    state: present
+  with_items:
+    "{{ interfaces }}"
+  notify:
+    - restart systemd-networkd
+
+- name: copy configure service
+  copy:
+    dest: /etc/systemd/system/configure.{{ item }}
+    src: system/configure.{{ item }}
+  with_items:
+    - service
