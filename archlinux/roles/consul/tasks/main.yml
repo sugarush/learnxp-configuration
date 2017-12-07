@@ -1,0 +1,11 @@
+---
+
+  - name: get consul package from s3
+    aws_s3:
+      bucket: {{ bucket }}
+      object: {{ consul }}
+      dest: /tmp/consul.pkg.tar.xz
+      mode: get
+
+  - name: install consul
+    command: pacman -U /tmp/consul.pkg.tar.xz
