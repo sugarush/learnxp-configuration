@@ -2,13 +2,13 @@
 
   - name: add users
     user:
-      name: {{ item.name }}
+      name: "{{ item.name }}"
       group: users
       groups: wheel
-    with_items: {{ users }}
+    with_items: "{{ users }}"
 
   - name: set users authorized keys
     authorized_key:
-      user: {{ item.name }}
+      user: "{{ item.name }}"
       key: https://github.com/{{ item.github }}.keys
-    with_items: {{ users }}
+    with_items: "{{ users }}"
