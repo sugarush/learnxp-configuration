@@ -10,6 +10,14 @@
   - name: install consul
     command: pacman --noconfirm -U /tmp/consul.pkg.tar.xz
 
+  - name: remove unnecessary files and directories
+    file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - /etc/consul.d
+      - /usr/lib/systemd/system/consul.service
+
   - name: create consul directories
     file:
       dest: "{{ item }}"
@@ -18,11 +26,11 @@
       owner: "consul"
       group: "consul"
     with_items:
-      - /etc/consul.d
-      - /etc/consul.d/agent/client
-      - /etc/consul.d/agent/server
-      - /etc/consul.d/agent/bootstrap
-      - /etc/consul.d/ui
+      - /etc/consul
+      - /etc/consul/agent
+      - /etc/consul/checks
+      - /etc/consul/ui
+      - /run/consul
 
   - name: copy consul@.service
     copy:

@@ -2,4 +2,4 @@
 
   - name: copy consul client configuration
     src: consul.json
-    dest: /etc/consul.d/agent/client/client.json
+    dest: /etc/consul/agent/client.json
