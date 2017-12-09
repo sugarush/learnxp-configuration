@@ -19,9 +19,9 @@
       group: "consul"
     with_items:
       - /etc/consul.d
-      - /etc/consul.d/client
-      - /etc/consul.d/server
-      - /etc/consul.d/bootstrap
+      - /etc/consul.d/agent/client
+      - /etc/consul.d/agent/server
+      - /etc/consul.d/agent/bootstrap
       - /etc/consul.d/ui
 
   - name: copy consul@.service
