@@ -1,12 +1,14 @@
 ---
 
-  - name: add user lava
+  - name: add users
     user:
-      name: lava
+      name: {{ item.name }}
       group: users
       groups: wheel
+    with_items: {{ users }}
 
-  - name: set lava's authorized key
+  - name: set users authorized keys
     authorized_key:
-      user: lava
-      key: https://github.com/luciferavada.keys
+      user: {{ item.name }}
+      key: https://github.com/{{ item.github }}.keys
+    with_items: {{ users }}
