@@ -1,5 +1,5 @@
 ---
 
-  - include: bootstrap/consul.yml
+  - import_playbook: bootstrap/consul.yml
   #- include: bootstrap/etcd.yml
   #- include: bootstrap/swarm.yml

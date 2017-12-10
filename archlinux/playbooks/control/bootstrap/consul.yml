@@ -1,6 +1,6 @@
 ---
 
-  - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
+  - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 
     tasks:
 
@@ -27,7 +27,7 @@
           seconds: 15
 
 
-  - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
+  - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 
     serial: 1
 
@@ -54,7 +54,7 @@
           seconds: 5
 
 
-#  - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
+#  - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 #
 #    tasks:
 #
