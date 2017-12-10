@@ -1,6 +1,6 @@
 ---
 
-  - name: copy zprofile
+  - name: copy zlogin
     copy:
-      src: zprofile
-      dest: /root/.zprofile
+      src: zlogin
+      dest: /root/.zlogin
