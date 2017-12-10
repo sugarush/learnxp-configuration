@@ -6,24 +6,25 @@
 
       - name: stop consul@bootstrap
         service:
-          name="consul@bootstrap"
-          state="stopped"
+          name: consul@bootstrap
+          state: stopped
 
       - name: stop consul@server
         service:
-          name="consul@server"
-          state="stopped"
+          name: consul@server
+          state: stopped
 
       - name: clear raft data
         shell: rm -rf /var/consul/raft/*
 
       - name: bootstrap consul cluster
         service:
-          name="consul@bootstrap"
-          state="started"
+          name: consul@bootstrap
+          state: started
 
       - name: settle...
-        pause: seconds=15
+        pause:
+          seconds: 15
 
 
   - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
@@ -34,35 +35,37 @@
 
       - name: stop consul@bootstrap
         service:
-          name="consul@bootstrap"
-          state="stopped"
-          enabled="no"
+          name: consul@bootstrap
+          state: stopped
+          enabled: no
 
       - name: settle...
-        pause: seconds=5
+        pause:
+          seconds: 5
 
       - name: start consul@server
         service:
-          name="consul@server"
-          state="started"
-          enabled="yes"
+          name: consul@server
+          state: started
+          enabled: yes
 
       - name: settle...
-        pause: seconds=5
+        pause:
+          seconds: 5
 
 
-  - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
-
-    tasks:
-
-      - name: restore consul kv
-        service:
-          name="consul-restore"
-          state="started"
-          enabled="yes"
-
-      - name: start consul alerts
-        service:
-          name="consul-alerts"
-          state="started"
-          enabled="yes"
+#  - hosts: tag_Name_control_{{ lookup('env', 'ENVIRONMENT') }}
+#
+#    tasks:
+#
+#      - name: restore consul kv
+#        service:
+#          name: consul-restore
+#          state: started
+#          enabled: yes
+#
+#      - name: start consul alerts
+#        service:
+#          name: consul-alerts
+#          state: started
+#          enabled: yes
