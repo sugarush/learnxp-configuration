@@ -9,12 +9,12 @@
       - { role: systemd, tags: [ "systemd" ] }
 
       # meta roles
-      #- { role: admin, tags: [ "admin" ] }
+      - { role: admin, tags: [ "admin" ] }
       - { role: build, tags: [ "build" ] }
-      #- { role: control, tags: [ "control" ] }
+      - { role: control, tags: [ "control" ] }
       #- { role: database, tags: [ "database" ] }
       #- { role: fleet, tags: [ "fleet" ] }
       #- { role: hub, tags: [ "hub" ] }
       #- { role: monitor, tags: [ "monitor" ] }
-      #- { role: proxy, tags: [ "proxy" ] }
+      - { role: proxy, tags: [ "proxy" ] }
       #- { role: swarm, tags: [ "swarm" ] }
