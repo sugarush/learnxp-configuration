@@ -1,0 +1,49 @@
+---
+
+    - hosts: tag_Name_control_{{ lookup('env', 'DEPLOY') }}
+
+      tasks:
+
+        - name: stop etcd bootstrap
+          service:
+            name="etcd-bootstrap"
+            state="stopped"
+
+        - name: stop etcd server
+          service:
+            name="etcd-server"
+            state="stopped"
+
+        - name: settle...
+          pause: seconds=5
+
+        - name: bootstrap etcd cluster
+          service:
+            name="etcd-bootstrap"
+            state="started"
+
+        - name: settle...
+          pause: seconds=15
+
+    - hosts: tag_Name_control_{{ lookup('env', 'DEPLOY') }}
+
+      serial: 1
+
+      tasks:
+
+        - name: stop etcd-bootstrap
+          service:
+            name="etcd-bootstrap"
+            state="stopped"
+
+        - name: settle...
+          pause: seconds=5
+
+        - name: enable and start etcd-server
+          service:
+            name="etcd-server"
+            state="started"
+            enabled="yes"
+
+        - name: settle...
+          pause: seconds=5
