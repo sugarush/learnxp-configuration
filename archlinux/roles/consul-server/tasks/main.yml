@@ -1,11 +1,11 @@
 ---
 
   - name: copy consul server configuration
-    file:
+    copy:
       src: server.json
       dest: /etc/consul/agent/server.json
 
   - name: copy consul bootstrap configuration
-    file:
+    copy:
       src: bootstrap.json
       dest: /etc/consul/agent/bootstrap.json
