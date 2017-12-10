@@ -27,7 +27,7 @@ ansible-ssh() {
 
 # ping a set of nodes
 ansible-ping() {
-  ansible-exec "Name" "${1}" "ping"
+  ansible-exec "Cluster" "${1}" "ping"
 }
 
 # the command to restart the ansible configure systemd service
@@ -35,12 +35,12 @@ RESTART_CONFIGURE_COMMAND="systemctl restart configure"
 
 # restart the configure systemd service on a subset of nodes
 ansible-configure() {
-  ansible-cmd "Name" "${1}" "${RESTART_CONFIGURE_COMMAND}"
+  ansible-cmd "Cluster" "${1}" "${RESTART_CONFIGURE_COMMAND}"
 }
 
 # restart the configure systemd service on all nodes
 ansible-configure-all() {
-  ansible-cmd "Managed" "terraform" "${RESTART_CONFIGURE_COMMAND}"
+  ansible-cmd "Environment" "${ENVIRONMENT}" "${RESTART_CONFIGURE_COMMAND}"
 }
 
 # tail the journal of a service on a remote node using ansible-cmd results
