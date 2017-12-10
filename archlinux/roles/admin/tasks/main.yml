@@ -1,0 +1,6 @@
+---
+
+  - name: copy zprofile
+    file:
+      src: zprofile
+      dest: /root/.zprofile
