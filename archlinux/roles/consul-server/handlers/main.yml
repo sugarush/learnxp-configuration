@@ -1,0 +1,7 @@
+---
+
+  - name: reload consul@server
+    systemd:
+      name: consul@server
+      state: reloaded
+      daemon_reload: yes
