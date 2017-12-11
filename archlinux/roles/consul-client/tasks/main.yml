@@ -4,3 +4,10 @@
     copy:
       src: client.json
       dest: /etc/consul/agent/client.json
+
+  - name: enable and start consul@client
+    systemd:
+      daemon_reload: yes
+      name: consul@client
+      state: started
+      enabled: yes
