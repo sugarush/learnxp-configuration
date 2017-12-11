@@ -8,17 +8,17 @@ PermissionsStartOnly=true
 EnvironmentFile=/etc/environment
 EnvironmentFile=/etc/environment.network
 Environment=GOMAXPROCS=4
-PIDFile=/run/consul/consul.pid
+PIDFile=/run/consul.pid
 Restart=always
 
 User=consul
 Group=consul
 
-ExecStartPre=/usr/bin/touch /run/consul/consul.pid
-ExecStartPre=/usr/bin/chown consul:consul /run/consul/consul.pid
+ExecStartPre=/usr/bin/touch /run/consul.pid
+ExecStartPre=/usr/bin/chown consul:consul /run/consul.pid
 
 ExecStart=/usr/bin/consul agent -ui \
-  -data-dir /var/lib/consul/ -pid-file /run/consul/consul.pid \
+  -data-dir /var/lib/consul/ -pid-file /run/consul.pid \
   -config-file /etc/consul/agent/%i.json -config-dir /etc/consul/checks \
   -advertise ${HOST_IP} -client ${HOST_IP} -datacenter ${REGION}
 
