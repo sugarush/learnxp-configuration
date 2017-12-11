@@ -1,12 +1,38 @@
 # display a sorted list of consul nodes
-alias members="consul members --rpc-addr $HOSTNAME:8400 | grep -v Node | sort -h"
+alias members="consul members --rpc-addr ${HOSTNAME}:8400 | grep -v Node | sort -h"
+
+# forcefully remove a consul node
+alias force-leave="consul force-leave --rpc-addr ${HOSTNAME}:8400"
 
 # run docker commands agains swarm managers
 alias swarm="docker -H tcp://swarm-manager.service.consul:4000"
 
+# run vctl from the vulcand container
+alias vctl="docker run -it --rm docker-registry.service.consul/vulcand vctl --vulcan http://vulcand.service.consul:8182"
+
+# ansible configuration alias
+alias act="ansible-configure-tail"
+
+# ansible command
+# XXX: fix ${{@:2}}, ${{}} shouldn't be needed
+acx() {
+  ansible-cmd "Cluster" "${1}" "${${@:2}}"
+}
+
+# ansible shell
+# XXX: fix ${{@:2}}, ${{}} shouldn't be needed
+ash() {
+  ansible-shell "Cluster" "${1}" "${${@:2}}"
+}
+
+# ansible ping
+apn() {
+  ansible-ping "${1}"
+}
+
 # run an ansible module across the current deployment
 ansible-exec() {
-  ansible -i /root/ansible/inventory.py "tag_${1}_${2}_${ENVIRONMENT}" -m "${3}" -a "${4}"
+  ansible -i /root/ansible/inventory.py "tag_${1}_${ENVIRONMENT}_${2}" -m "${3}" -a "${4}"
 }
 
 # run commands on remote nodes
@@ -31,7 +57,7 @@ ansible-ping() {
 }
 
 # the command to restart the ansible configure systemd service
-RESTART_CONFIGURE_COMMAND="systemctl restart configure"
+RESTART_CONFIGURE_COMMAND="systemctl --no-block restart configure"
 
 # restart the configure systemd service on a subset of nodes
 ansible-configure() {
