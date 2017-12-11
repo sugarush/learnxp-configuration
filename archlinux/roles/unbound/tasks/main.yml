@@ -4,7 +4,7 @@
     aws_s3:
       bucket: "{{ bucket }}"
       object: "{{ unbound }}"
-      dest: /tmp/unbound.pgk.tar.xz
+      dest: /tmp/unbound.pkg.tar.xz
       mode: get
 
   - name: install unbound
