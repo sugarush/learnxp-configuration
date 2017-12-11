@@ -1,5 +1,15 @@
 ---
 
+  - name: get unbound package from s3
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ unbound }}"
+      dest: /tmp/unbound.pgk.tar.xz
+      mode: get
+
+  - name: install unbound
+    command: pacman --noconfirm -U /tmp/unbound.pkg.tar.xz
+
   - name: template config
     template:
       src: unbound.conf.j2

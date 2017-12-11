@@ -1,0 +1,4 @@
+---
+
+  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
+  unbound: unbound-1.6.7-2-x86_64.pkg.tar.xz
