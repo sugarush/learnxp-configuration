@@ -5,9 +5,9 @@
   "data_dir": "/var/consul",
   "log_level": "INFO",
   "start_join": [
-    "consul-1", "consul-2", "consul-3"
+    "control-1", "control-2", "control-3"
   ],
   "retry_join": [
-    "consul-1", "consul-2", "consul-3"
+    "control-1", "control-2", "control-3"
   ]
 }
