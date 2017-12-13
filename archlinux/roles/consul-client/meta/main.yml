@@ -3,4 +3,3 @@
   dependencies:
 
     - { role: consul, meta: consul-client }
-    - { role: unbound, meta: consul-client }
