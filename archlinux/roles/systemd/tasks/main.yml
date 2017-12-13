@@ -52,7 +52,19 @@
 
 - name: set interfaces to use domain names
   lineinfile:
-    dest: /etc/systemd/network/{{ item }}.network
+    path: /etc/systemd/network/{{ item }}.network
+    insertafter: "^\[DHCP\]$"
+    line: DNS=127.0.0.1
+    state: present
+  with_items:
+    "{{ interfaces }}"
+  notify:
+    - restart systemd-networkd
+
+- name: set interfaces to use domain names
+  lineinfile:
+    path: /etc/systemd/network/{{ item }}.network
+    insertafter: "^\[Network\]$"
     line: UseDomains=yes
     state: present
   with_items:
