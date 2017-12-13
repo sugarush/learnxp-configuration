@@ -5,4 +5,5 @@
     - { role: hostname, meta: bootstrap }
     - { role: sudo, meta: bootstrap }
     - { role: systemd, meta: bootstrap }
+    - { role: unbound, meta: bootstrap }
     - { role: users, meta: bootstrap }
