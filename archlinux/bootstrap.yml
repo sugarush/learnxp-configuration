@@ -7,7 +7,7 @@
 
       - role: bootstrap
 
-    post_tasks:
-
-      - name: start configure
-        command: systemctl start configure
+#    post_tasks:
+#
+#      - name: start configure
+#        command: systemctl start configure
