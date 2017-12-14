@@ -18,3 +18,10 @@
       #- { role: monitor, tags: [ "monitor" ] }
       - { role: proxy, tags: [ "proxy" ] }
       #- { role: swarm, tags: [ "swarm" ] }
+
+    post_tasks:
+
+      - name: restart systemd-networkd
+        systemd:
+          name: systemd-networkd
+          state: restarted
