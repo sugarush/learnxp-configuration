@@ -10,4 +10,4 @@
     post_tasks:
 
       - name: start configure
-        command: systemctl restart configure
+        command: systemctl start configure
