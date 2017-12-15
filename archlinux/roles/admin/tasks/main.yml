@@ -1,6 +1,6 @@
 ---
 
   - name: copy zlogin
-    template:
+    copy:
       src: zlogin
       dest: /root/.zlogin
