@@ -3,3 +3,4 @@
   dependencies:
 
     - { role: consul-server, meta: control }
+    - { role: influxdb, meta: control }
