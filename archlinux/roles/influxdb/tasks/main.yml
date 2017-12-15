@@ -12,7 +12,7 @@
 
   - name: template influxdb config
     template:
-      src: influxdb.conf.tpl
+      src: influxdb.conf
       dest: /etc/influxdb/influxdb.conf
     notify:
       - daemon-reload
@@ -32,11 +32,8 @@
 
   - name: template influxdb consul service
     template:
-      src: influxdb-{{ item }}.service.json.tpl
-      dest: /etc/consul/checks/influxdb-{{ item }}.service.json
-    items:
-      - admin
-      - http
+      src: influxdb-http.service.json
+      dest: /etc/consul/checks/influxdb-http.service.json
     notify:
       - daemon-reload
       - reload consul@client
