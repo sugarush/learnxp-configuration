@@ -4,3 +4,4 @@
 
     - { role: consul-server, meta: control }
     - { role: influxdb, meta: control }
+    - { role: influxdb-relay, meta: control }
