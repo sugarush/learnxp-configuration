@@ -40,7 +40,7 @@
 
   - name: template influxdb-relay consul-template template
     template:
-      src: influxdb-relay.toml.tpl
+      src: influxdb-relay.toml
       dest: /etc/consul-template/template/influxdb-relay.toml
     notify:
       - reload consul-template@influxdb-relay
@@ -59,10 +59,10 @@
       enabled: yes
       state: started
 
-  - name: template influxdb-relay http and udp consul service files
+  - name: template influxdb-relay http consul service files
     template:
-      src: influxdb-relay-http.service.json.tpl
-      dest: /etc/consul/consul.d/client/influxdb-relay-http.service.json
+      src: influxdb-relay-http.service.json
+      dest: /etc/consul/checks/influxdb-relay-http.service.json
     notify:
       - reload consul@client
       - reload consul@server
