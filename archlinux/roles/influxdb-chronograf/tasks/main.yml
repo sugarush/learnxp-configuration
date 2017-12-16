@@ -42,7 +42,7 @@
       - reload consul@server
 
   - name: start and enable chronograf
-    command: systemctl enable --now chronograf
+  #  command: systemctl enable --now chronograf
     systemd:
       name: kapacitor
       enabled: yes
