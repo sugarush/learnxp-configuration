@@ -47,7 +47,7 @@
 
   - name: start and enable consul-template@influxdb-relay
     #command: systemctl enable --now consul-template@influxdb-relay
-    sytemd:
+    systemd:
       name: consul-template@influxdb-relay
       enabled: yes
       state: started
