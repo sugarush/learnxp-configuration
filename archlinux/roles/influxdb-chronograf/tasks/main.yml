@@ -10,6 +10,12 @@
   - name: install chronograf
     command: pacman --noconfirm -U /tmp/chronograf.pkg.tar.xz
 
+  - name: add chronograf user
+    user:
+      name: chronograf
+      group: chronograf
+      system: yes
+
   - name: set permissions on /etc/chronograf
     file:
       path: /etc/chronograf
