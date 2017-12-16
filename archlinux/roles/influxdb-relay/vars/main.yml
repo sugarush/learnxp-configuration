@@ -1,4 +1,4 @@
 ---
 
   bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  influxdb-relay: influxdb-relay-0.0.1-1-x86_64.pkg.tar.xz
+  influxdb_relay: influxdb-relay-0.0.1-1-x86_64.pkg.tar.xz

@@ -3,7 +3,7 @@
   - name: copy influxdb-relay from s3
     aws_s3:
       bucket: "{{ bucket }}"
-      object: "{{ influxdb-relay }}"
+      object: "{{ influxdb_relay }}"
       mode: get
       dest: /tmp/influxdb-relay.pkg.tar.xz
 
