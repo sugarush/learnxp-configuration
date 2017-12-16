@@ -10,6 +10,11 @@
   - name: install consul-template
     command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
 
+  - name: remove config file
+    file:
+      path: /etc/consul-template/config.hcl
+      state: absent
+
   - name: create /run/consul-template
     file:
       path: /run/consul-template
