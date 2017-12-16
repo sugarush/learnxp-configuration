@@ -1,0 +1,49 @@
+---
+
+  - name: copy chronograf from s3
+    s3:
+      bucket: "{{ bucket }}"
+      object: "{{ chronograf }}"
+      dest: /tmp/chronograf.pkg.tar.xz
+      mode: get
+
+  - name: install chronograf
+    command: pacman --noconfirm -U /tmp/chronograf.pkg.tar.xz
+
+  - name: set permissions on /etc/chronograf
+    file:
+      path: /etc/chronograf
+      state: directory
+      owner: chronograf
+      group: chronograf
+      mode: 0770
+
+  #- name: template chronograf.conf to /etc/chronograf
+  #  template:
+  #    src: chronograf.toml.tpl
+  #    dest: /etc/chronograf/chronograf.toml
+  #    owner: chronograf
+  #    group: chronograf
+  #    mode: 0770
+
+  #- name: copy chronograf systemd service file
+  #  copy:
+  #    src: chronograf.service
+  #    dest: /etc/systemd/system/chronograf.service
+  #  notify:
+  #    - daemon-reload
+
+  - name: template influxdb-chronograf consul service definition
+    template:
+      src: influxdb-chronograf.service.json.tpl
+      dest: /etc/consul/consul.d/client/influxdb-chronograf.service.json
+    notify:
+      - reload consul@client
+      - reload consul@server
+
+  - name: start and enable chronograf
+    command: systemctl enable --now chronograf
+    systemd:
+      name: kapacitor
+      enabled: yes
+      state: started
