@@ -1,7 +1,7 @@
 ---
 
   - name: copy chronograf from s3
-    s3:
+    aws_s3:
       bucket: "{{ bucket }}"
       object: "{{ chronograf }}"
       dest: /tmp/chronograf.pkg.tar.xz
