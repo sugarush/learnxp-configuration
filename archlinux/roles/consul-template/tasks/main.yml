@@ -10,13 +10,24 @@
   - name: install consul-template
     command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
 
-  - name: mkdir /run/consul-template
+  - name: create /run/consul-template
     file:
-      dest: /run/consul-template
-      mode: 0770
+      path: /run/consul-template
       owner: consul
       group: consul
       state: directory
+      mode: 0770
+
+  - namme: create /etc/consul-template/ directories
+    file:
+      path: /etc/consul-template/{{ item }}
+      owner: consul
+      group: consul
+      state: directory
+      mode: 0770
+    with_items:
+      - config
+      - template
 
   - name: template consul-template systemd service
     template:
