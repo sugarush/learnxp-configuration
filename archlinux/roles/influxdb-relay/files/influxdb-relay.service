@@ -1,0 +1,11 @@
+[Unit]
+Description=InfluxDB Relay
+Requires=network-online.target consul-template@influxdb-relay
+After=network-online.target consul-template@influxdb-relay
+
+[Service]
+ExecStart=/usr/bin/influxdb-relay \
+  --config /etc/influxdb-relay/influxdb-relay.toml
+
+[Install]
+WantedBy=multi-user.target
