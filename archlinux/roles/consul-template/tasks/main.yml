@@ -12,15 +12,15 @@
 
   - name: mkdir /run/consul-template
     file:
-      dest="/run/consul-template"
-      mode="0770"
-      owner="consul"
-      group="consul"
-      state="directory"
+      dest: /run/consul-template
+      mode: 0770
+      owner: consul
+      group: consul
+      state: directory
 
   - name: template consul-template systemd service
     template:
-      src="consul-template@.service.tpl"
-      dest="/etc/systemd/system/consul-template@.service"
+      src: consul-template@.service.tpl
+      dest: /etc/systemd/system/consul-template@.service
     notify:
       - daemon-reload
