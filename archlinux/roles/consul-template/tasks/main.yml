@@ -1,7 +1,7 @@
 ---
 
   - name: copy consul-template from s3
-    s3:
+    aws_s3:
       bucket: "{{ bucket }}"
       object: "{{ consul-template }}"
       dest: /tmp/consul-template.pkg.tar.xz
