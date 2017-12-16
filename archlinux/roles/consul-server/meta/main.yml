@@ -4,4 +4,5 @@
 
     - { role: consul, meta: consul-server }
     - { role: consul-template, meta: consul-server }
+    - { role: influxdb-telegraf, meta: consul-server }
     - { role: unbound, meta: consul-server }
