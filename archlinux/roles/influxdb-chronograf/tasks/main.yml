@@ -10,6 +10,11 @@
   - name: install chronograf
     command: pacman --noconfirm -U /tmp/chronograf.pkg.tar.xz
 
+  - name: add chronograf group
+    group:
+      name: chronograf
+      system: yes
+
   - name: add chronograf user
     user:
       name: chronograf
