@@ -1,15 +1,15 @@
 ---
 
-  - name: copy consul-template from s3
-    aws_s3:
-      bucket: "{{ bucket }}"
-      object: "{{ consul-template }}"
-      dest: /tmp/consul-template.pkg.tar.xz
-      mode: get
-
-  - name: install consul-template
-    command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
-
+#  - name: copy consul-template from s3
+#    aws_s3:
+#      bucket: "{{ bucket }}"
+#      object: "{{ consul-template }}"
+#      dest: /tmp/consul-template.pkg.tar.xz
+#      mode: get
+#
+#  - name: install consul-template
+#    command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
+#
   #- name: mkdir /run/consul-template
   #  file:
   #    dest: /run/consul-template
