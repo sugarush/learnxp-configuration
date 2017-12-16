@@ -1,26 +1,26 @@
 ---
 
-#  - name: copy consul-template from s3
-#    aws_s3:
-#      bucket: "{{ bucket }}"
-#      object: "{{ consul-template }}"
-#      dest: /tmp/consul-template.pkg.tar.xz
-#      mode: get
-#
-#  - name: install consul-template
-#    command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
-#
-  #- name: mkdir /run/consul-template
-  #  file:
-  #    dest: /run/consul-template
-  #    mode: 0770
-  #    owner: consul
-  #    group: consul
-  #    state: directory
-#
-#  - name: template consul-template systemd service
-#    template:
-#      src: consul-template@.service
-#      dest: /etc/systemd/system/consul-template@.service
-#    notify:
-#      - daemon-reload
+  - name: copy consul-template from s3
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ consul_template }}"
+      dest: /tmp/consul-template.pkg.tar.xz
+      mode: get
+
+  - name: install consul-template
+    command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
+
+  - name: mkdir /run/consul-template
+    file:
+      dest: /run/consul-template
+      mode: 0770
+      owner: consul
+      group: consul
+      state: directory
+
+  - name: template consul-template systemd service
+    template:
+      src: consul-template@.service
+      dest: /etc/systemd/system/consul-template@.service
+    notify:
+      - daemon-reload
