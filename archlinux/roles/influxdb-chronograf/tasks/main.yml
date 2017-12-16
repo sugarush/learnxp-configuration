@@ -29,6 +29,14 @@
       group: chronograf
       mode: 0770
 
+  - name: create /var/lib/chronograf
+    file:
+      path: /var/lib/chronograf
+      state: directory
+      owner: chronograf
+      group: chronograf
+      mode: 0770
+
   #- name: template chronograf.conf to /etc/chronograf
   #  template:
   #    src: chronograf.toml
