@@ -31,7 +31,7 @@
 
   #- name: template chronograf.conf to /etc/chronograf
   #  template:
-  #    src: chronograf.toml.tpl
+  #    src: chronograf.toml
   #    dest: /etc/chronograf/chronograf.toml
   #    owner: chronograf
   #    group: chronograf
@@ -46,8 +46,8 @@
 
   - name: template influxdb-chronograf consul service definition
     template:
-      src: influxdb-chronograf.service.json.tpl
-      dest: /etc/consul/consul.d/client/influxdb-chronograf.service.json
+      src: influxdb-chronograf.service.json
+      dest: /etc/consul/checks/influxdb-chronograf.service.json
     notify:
       - reload consul@client
       - reload consul@server
@@ -55,6 +55,6 @@
   - name: start and enable chronograf
   #  command: systemctl enable --now chronograf
     systemd:
-      name: kapacitor
+      name: chronograf
       enabled: yes
       state: started
