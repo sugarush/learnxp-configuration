@@ -2,6 +2,7 @@
 
   dependencies:
 
+    - { role: ansible-modules, meta: bootstrap }
     - { role: hostname, meta: bootstrap }
     - { role: sudo, meta: bootstrap }
     - { role: systemd, meta: bootstrap }
