@@ -5,11 +5,11 @@
       path: "{{ library_path }}"
       state: directory
 
-  - name: uncomment library path in /etc/ansible/ansible.cfg
-    lineinfile:
-      regexp: "^\#*library\s*="
-      line: "library={{ library_path }}"
-      dest: "{{ ansible_cfg }}"
+#  - name: uncomment library path in /etc/ansible/ansible.cfg
+#    lineinfile:
+#      regexp: "^\#*library\s*="
+#      line: "library={{ library_path }}"
+#      dest: "{{ ansible_cfg }}"
 
   - name: copy consul_get.py module
     copy:
