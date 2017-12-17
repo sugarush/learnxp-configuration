@@ -1,0 +1,43 @@
+---
+
+  - name: copy kapacitor from s3
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ kapacitor }}"
+      dest: /tmp/kapacitor.pkg.tar.xz
+      mode: get
+
+  - name: install kapacitor
+    command: pacman --noconfirm -U /tmp/kapacitor.pkg.tar.xz
+
+  - name: set permissions on /etc/kapacitor
+    file:
+      path: /etc/kapacitor
+      state: directory
+      owner: kapacitor
+      group: kapacitor
+      mode: 0770
+
+#  - name: get consul kv victorops api-key
+#    consul_get:
+#      key: "ansible/{{ lookup('env', 'ROLE') }}/victorops/api-key"
+#      host: "{{ lookup('env', 'HOSTNAME') }}"
+#    register: api_key
+#    ignore_errors: yes
+
+  - name: template kapacitor.conf to /etc/kapacitor
+    template:
+      src: kapacitor.conf
+      dest: /etc/kapacitor/kapacitor.conf
+      owner: kapacitor
+      group: kapacitor
+      mode: 0770
+    notify:
+      - restart kapacitor
+    ignore_errors: yes
+
+  - name: start and enable kapacitor
+    systemd:
+      name: kapacitor
+      state: started
+      enabled: yes
