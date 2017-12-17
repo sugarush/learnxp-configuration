@@ -1,14 +1,14 @@
 ---
 
-  - name: get consul package from s3
-    aws_s3:
-      bucket: "{{ bucket }}"
-      object: "{{ consul }}"
-      dest: /tmp/consul.pkg.tar.xz
-      mode: get
+  #- name: get consul package from s3
+  #  aws_s3:
+  #    bucket: "{{ bucket }}"
+  #    object: "{{ consul }}"
+  #    dest: /tmp/consul.pkg.tar.xz
+  #    mode: get
 
-  - name: install consul
-    command: pacman --noconfirm -U /tmp/consul.pkg.tar.xz
+  #- name: install consul
+  #  command: pacman --noconfirm -U /tmp/consul.pkg.tar.xz
 
   - name: remove unnecessary files and directories
     file:
