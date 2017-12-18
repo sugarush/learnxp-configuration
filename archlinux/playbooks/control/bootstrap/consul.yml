@@ -63,9 +63,9 @@
 #          name: consul-restore
 #          state: started
 #          enabled: yes
-#
-#      - name: start consul alerts
-#        service:
-#          name: consul-alerts
-#          state: started
-#          enabled: yes
+
+      - name: start consul alerts
+        systemd:
+          name: consul-alerts
+          state: started
+          enabled: yes
