@@ -1,6 +1,6 @@
 ---
 
-  #  These handlers exist here for the Docker role
+  #  These handlers exist here for the Docker role in the bootstrap module
 
   - name: reload consul@client
     systemd:
