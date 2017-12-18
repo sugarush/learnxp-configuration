@@ -10,4 +10,4 @@
       src: swarm-manager.service.json.tpl
       dest: /etc/consul/checks/swarm-manager.service.json
     notify:
-      - reload consul
+      - reload consul@server
