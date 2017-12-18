@@ -5,12 +5,12 @@
     tasks:
 
       - name: stop swarm-manager
-        service:
-          name="swarm-manager"
-          state="stopped"
+        systemd:
+          name: swarm-manager
+          state: stopped
 
       - name: enable and start swarm-manager
-        service:
-          name="swarm-manager"
-          state="started"
-          enabled="yes"
+        systemd:
+          name: swarm-manager
+          state: started
+          enabled: yes
