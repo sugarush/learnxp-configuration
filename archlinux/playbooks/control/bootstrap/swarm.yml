@@ -1,0 +1,16 @@
+---
+
+  - hosts: tag_Name_{{ lookup('env', 'ENVIRONMENT') }}_control
+
+    tasks:
+
+      - name: stop swarm-manager
+        service:
+          name="swarm-manager"
+          state="stopped"
+
+      - name: enable and start swarm-manager
+        service:
+          name="swarm-manager"
+          state="started"
+          enabled="yes"
