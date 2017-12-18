@@ -11,6 +11,10 @@
     dest: /etc/systemd/system/environment.service
     src: system/environment.service
 
+- name: run systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+
 - name: create journald.conf.d directory
   file:
     dest: /etc/systemd/journald.conf.d
