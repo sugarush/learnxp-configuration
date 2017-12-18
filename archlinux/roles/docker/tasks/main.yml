@@ -1,0 +1,53 @@
+---
+
+- name: load overlay module
+  modprobe:
+    name: overlay
+
+- name: create docker drop-in folder
+  file:
+    dest: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: add docker.service command override
+  copy:
+    src: 00-docker-command.conf
+    dest: /etc/systemd/system/docker.service.d/00-docker-command.conf
+  notify:
+    - daemon-reload
+
+- name: add docker prune service
+  copy:
+    src: docker-prune.service
+    dest: /etc/systemd/system/docker-prune.service
+  notify:
+    - daemon-reload
+
+- name: add docker prune timer
+  copy:
+    src: docker-prune.timer
+    dest: /etc/systemd/system/docker-prune.timer
+  notify:
+    - daemon-reload
+
+- name: enable and start docker
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: enable and start the timer
+  systemd:
+    name: docker-prune.timer
+    enabled: yes
+    state: started
+  notify:
+    - daemon-reload
+
+- name: copy consul config
+  copy:
+    src: docker.check.json
+    dest: /etc/consul/checks/docker.check.json
+  notify:
+    - reload consul@client
+    - reload consul@server
