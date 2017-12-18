@@ -1,11 +1,13 @@
 ---
 
+  #  These handlers exist here for the Docker role
+
   - name: reload consul@client
     systemd:
       name: consul@client
       state: reloaded
       daemon_reload: yes
-      
+
   - name: reload consul@server
     systemd:
       name: consul@server
