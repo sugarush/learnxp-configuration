@@ -2,7 +2,7 @@
 
   - name: template swarm-ui systemd service file
     template:
-      src: swarm-ui.service.tpl
+      src: swarm-ui.service
       dest: /etc/systemd/system/swarm-ui.service
     notify:
       - daemon-reload
@@ -11,8 +11,8 @@
 
   - name: template swarm-ui consul service definition
     template:
-      src: swarm-ui.service.json.tpl
-      dest: /etc/consul/agent/swarm-ui.service.json
+      src: swarm-ui.service.json
+      dest: /etc/consul/checks/swarm-ui.service.json
     notify:
       - reload consul@client
       - reload consul@server
