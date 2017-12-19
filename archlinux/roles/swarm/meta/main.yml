@@ -3,5 +3,6 @@
   dependencies:
 
     - { role: consul-client, meta: swarm }
+    - { role: flannel, meta: swarm }
     - { role: influxdb-telegraf, meta: swarm }
     - { role: swarm-agent, meta: swarm}
