@@ -1,0 +1,28 @@
+[Unit]
+Description=Etcd Server
+After=environment.service
+Requires=environment.service
+
+Conflicts=etcd-bootstrap.service
+
+[Service]
+Type=notify
+User=etcd
+
+LimitNOFILE=40000
+
+Environment=GOMAXPROCS=4
+
+EnvironmentFile=/etc/environment
+EnvironmentFile=/etc/environment.network
+
+ExecStart=/usr/bin/etcd --name ${HOSTNAME} \
+  --data-dir /var/lib/etcd \
+  --discovery-srv ${HOST_DOMAIN_1} \
+  --initial-advertise-peer-urls http://{{ lookup('env', 'HOST_IP') }}:2380 \
+  --advertise-client-urls http://{{ lookup('env', 'HOST_IP') }}:2379 \
+  --listen-client-urls http://{{ lookup('env', 'HOST_IP') }}:2379 \
+  --listen-peer-urls http://{{ lookup('env', 'HOST_IP') }}:2380
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,46 @@
+---
+
+  - name: copy etcd package
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ etcd }}"
+      dest: /tmp/etcd.pkg.tar.xz"
+      mode: get
+
+  - name: install etcd binary
+    command: pacman --noconfirm -U /tmp/etcd.pkg.tar.xz
+
+  - name: add etcd user
+    user:
+      name: etcd
+      system: yes
+      createhome: no
+
+  - name: remove etcd config
+    file:
+      dest: /etc/etcd/etcd.conf.yml
+      state: absent
+
+  - name: create data directory
+    file:
+      dest: /var/lib/etcd
+      state: directory
+      owner: etcd
+      group: etcd
+      mode: 0700
+
+  - name: copy etcd service files
+    copy:
+      src: etcd-{{ item }}.service
+      dest: /etc/systemd/system/etcd-{{ item }}.service
+    with_items:
+      - bootstrap
+      - server
+
+  - name: template etcd consul service file
+    template:
+      src: etcd-server.service.json.tpl
+      dest: /etc/consul/agent/etcd-server.service.json
+    notify:
+      - reload consul@client
+      - reload consul@server
