@@ -4,6 +4,7 @@
 
     - { role: consul-server, meta: control }
     - { role: consul-alerts, meta: control }
+    - { role: etcd, meta: control }
     - { role: influxdb, meta: control }
     - { role: influxdb-relay, meta: control }
     - { role: swarm-manager, meta: control }
