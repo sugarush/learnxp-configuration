@@ -1,0 +1,41 @@
+---
+
+  - name: copy flannel binary package
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ flannel }}"
+      dest: /tmp/flannel.tar.pkg.xz
+      mode: get
+
+  - name: install flannel
+    command: pacman --noconfirm -U /tmp/flannel.tar.pkg.xz
+
+  - name: copy flannel service file
+    copy:
+      dest: /etc/systemd/system/flannel.service
+      src: flannel.service
+    notify:
+      - daemon-reload
+
+  - name: start flannel
+    command: systemctl enable --now flannel.service
+
+  - name: wait for flannel environment file
+    wait_for:
+      path: /etc/environment.flannel
+      state: present
+      timeout: 30
+    ignore_errors: yes
+
+  - name: copy docker flannel config
+    copy:
+      src: 10-flannel.conf
+      dest: /etc/systemd/system/docker.service.d/10-flannel.conf
+
+  - name: systemctl daemon-reload
+    command: systemctl daemon-reload
+
+  - name: restart docker
+    systemd:
+      name: docker
+      state: restarted
