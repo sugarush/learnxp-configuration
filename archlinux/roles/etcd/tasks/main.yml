@@ -30,12 +30,14 @@
       mode: 0700
 
   - name: copy etcd service files
-    copy:
+    template:
       src: etcd-{{ item }}.service
       dest: /etc/systemd/system/etcd-{{ item }}.service
     with_items:
       - bootstrap
       - server
+    notify:
+      - daemon-reload
 
   - name: template etcd consul service file
     template:
