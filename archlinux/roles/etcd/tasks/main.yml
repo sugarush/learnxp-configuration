@@ -40,7 +40,7 @@
   - name: template etcd consul service file
     template:
       src: etcd-server.service.json
-      dest: /etc/consul/agent/etcd-server.service.json
+      dest: /etc/consul/checks/etcd-server.service.json
     notify:
       - reload consul@client
       - reload consul@server
