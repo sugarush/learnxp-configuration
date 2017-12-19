@@ -1,4 +1,0 @@
----
-
-  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  flannel: flannel-0.9.0-1-any.pkg.tar.xz
