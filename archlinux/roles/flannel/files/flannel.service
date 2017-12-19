@@ -3,7 +3,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=/usr/bin/flannel \
+ExecStart=/usr/bin/flanneld \
   --etcd-prefix="/flannel/network" \
   --etcd-endpoints="http://etcd-1:2379,http://etcd-2:2379,http://etcd-3:2379" \
   --subnet-file="/etc/environment.flannel"
