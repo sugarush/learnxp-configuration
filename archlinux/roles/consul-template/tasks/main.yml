@@ -23,7 +23,7 @@
       state: directory
       mode: 0770
 
-  - namme: create /etc/consul-template/ directories
+  - name: create /etc/consul-template/ directories
     file:
       path: /etc/consul-template/{{ item }}
       owner: consul
