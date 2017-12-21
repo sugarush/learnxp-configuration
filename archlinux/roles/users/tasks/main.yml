@@ -11,6 +11,11 @@
       repo: "{{ satan_shell }}"
       dest: /usr/local/etc
 
+  - name: place satan-shell settings file
+    copy:
+      src: settings.conf
+      dest: /usr/local/etc/zsh.d/settings.conf
+
   - name: install satan-shell for root user
     shell: |
       cd /usr/local/etc
