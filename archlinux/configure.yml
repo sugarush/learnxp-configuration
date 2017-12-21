@@ -10,11 +10,13 @@
 
       # meta roles
       - { role: admin, tags: [ "admin" ] }
+      - { role: apache, tags: [ "apache" ] }
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
+      #- { role: mariadb, tags: [ "mariadb"] }
+      #- { role: php, tags: [ "php"] }
       #- { role: database, tags: [ "database" ] }
       #- { role: fleet, tags: [ "fleet" ] }
       #- { role: hub, tags: [ "hub" ] }
       #- { role: monitor, tags: [ "monitor" ] }
-      - { role: proxy, tags: [ "proxy" ] }
-      - { role: swarm, tags: [ "swarm" ] }
+      #- { role: swarm, tags: [ "swarm" ] }
