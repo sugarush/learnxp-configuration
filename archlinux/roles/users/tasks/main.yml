@@ -9,16 +9,16 @@
   - name: clone satan-shell repository
     git:
       repo: "{{ satan_shell }}"
-      dest: /usr/local/etc
+      dest: /usr/local/etc/satan-shell
 
   - name: place satan-shell settings file
     copy:
       src: settings.conf
-      dest: /usr/local/etc/zsh.d/settings.conf
+      dest: /usr/local/etc/satan-shell/zsh.d/settings.conf
 
   - name: install satan-shell for root user
     shell: |
-      cd /usr/local/etc
+      cd /usr/local/etc/satan-shell
       ./install.sh
 
   - name: add users
