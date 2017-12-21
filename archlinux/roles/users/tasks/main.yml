@@ -12,7 +12,7 @@
       dest: /usr/local/etc
 
   - name: install satan-shell for root user
-    shell: >
+    shell: |
       cd /usr/local/etc
       ./install.sh
 
