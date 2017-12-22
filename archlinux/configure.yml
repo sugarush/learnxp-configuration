@@ -13,7 +13,7 @@
       - { role: apache, tags: [ "apache" ] }
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
-      #- { role: mariadb, tags: [ "mariadb"] }
+      - { role: mariadb, tags: [ "mariadb"] }
       #- { role: php, tags: [ "php"] }
       #- { role: database, tags: [ "database" ] }
       #- { role: fleet, tags: [ "fleet" ] }
