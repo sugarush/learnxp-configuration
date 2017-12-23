@@ -12,9 +12,9 @@ ExecStartPre=-/usr/bin/docker rm swarm-manager
 ExecStartPre=/usr/bin/docker pull swarm
 
 ExecStart=/usr/bin/docker run --name swarm-manager \
-  -p 4000:4000 \
+  --publish 4000:4000 \
   swarm manage \
-  -H :4000 \
+  --host :4000 \
   --replication \
   --advertise ${HOST_IP}:4000 \
   consul://${HOST_IP}:8500
