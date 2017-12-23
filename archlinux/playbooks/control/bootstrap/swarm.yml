@@ -8,11 +8,26 @@
         command: docker swarm init
         run_once: yes
 
-      - name: get manager join token
+      - name: get manager token
         command: docker swarm join-token manager --quiet
         register: manager_token
         run_once: yes
 
-      - debug:
-          msg: "{{ manager_token }}"
+      - name: get worker token
+        command: docker swarm join-token worker --quiet
+        register: worker_token
         run_once: yes
+
+      - name: add manager token to consul
+        uri:
+          url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/manager
+          method: PUT
+          body: "{{ manager_token }}"
+          run_once: yes
+
+      - name: add manager token to consul
+        uri:
+          url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/worker
+          method: PUT
+          body: "{{ worker_token }}"
+          run_once: yes
