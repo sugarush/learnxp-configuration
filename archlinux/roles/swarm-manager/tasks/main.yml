@@ -1,9 +1,9 @@
 ---
 
-  - name: copy swarm-manager service file
-    copy:
-      src: swarm-manager.service
-      dest: /etc/systemd/system/swarm-manager.service
+  #- name: copy swarm-manager service file
+  #  copy:
+  #    src: swarm-manager.service
+  #    dest: /etc/systemd/system/swarm-manager.service
 
   - name: template swarm-manager consul service definition
     template:

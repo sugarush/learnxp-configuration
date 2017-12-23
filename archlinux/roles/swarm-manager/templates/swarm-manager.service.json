@@ -6,14 +6,10 @@
       "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
-    "port": 4000,
+    "port": 2377,
     "checks": [
       {
-        "script": "systemctl is-active swarm-manager",
-        "interval": "20s"
-      },
-      {
-        "tcp": "{{ lookup('env', 'HOST_IP') }}:4000",
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:2377",
         "interval": "20s",
         "timeout": "1s"
       }
