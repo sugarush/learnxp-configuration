@@ -16,6 +16,7 @@
 
       - name: destroy the cluster
         command: docker swarm leave --force
+        ignore_errors: yes
 
       - name: initialize the cluster
         command: docker swarm init
@@ -38,7 +39,7 @@
           method: PUT
           run_once: yes
 
-      - name: add manager token to consul
+      - name: add worker token to consul
         uri:
           url: "{{ worker_token_path }}"
           body: "{{ worker_token.stdout }}"
@@ -48,9 +49,10 @@
       - name: add the swarm leader's ip to consul
         uri:
           url: "{{ swarm_leader_path }}"
-          body: "{{ ansible_host }}"
+          body: "{{ ansible_host }}:{{ swarm_port }}"
           method: PUT
           run_once: yes
 
       - name: add managers to the cluster
         command: docker swarm join --token {{ manager_token.stdout }} {{ ansible_host }}:{{ swarm_port }}
+        ignore_errors: yes
