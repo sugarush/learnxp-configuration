@@ -22,12 +22,12 @@
         uri:
           url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/manager
           method: PUT
-          body: "{{ manager_token }}"
+          body: "{{ manager_token.stdout }}"
           run_once: yes
 
       - name: add manager token to consul
         uri:
           url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/worker
           method: PUT
-          body: "{{ worker_token }}"
+          body: "{{ worker_token.stdout }}"
           run_once: yes
