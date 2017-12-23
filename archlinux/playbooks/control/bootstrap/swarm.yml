@@ -2,9 +2,9 @@
 
   - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 
-    tasks:
+    serial: 1
 
-      serial: 1
+    tasks:
 
       - name: initialize the cluster
         command: docker swarm init
