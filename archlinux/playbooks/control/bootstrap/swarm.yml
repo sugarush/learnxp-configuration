@@ -4,13 +4,15 @@
 
     tasks:
 
-      - name: stop swarm-manager
-        systemd:
-          name: swarm-manager
-          state: stopped
+      serial: 1
 
-      - name: enable and start swarm-manager
-        systemd:
-          name: swarm-manager
-          state: started
-          enabled: yes
+      - name: initialize the cluster
+        command: docker swarm init
+        run_once: yes
+
+      - name: get manager join token
+        command: docker swarm join-token manager --quiet
+        register: manager_token
+
+      - debug:
+          msg: "{{ manager_token }}"
