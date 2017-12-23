@@ -56,6 +56,7 @@
       - name: get swarm leader ip and port
         uri:
           url: "{{ swarm_leader_path }}"
+          return_content: yes
           method: GET
         run_once: yes
         register: swarm_leader
