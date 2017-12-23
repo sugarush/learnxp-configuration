@@ -1,21 +1,16 @@
 ---
 
-  - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
-
-    serial: 1
+  - hosts: tag_Name_{{ lookup('env', 'ENVIRONMENT') }}_control
 
     tasks:
 
-      - name: initialize the cluster
-        command: docker swarm init
-        run_once: yes
-        ignore_errors: yes
+      - name: stop swarm-manager
+        service:
+          name="swarm-manager"
+          state="stopped"
 
-      - name: get manager join token
-        command: docker swarm join-token manager --quiet
-        register: manager_token
-        run_once: yes
-
-      - debug:
-          msg: "{{ manager_token.stdout }}"
-        run_once: yes
+      - name: enable and start swarm-manager
+        service:
+          name="swarm-manager"
+          state="started"
+          enabled="yes"
