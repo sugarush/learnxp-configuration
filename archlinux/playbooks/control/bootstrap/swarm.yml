@@ -2,7 +2,20 @@
 
   - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 
+    vars:
+
+      consul: http://consul.service.consul:8500/v1/kv
+
+      manager_token_path: {{ consul }}/docker/swarm/token/manager
+      worker_token_path: {{ consul }}/docker/swarm/token/worker
+      swarm_leader_path: {{ consul }}/docker/swarm/leader
+
+      swarm_port: 2377
+
     tasks:
+
+      - name: destroy the cluster
+        command: docker swarm leave --force
 
       - name: initialize the cluster
         command: docker swarm init
@@ -20,14 +33,24 @@
 
       - name: add manager token to consul
         uri:
-          url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/manager
-          method: PUT
+          url: "{{ manager_token_path }}"
           body: "{{ manager_token.stdout }}"
+          method: PUT
           run_once: yes
 
       - name: add manager token to consul
         uri:
-          url: http://consul.service.consul:8500/v1/kv/docker/swarm/token/worker
-          method: PUT
+          url: "{{ worker_token_path }}"
           body: "{{ worker_token.stdout }}"
+          method: PUT
           run_once: yes
+
+      - name: add the swarm leader's ip to consul
+        uri:
+          url: "{{ swarm_leader_path }}"
+          body: "{{ ansible_host }}"
+          method: PUT
+          run_once: yes
+
+      - name: add managers to the cluster
+        command: docker swarm join --token {{ manager_token.stdout }} {{ ansible_host }}:{{ swarm_port }}
