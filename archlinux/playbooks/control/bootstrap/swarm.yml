@@ -9,6 +9,7 @@
       - name: initialize the cluster
         command: docker swarm init
         run_once: yes
+        ignore_errors: yes
 
       - name: get manager join token
         command: docker swarm join-token manager --quiet
