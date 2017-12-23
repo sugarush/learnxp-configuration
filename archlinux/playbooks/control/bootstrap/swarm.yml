@@ -13,6 +13,8 @@
       - name: get manager join token
         command: docker swarm join-token manager --quiet
         register: manager_token
+        run_once: yes
 
       - debug:
-          msg: "{{ manager_token }}"
+          msg: "{{ manager_token.stdout }}"
+        run_once: yes
