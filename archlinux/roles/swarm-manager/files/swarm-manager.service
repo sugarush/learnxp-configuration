@@ -9,11 +9,11 @@ EnvironmentFile=/etc/environment.network
 ExecStartPre=-/usr/bin/docker stop swarm-manager
 ExecStartPre=-/usr/bin/docker rm swarm-manager
 
-ExecStartPre=/usr/bin/docker pull swarm
+ExecStartPre=/usr/bin/docker pull swarm:1.2.6
 
 ExecStart=/usr/bin/docker run --name swarm-manager \
   --publish 4000:4000 \
-  swarm manage \
+  swarm:1.2.6 manage \
   --host :4000 \
   --replication \
   --advertise ${HOST_IP}:4000 \
