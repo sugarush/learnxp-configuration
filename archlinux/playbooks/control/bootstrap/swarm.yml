@@ -6,9 +6,9 @@
 
       consul: http://consul.service.consul:8500/v1/kv
 
-      manager_token_path: {{ consul }}/docker/swarm/token/manager
-      worker_token_path: {{ consul }}/docker/swarm/token/worker
-      swarm_leader_path: {{ consul }}/docker/swarm/leader
+      manager_token_path: "{{ consul }}/docker/swarm/token/manager"
+      worker_token_path: "{{ consul }}/docker/swarm/token/worker"
+      swarm_leader_path: "{{ consul }}/docker/swarm/leader"
 
       swarm_port: 2377
 
