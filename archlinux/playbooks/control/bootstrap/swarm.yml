@@ -37,21 +37,21 @@
           url: "{{ manager_token_path }}"
           body: "{{ manager_token.stdout }}"
           method: PUT
-          run_once: yes
+        run_once: yes
 
       - name: add worker token to consul
         uri:
           url: "{{ worker_token_path }}"
           body: "{{ worker_token.stdout }}"
           method: PUT
-          run_once: yes
+        run_once: yes
 
       - name: add the swarm leader's ip to consul
         uri:
           url: "{{ swarm_leader_path }}"
           body: "{{ ansible_host }}:{{ swarm_port }}"
           method: PUT
-          run_once: yes
+        run_once: yes
 
       - name: add managers to the cluster
         command: docker swarm join --token {{ manager_token.stdout }} {{ ansible_host }}:{{ swarm_port }}
