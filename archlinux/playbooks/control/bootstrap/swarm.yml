@@ -56,11 +56,8 @@
       - name: register swarm leader's ip and port
         debug:
           msg: "{{ ansible_host }}:{{ swarm_port }}"
-        register: test_var
-
-      - name: print test_var
-        debug:
-          msg: "{{ test_var }}"
+        run_once: yes
+        register: swarm_leader
 
       #- name: get the swarm leader ip and port
       #  uri:
@@ -69,9 +66,9 @@
       #  run_once: yes
       #  register: swarm_leader
 
-      #- name: add managers to the cluster
-      #  command: docker swarm join --token {{ manager_token.stdout }} {{ #swarm_leader.json[0].Value|b64decode }}
-      #  ignore_errors: yes
+      - name: add managers to the cluster
+        command: docker swarm join --token {{ manager_token.stdout }} {{ swarm_leader.msg }}
+        ignore_errors: yes
 
       #- name: get manager node ids
       #  command: docker node ls --quiet
