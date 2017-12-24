@@ -9,7 +9,7 @@
     "port": 5000,
     "checks": [
       {
-        "script": "systemctl is-active php",
+        "script": "systemctl is-active php-fpm",
         "interval": "30s"
       },
       {
