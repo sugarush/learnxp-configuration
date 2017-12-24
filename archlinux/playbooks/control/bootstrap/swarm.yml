@@ -46,32 +46,18 @@
           method: PUT
         run_once: yes
 
-      - name: add the swarm leader's ip to consul
-        uri:
-          url: "{{ swarm_leader_path }}"
-          body: "{{ ansible_host }}:{{ swarm_port }}"
-          method: PUT
-        run_once: yes
-
       - name: register swarm leader's ip and port
         debug:
           msg: "{{ ansible_host }}:{{ swarm_port }}"
         run_once: yes
         register: swarm_leader
 
-      #- name: get the swarm leader ip and port
-      #  uri:
-      #    url: "{{ swarm_leader_path }}"
-      #    method: GET
-      #  run_once: yes
-      #  register: swarm_leader
-
       - name: add managers to the cluster
         command: docker swarm join --token {{ manager_token.stdout }} {{ swarm_leader.msg }}
         ignore_errors: yes
 
       - name: get manager node ids
-        command: docker node ls --quiet
+        command: docker node ls --quiet --filter role=manager
         run_once: yes
         register: manager_ids
 
@@ -79,9 +65,4 @@
         command: docker node update --availability drain {{ item }}
         run_once: yes
         with_items: "{{ manager_ids.stdout_lines }}"
-
-      #- name: remove the swarm leader's ip from consul
-      #  uri:
-      #    url: "{{ swarm_leader_path }}"
-      #    method: DELETE
-      #  run_once: yes
+u
