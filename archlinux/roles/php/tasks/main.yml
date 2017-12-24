@@ -1,0 +1,6 @@
+---
+
+  - name: template php www.conf
+    template:
+      src: www.conf
+      dest: /etc/php/php-fpm.d/www.conf
