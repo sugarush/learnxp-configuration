@@ -19,3 +19,10 @@
       dest: /etc/httpd/conf/httpd.conf
     notify:
       - reload httpd
+
+  - name: place htaccess
+    copy:
+      src: htaccess
+      dest: /srv/http/.htaccess
+    notify:
+      - reload httpd
