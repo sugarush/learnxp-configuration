@@ -70,15 +70,15 @@
         command: docker swarm join --token {{ manager_token.stdout }} {{ swarm_leader.msg }}
         ignore_errors: yes
 
-      #- name: get manager node ids
-      #  command: docker node ls --quiet
-      #  run_once: yes
-      #  register: manager_ids
+      - name: get manager node ids
+        command: docker node ls --quiet
+        run_once: yes
+        register: manager_ids
 
-      #- name: drain manager nodes
-      #  command: docker node update --availability drain {{ item }}
-      #  run_once: yes
-      #  with_items: "{{ manager_ids }}"
+      - name: drain manager nodes
+        command: docker node update --availability drain {{ item }}
+        run_once: yes
+        with_items: "{{ manager_ids.stdout_lines }}"
 
       #- name: remove the swarm leader's ip from consul
       #  uri:
