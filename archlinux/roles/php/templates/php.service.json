@@ -1,0 +1,22 @@
+{
+  "service": {
+    "id": "php",
+    "name": "php",
+    "tags": [
+      "{{ lookup('env', 'ENVIRONMENT') }}"
+    ],
+    "address": "{{ lookup('env', 'HOST_IP') }}",
+    "port": 5000,
+    "checks": [
+      {
+        "script": "systemctl is-active php",
+        "interval": "30s"
+      },
+      {
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:5000",
+        "interval": "30s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
