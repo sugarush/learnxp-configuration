@@ -1,0 +1,21 @@
+---
+
+  - name: enable and start apache httpd
+    systemd:
+      name: httpd
+      enabled: yes
+      state: started
+
+  - name: place httpd-vhosts.conf
+    copy:
+      src: httpd-vhosts.conf
+      dest: /etc/httpd/conf/extra/httpd-vhosts.conf
+    notify:
+      - reload httpd
+
+  - name: place httpd.conf
+    copy:
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+      - reload httpd
