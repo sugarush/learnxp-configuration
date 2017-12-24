@@ -65,4 +65,3 @@
         command: docker node update --availability drain {{ item }}
         run_once: yes
         with_items: "{{ manager_ids.stdout_lines }}"
-u
