@@ -66,14 +66,20 @@
 
       - name: get manager node ids
         command: docker node ls --quiet
+        run_once: yes
         register: manager_ids
 
       - debug:
-          msg: "{{ manager_ids }}"
+          var: "{{ manager_ids.stdout_lines }}"
+        register: test
+        run_once: yes
 
-      #- name: drain manager nodes
-      #  command: docker node update --availability drain {{ item }}
-      #  with_items: "{{ manager_ids }}"
+      - debug:
+          msg: Test has a value of: {{ test }}
+
+      - name: drain manager nodes
+        command: docker node update --availability drain {{ item }}
+        with_items: "{{ manager_ids.stdout_lines }}"
 
       #- name: remove the swarm leader's ip from consul
       #  uri:
