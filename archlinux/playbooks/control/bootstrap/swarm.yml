@@ -75,7 +75,7 @@
         run_once: yes
 
       - debug:
-          msg: Test has a value of: {{ test }}
+          msg: Test has a value of {{ test }}
 
       - name: drain manager nodes
         command: docker node update --availability drain {{ item }}
