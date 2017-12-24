@@ -53,28 +53,38 @@
           method: PUT
         run_once: yes
 
-      - name: get the swarm leader ip and port
-        uri:
-          url: "{{ swarm_leader_path }}"
-          method: GET
-        run_once: yes
-        register: swarm_leader
+      - name: register swarm leader's ip and port
+        debug:
+          msg: "{{ ansible_host }}:{{ swarm_port }}"
+        register: test_var
 
-      - name: add managers to the cluster
-        command: docker swarm join --token {{ manager_token.stdout }} {{ swarm_leader.json[0].Value|b64decode }}
-        ignore_errors: yes
+      - name: print test_var
+        debug:
+          msg: "{{ test_var }}"
 
-      - name: get manager node ids
-        command: docker node ls --quiet
-        run_once: yes
-        register: manager_ids
+      #- name: get the swarm leader ip and port
+      #  uri:
+      #    url: "{{ swarm_leader_path }}"
+      #    method: GET
+      #  run_once: yes
+      #  register: swarm_leader
 
-      - name: drain manager nodes
-        command: docker node update --availability drain {{ item }}
-        with_items: "{{ manager_ids }}"
+      #- name: add managers to the cluster
+      #  command: docker swarm join --token {{ manager_token.stdout }} {{ #swarm_leader.json[0].Value|b64decode }}
+      #  ignore_errors: yes
 
-      - name: remove the swarm leader's ip from consul
-        uri:
-          url: "{{ swarm_leader_path }}"
-          method: DELETE
-        run_once: yes
+      #- name: get manager node ids
+      #  command: docker node ls --quiet
+      #  run_once: yes
+      #  register: manager_ids
+
+      #- name: drain manager nodes
+      #  command: docker node update --availability drain {{ item }}
+      #  run_once: yes
+      #  with_items: "{{ manager_ids }}"
+
+      #- name: remove the swarm leader's ip from consul
+      #  uri:
+      #    url: "{{ swarm_leader_path }}"
+      #    method: DELETE
+      #  run_once: yes
