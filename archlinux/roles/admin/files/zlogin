@@ -8,7 +8,7 @@ alias members="consul members --http-addr ${HOST_IP}:8500 | grep -v Node | sort 
 alias force-leave="consul force-leave --http-addr ${HOST_IP}:8500"
 
 # run docker commands agains swarm managers
-alias swarm="docker -H tcp://swarm-manager.service.consul:4000"
+alias swarm="docker --host tcp://swarm-manager.service.consul:2375"
 
 # run vctl from the vulcand container
 alias vctl="docker run -it --rm docker-registry.service.consul/vulcand vctl --vulcan http://vulcand.service.consul:8182"
