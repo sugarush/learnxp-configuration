@@ -13,6 +13,13 @@
     notify:
       - reload php-fpm
 
+  - name: place php.ini
+    copy:
+      src: php.ini
+      dest: /etc/php/php.ini
+    notify:
+      - reload php-fpm
+
   - name: template php consul service
     template:
       src: php.service.json
