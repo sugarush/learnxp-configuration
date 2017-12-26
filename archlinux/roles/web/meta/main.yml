@@ -1,0 +1,8 @@
+---
+
+  dependencies:
+
+    - { role: consul-client, meta: web }
+
+    - { role: apache, meta: web }
+    - { role: php, meta: web }
