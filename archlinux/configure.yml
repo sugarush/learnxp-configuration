@@ -14,6 +14,7 @@
       - { role: control, tags: [ "control" ] }
       - { role: mariadb, tags: [ "mariadb" ] }
       - { role: proxy, tags: [ "proxy"] }
+      - { role: web, tags: [ "web"] }
       #- { role: database, tags: [ "database" ] }
       #- { role: fleet, tags: [ "fleet" ] }
       #- { role: hub, tags: [ "hub" ] }
