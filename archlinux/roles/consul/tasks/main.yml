@@ -28,7 +28,7 @@
     with_items:
       - /etc/consul
       - /etc/consul/agent
-      - /etc/consul/checks
+      - /etc/consul/check
       - /etc/consul/service
       - /etc/consul/ui
       - /run/consul
