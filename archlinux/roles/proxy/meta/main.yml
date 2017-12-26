@@ -1,3 +1,5 @@
 ---
 
+  dependencies:
+
   - { name: consul-client, meta: proxy }
