@@ -6,8 +6,8 @@
       enabled: yes
       state: started
 
-  - name: template php www.conf
-    template:
+  - name: place php www.conf
+    copy:
       src: www.conf
       dest: /etc/php/php-fpm.d/www.conf
     notify:
@@ -19,10 +19,3 @@
       dest: /etc/php/php.ini
     notify:
       - reload php-fpm
-
-  - name: template php consul service
-    template:
-      src: php.service.json
-      dest: /etc/consul/checks/php.service.json
-    notify:
-      - reload consul@client
