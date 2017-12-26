@@ -1,11 +1,5 @@
 ---
 
-  - name: enable and start php-fpm
-    systemd:
-      name: php-fpm
-      enabled: yes
-      state: started
-
   - name: place php www.conf
     copy:
       src: www.conf
@@ -19,3 +13,9 @@
       dest: /etc/php/php.ini
     notify:
       - reload php-fpm
+
+  - name: enable and start php-fpm
+    systemd:
+      name: php-fpm
+      enabled: yes
+      state: started

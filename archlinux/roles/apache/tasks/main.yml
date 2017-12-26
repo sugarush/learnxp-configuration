@@ -1,11 +1,5 @@
 ---
 
-  - name: enable and start apache httpd
-    systemd:
-      name: httpd
-      enabled: yes
-      state: started
-
   - name: place httpd-vhosts.conf
     copy:
       src: httpd-vhosts.conf
@@ -26,3 +20,9 @@
       dest: /srv/http/.htaccess
     notify:
       - reload httpd
+
+  - name: enable and start apache httpd
+    systemd:
+      name: httpd
+      enabled: yes
+      state: started
