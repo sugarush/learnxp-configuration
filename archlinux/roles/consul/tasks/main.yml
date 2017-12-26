@@ -29,6 +29,7 @@
       - /etc/consul
       - /etc/consul/agent
       - /etc/consul/checks
+      - /etc/consul/service
       - /etc/consul/ui
       - /run/consul
 
