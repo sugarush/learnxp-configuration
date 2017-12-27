@@ -47,7 +47,7 @@
 - name: copy consul config
   copy:
     src: docker.check.json
-    dest: /etc/consul/checks/docker.check.json
+    dest: /etc/consul/check/docker.check.json
   notify:
     - reload consul@client
     - reload consul@server

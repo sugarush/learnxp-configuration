@@ -55,7 +55,7 @@
   - name: template influxdb-chronograf consul service definition
     template:
       src: influxdb-chronograf.service.json
-      dest: /etc/consul/checks/influxdb-chronograf.service.json
+      dest: /etc/consul/service/influxdb-chronograf.service.json
     notify:
       - reload consul@client
       - reload consul@server

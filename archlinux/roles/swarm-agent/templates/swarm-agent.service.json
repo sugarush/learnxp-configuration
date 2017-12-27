@@ -3,7 +3,7 @@
     "id": "swarm-agent",
     "name": "swarm-agent",
     "tags": [
-      "{{ lookup('env', 'DEPLOY') }}"
+      "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
     "port": 2375,

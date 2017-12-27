@@ -12,7 +12,7 @@
 
   - name: template config
     template:
-      src: unbound.conf.j2
+      src: unbound.conf
       dest: /etc/unbound/unbound.conf
     notify:
       - reload unbound
@@ -55,7 +55,7 @@
   - name: copy consul config
     copy:
       src: unbound.check.json
-      dest: /etc/consul/checks/unbound.check.json
+      dest: /etc/consul/check/unbound.check.json
     notify:
       - reload consul@client
       - reload consul@server

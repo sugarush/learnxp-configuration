@@ -33,7 +33,7 @@
   - name: template influxdb consul service
     template:
       src: influxdb-http.service.json
-      dest: /etc/consul/checks/influxdb-http.service.json
+      dest: /etc/consul/service/influxdb-http.service.json
     notify:
       - daemon-reload
       - reload consul@client

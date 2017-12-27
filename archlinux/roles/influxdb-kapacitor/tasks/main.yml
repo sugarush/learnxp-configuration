@@ -39,7 +39,7 @@
   - name: template influxdb-kapacitor consul service definition
     template:
       src: influxdb-kapacitor.service.json
-      dest: /etc/consul/checks/influxdb-kapacitor.service.json
+      dest: /etc/consul/service/influxdb-kapacitor.service.json
     notify:
       - reload consul@client
       - reload consul@server

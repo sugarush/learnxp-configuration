@@ -12,7 +12,7 @@
   - name: template swarm-ui consul service definition
     template:
       src: swarm-ui.service.json
-      dest: /etc/consul/checks/swarm-ui.service.json
+      dest: /etc/consul/service/swarm-ui.service.json
     notify:
       - reload consul@client
       - reload consul@server

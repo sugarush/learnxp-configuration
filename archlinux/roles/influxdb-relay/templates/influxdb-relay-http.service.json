@@ -3,7 +3,7 @@
     "id": "influxdb-relay-http",
     "name": "influxdb-relay-http",
     "tags": [
-      "{{ lookup('env', 'DEPLOY') }}"
+      "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
     "port": 8086,

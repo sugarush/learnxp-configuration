@@ -4,8 +4,8 @@
     aws_s3:
       bucket: "{{ bucket }}"
       object: "{{ influxdb_relay }}"
-      mode: get
       dest: /tmp/influxdb-relay.pkg.tar.xz
+      mode: get
 
   - name: install influxdb-relay
     command: pacman --noconfirm -U /tmp/influxdb-relay.pkg.tar.xz
@@ -62,7 +62,7 @@
   - name: template influxdb-relay http consul service files
     template:
       src: influxdb-relay-http.service.json
-      dest: /etc/consul/checks/influxdb-relay-http.service.json
+      dest: /etc/consul/service/influxdb-relay-http.service.json
     notify:
       - reload consul@client
       - reload consul@server

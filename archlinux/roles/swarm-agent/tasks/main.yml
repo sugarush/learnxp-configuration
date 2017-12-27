@@ -14,7 +14,7 @@
   - name: template swarm-agent consul service definition
     template:
       src: swarm-agent.service.json
-      dest: /etc/consul/agent/swarm-agent.service.json
+      dest: /etc/consul/service/swarm-agent.service.json
     notify:
       - reload consul@client
       - reload consul@server
