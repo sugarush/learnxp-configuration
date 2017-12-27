@@ -20,7 +20,7 @@ ExecStartPre=/usr/bin/chown consul:consul /run/consul.pid
 ExecStart=/usr/bin/consul agent -ui \
   -data-dir /var/lib/consul/ -pid-file /run/consul.pid \
   -config-file /etc/consul/agent/%i.json \
-  -config-dir /etc/consul/checks -config-dir /etc/consul/service \
+  -config-dir /etc/consul/check -config-dir /etc/consul/service \
   -advertise ${HOST_IP} -client ${HOST_IP} -datacenter ${REGION}
 
 ExecReload=/usr/bin/kill -HUP $MAINPID
