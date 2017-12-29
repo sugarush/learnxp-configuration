@@ -1,17 +1,19 @@
 ---
 
-  - name: copy consul-alerts service file
-    copy:
-      dest: /etc/systemd/system/consul-alerts.service
-      src: consul-alerts.service
-    notify:
-      - daemon-reload
-      - restart consul-alerts
+  - name: copy consul-alerts
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: /tmp/{{ item.key }}.pkg.tar.xz
+      mode: get
+    with_dict: "{{ packages }}"
 
-  - name: copy consul config
+  - name: install consul-alerts
+    command: pacman --noconfirm -U /tmp/{{ item }}.pkg.tar.xz
+    with_items:
+      - consul-alerts
+
+  - name: copy consul-alerts systemd service
     copy:
-      dest: /etc/consul/check/consul-alerts.check.json
-      src: consul-alerts.check.json
-    notify:
-      - reload consul@client
-      - reload consul@server
+      src: consul-alerts.service
+      dest: /etc/system/systemd/consul-alerts.service
