@@ -6,8 +6,8 @@
       object: "{{ item.value }}"
       dest: /tmp/{{ item.key }}.pkg.tar.xz
       mode: get
-    with_items: "{{ packages }}"
+    with_dict: "{{ packages }}"
 
   - name: install mysql
     command: pacman --noconfirm -U /tmp/{{ item.key }}.pkg.tar.xz
-    with_items: "{{ packages }}"
+    with_dict: "{{ packages }}"
