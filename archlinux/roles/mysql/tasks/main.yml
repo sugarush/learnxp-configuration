@@ -15,3 +15,16 @@
       - libmysqlclient
       - mysql-clients
       - mysql
+
+  - name: start mysql
+    systemd:
+      name: mysqld
+      state: started
+      enabled: yes
+
+  - name: template mysql consul service definition
+    template:
+      src: mysql.service.json
+      dest: /etc/consul/service/mysql.service.json
+    notify:
+      - reload consul@client
