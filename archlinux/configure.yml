@@ -12,7 +12,7 @@
       - { role: admin, tags: [ "admin" ] }
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
-      - { role: mariadb, tags: [ "mariadb" ] }
+      - { role: mysql, tags: [ "mysql" ] }
       - { role: proxy, tags: [ "proxy"] }
       - { role: web, tags: [ "web"] }
       #- { role: database, tags: [ "database" ] }
