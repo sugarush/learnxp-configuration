@@ -1,11 +1,13 @@
 ---
 
-  - name: copy mysql from s3
+  - name: copy mysql
     aws_s3:
       bucket: "{{ bucket }}"
-      object: "{{ mysql }}"
-      dest: /tmp/mysql.pkg.tar.xz
+      object: "{{ item.value }}"
+      dest: /tmp/{{ item.key }}.pkg.tar.xz
       mode: get
+    with_items: "{{ packages }}"
 
   - name: install mysql
-    command: pacman --noconfirm -U /tmp/mysql.pkg.tar.xz
+    command: pacman --noconfirm -U /tmp/{{ item.key }}.pkg.tar.xz
+    with_items: "{{ packages }}"

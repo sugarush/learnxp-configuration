@@ -1,4 +1,9 @@
 ---
 
   bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  mysql: mysql-5.7.20-1-x86_64.pkg.tar.xz
+
+  packages:
+
+    mysql: mysql-5.7.20-1-x86_64.pkg.tar.xz
+    mysql-clients: mysql-clients-5.7.20-1-x86_64.pkg.tar.xz
+    libmysqlclient: libmysqlclient-5.7.20-1-x86_64.pkg.tar.xz
