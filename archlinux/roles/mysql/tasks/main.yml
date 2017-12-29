@@ -7,3 +7,11 @@
       dest: /tmp/{{ item.key }}.pkg.tar.xz
       mode: get
     with_dict: "{{ packages }}"
+
+  - name: install mysql
+    command: pacman --noconfirm -U {{ item }}.pkg.tar.xz
+    with_items:
+      - jemalloc
+      - libmysqlclient
+      - mysql-clients
+      - mysql
