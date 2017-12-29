@@ -9,7 +9,7 @@
     with_dict: "{{ packages }}"
 
   - name: install mysql
-    command: pacman --noconfirm -U {{ item }}.pkg.tar.xz
+    command: pacman --noconfirm -U /tmp/{{ item }}.pkg.tar.xz
     with_items:
       - jemalloc
       - libmysqlclient
