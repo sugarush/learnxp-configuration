@@ -7,3 +7,4 @@
     mysql: mysql-5.7.20-1-x86_64.pkg.tar.xz
     mysql-clients: mysql-clients-5.7.20-1-x86_64.pkg.tar.xz
     libmysqlclient: libmysqlclient-5.7.20-1-x86_64.pkg.tar.xz
+    jemalloc: jemalloc-1:5.0.1-3-x86_64.pkg.tar.xz
