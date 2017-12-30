@@ -12,3 +12,25 @@
     command: pacman --noconfirm -U /tmp/{{ item }}.pkg.tar.xz
     with_items:
       - nginx-mainline
+
+  - name: place nginx.conf consul-template
+    copy:
+      src: nginx.conf
+      dest: /etc/consul-template/template/nginx.conf
+
+  - name: place nginx.conf consul-template configuration
+    copy:
+      src: nginx.toml
+      dest: /etc/consul-template/config/nginx.toml
+
+  - name: start and enable consul-template@nginx
+    systemd:
+      name: consul-template@nginx
+      state: started
+      enabled: yes
+      
+  - name: start and enable nginx
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes
