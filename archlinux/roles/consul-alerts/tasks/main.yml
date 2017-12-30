@@ -17,3 +17,11 @@
     copy:
       src: consul-alerts.service
       dest: /etc/system/systemd/consul-alerts.service
+    notify:
+      - daemon-reload
+
+  - name: enable and start consul-alerts
+    systemd:
+      name: consul-alerts
+      state: started
+      enabled: yes
