@@ -25,7 +25,7 @@
       src: consul-alerts.check.json
       dest: /etc/consul/check/consul-alerts.check.json
     notify:
-      reload consul@client
+      - reload consul@client
 
   - name: enable and start consul-alerts
     systemd:
