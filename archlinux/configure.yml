@@ -13,6 +13,7 @@
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
       - { role: mysql, tags: [ "mysql" ] }
+      - { role: nginx, tags: [ "nginx"] }
       - { role: proxy, tags: [ "proxy"] }
       - { role: web, tags: [ "web"] }
       #- { role: database, tags: [ "database" ] }
