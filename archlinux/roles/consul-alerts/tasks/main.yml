@@ -16,9 +16,16 @@
   - name: copy consul-alerts systemd service
     copy:
       src: consul-alerts.service
-      dest: /etc/system/systemd/consul-alerts.service
+      dest: /etc/systemd/system/consul-alerts.service
     notify:
       - daemon-reload
+
+  - name: copy consul-alerts consul check
+    copy:
+      src: consul-alerts.check.json
+      dest: /etc/consul/check/consul-alerts.check.json
+    notify:
+      reload consul@client
 
   - name: enable and start consul-alerts
     systemd:
