@@ -1,0 +1,14 @@
+---
+
+  - name: copy nginx-mainline
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: /tmp/{{ item.key }}.pkg.tar.xz
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install nginx-mainline
+    command: pacman --noconfirm -U /tmp/{{ item }}.pkg.tar.xz
+    with_items:
+      - nginx-mainline
