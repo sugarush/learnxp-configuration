@@ -1,8 +1,5 @@
 ---
 
-  - name: set default shell to zshell
-    command: useradd -D -s /usr/bin/zsh
-
   - name: set root user shell to zshell
     command: chsh -s /usr/bin/zsh root
 
