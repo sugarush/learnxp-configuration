@@ -10,6 +10,7 @@
     post_tasks:
 
       - name: start configure
-        systemd:
-          name: configure
-          state: started
+        command: systemctl start configure
+        #systemd:
+        #  name: configure
+        #  state: started
