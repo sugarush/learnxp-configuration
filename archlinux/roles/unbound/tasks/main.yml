@@ -17,11 +17,27 @@
     notify:
       - reload unbound
 
+  - name: create unbound drop-in directory
+    file:
+      path: /etc/systemd/system/unbound.service.d
+      state: directory
+
+  - name: place unbound drop-in
+    copy:
+      src: unbound.service.d/00-unit.conf
+      dest: /etc/systemd/system/unbound.service.d/00-systemd-resolved.conf
+
   - name: enable and start unbound
     systemd:
       name: unbound
       state: started
       enabled: yes
+      daemon_reload: yes
+
+  - name: restart systemd-resolved
+    systemd:
+      name: systemd-resolved
+      state: restarted
 
   - name: place unbound consul check definition
     copy:
