@@ -22,9 +22,9 @@
       #- { role: monitor, tags: [ "monitor" ] }
       #- { role: swarm, tags: [ "swarm" ] }
 
-  post_tasks:
+    post_tasks:
 
-    - name: restart systemd-resolved
-      systemd:
-        name: systemd-resolved
-        state: restarted
+      - name: restart systemd-resolved
+        systemd:
+          name: systemd-resolved
+          state: restarted
