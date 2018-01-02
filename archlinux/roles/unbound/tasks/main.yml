@@ -17,6 +17,19 @@
     notify:
       - reload unbound
 
+  - name: create unbound drop-in directory
+    file:
+      path: /etc/systemd/system/unbound.service.d
+      state: directory
+      owner: unbound
+      group: unbound
+      mode: 0755
+
+  - name: place unbound-before-systemd-resolved drop-in
+    copy:
+      src: 00-before-systemd-resolved.conf
+      dest: /etc/systemd/system/unbound.service.d/00-before-systemd-resolved.conf
+
   - name: enable and start unbound
     systemd:
       name: unbound
