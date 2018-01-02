@@ -22,7 +22,7 @@
 
   - name: create systemd drop-in directories
     file:
-      dest: {{ item }}
+      dest: "{{ item }}"
       state: directory
     with_items:
       - /etc/systemd/journald.conf.d
