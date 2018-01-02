@@ -24,7 +24,7 @@
 
   - name: place unbound drop-in
     copy:
-      src: unbound.service.d/00-unit.conf
+      src: unbound.service.d/00-systemd-resolved.conf
       dest: /etc/systemd/system/unbound.service.d/00-systemd-resolved.conf
 
   - name: enable and start unbound
