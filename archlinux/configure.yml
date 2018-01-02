@@ -28,3 +28,4 @@
         systemd:
           name: systemd-resolved
           state: restarted
+        tags: [ "all" ]
