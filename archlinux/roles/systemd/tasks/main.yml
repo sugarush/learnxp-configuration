@@ -13,10 +13,13 @@
     notify:
       - daemon-reload
 
-  - name: place configure service
+  - name: place configure service and timer
     copy:
-      src: configure.service
-      dest: /etc/systemd/system/configure.service
+      src: configure.{{ item }}
+      dest: /etc/systemd/system/configure.{{ item }}
+    with_items:
+      - service
+      - timer
     notify:
       - daemon-reload
 
