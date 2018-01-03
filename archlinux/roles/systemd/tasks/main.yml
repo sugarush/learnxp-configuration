@@ -23,6 +23,11 @@
     notify:
       - daemon-reload
 
+  - name: enable configure timer
+    systemd:
+      name: configure.timer
+      enabled: yes
+
   - name: create systemd drop-in directories
     file:
       dest: "{{ item }}"
