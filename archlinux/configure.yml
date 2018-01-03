@@ -22,10 +22,10 @@
       #- { role: monitor, tags: [ "monitor" ] }
       #- { role: swarm, tags: [ "swarm" ] }
 
-#    post_tasks:
-#
-#      - name: restart systemd-resolved
-#        systemd:
-#          name: systemd-resolved
-#          state: restarted
-#        tags: [ "network" ]
+    post_tasks:
+
+      - name: restart systemd-resolved
+        systemd:
+          name: systemd-resolved
+          state: restarted
+        tags: [ "network" ]
