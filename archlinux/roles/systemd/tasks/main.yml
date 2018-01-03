@@ -6,27 +6,19 @@
       src: environment.py
       mode: 0700
 
-  - name: place environment.service
+  - name: place environment service
     copy:
       src: environment.service
       dest: /etc/systemd/system/environment.service
     notify:
       - daemon-reload
 
-  - name: place configure service and timer
+  - name: place configure service
     copy:
-      src: configure.{{ item }}
-      dest: /etc/systemd/system/configure.{{ item }}
-    with_items:
-      - service
-      - timer
+      src: configure.service
+      dest: /etc/systemd/system/configure.service
     notify:
       - daemon-reload
-
-  - name: enable configure timer
-    systemd:
-      name: configure.timer
-      enabled: yes
 
   - name: create systemd drop-in directories
     file:
