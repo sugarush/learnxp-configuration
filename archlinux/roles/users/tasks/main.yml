@@ -28,5 +28,6 @@
   - name: set users authorized keys
     authorized_key:
       user: "{{ item.name }}"
-      key: https://github.com/{{ item.github }}.keys
+      key: "{{ lookup('file', item.key) }}"
+      exclusive: yes
     with_items: "{{ users }}"

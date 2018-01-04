@@ -5,4 +5,4 @@
   users:
 
     - name: csev
-      github: csev
+      key: ssh/csev.pub
