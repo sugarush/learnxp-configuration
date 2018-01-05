@@ -14,13 +14,6 @@
     notify:
       - reload httpd
 
-  - name: place htaccess
-    copy:
-      src: htaccess
-      dest: /srv/http/.htaccess
-    notify:
-      - reload httpd
-
   - name: enable and start apache httpd
     systemd:
       name: httpd
