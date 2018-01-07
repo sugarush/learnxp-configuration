@@ -6,5 +6,5 @@
 
     - { role: ansible-modules, meta: bootstrap }
     - { role: hostname, meta: bootstrap }
-    - { role: users, meta: bootstrap }
     - { role: sudo, meta: bootstrap }
+    - { role: users, meta: bootstrap }
