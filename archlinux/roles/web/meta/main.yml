@@ -6,3 +6,5 @@
 
     - { role: apache, meta: web }
     - { role: php, meta: web }
+    - { role: tsugi-project, meta: web }
+    - { role: tsugi-website, meta: web }
