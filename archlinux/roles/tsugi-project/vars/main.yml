@@ -1,0 +1,4 @@
+---
+
+  repository: https://github.com/tsugiproject/tsugi.git
+  directory: /srv/http/tsugi

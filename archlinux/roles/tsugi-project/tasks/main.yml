@@ -1,0 +1,11 @@
+---
+
+  - name: create destination directory
+    file:
+      path: "{{ directory }}"
+      state: directory
+
+  - name: clone tsugi project
+    git:
+      repo: "{{ repository }}"
+      dest: "{{ directory }}"

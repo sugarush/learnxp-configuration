@@ -1,0 +1,4 @@
+---
+
+  repository: https://github.com/tsugicloud/website.git
+  directory: /srv/http/website
