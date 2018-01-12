@@ -5,6 +5,13 @@
       path: "{{ directory }}"
       state: directory
 
+  - name: create grav directories
+    file:
+      path: "{{ item }}"
+      owner: 33
+      group: 33
+    with_items: "{{ grav_directories }}"
+
   - name: clone tsugi website
     git:
       repo: "{{ repository }}"

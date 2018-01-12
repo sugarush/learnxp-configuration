@@ -2,3 +2,8 @@
 
   repository: https://github.com/tsugicloud/website.git
   directory: /srv/http/website
+
+  grav_directories:
+    - assets
+    - cache
+    - logs
