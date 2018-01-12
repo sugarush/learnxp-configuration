@@ -46,7 +46,7 @@ unset($apphome);
 // You need to point this at a database with am account and password
 // that can create tables.   To make the initial tables go into Admin
 // to run the upgrade.php script which auto-creates the tables.
-$CFG->pdo       = 'mysql:mysql.service.consul;dbname=tsugi';
+$CFG->pdo       = 'mysql:host=mysql.service.consul;dbname=tsugi';
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 $CFG->dbuser    = 'ltiuser';
 $CFG->dbpass    = 'ltipassword';
