@@ -9,8 +9,8 @@
     file:
       path: "{{ directory }}/{{ item }}"
       state: directory
-      owner: 33
-      group: 33
+      owner: http
+      group: http
     with_items: "{{ grav_directories }}"
 
   - name: clone tsugi website
