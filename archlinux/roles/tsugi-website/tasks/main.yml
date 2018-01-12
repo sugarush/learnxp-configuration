@@ -7,7 +7,7 @@
 
   - name: create grav directories
     file:
-      path: "{{ item }}"
+      path: "{{ directory }}/{{ item }}"
       state: directory
       owner: 33
       group: 33
