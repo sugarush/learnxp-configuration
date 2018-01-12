@@ -9,3 +9,8 @@
     git:
       repo: "{{ repository }}"
       dest: "{{ directory }}"
+
+  - name: place tsugi configuration
+    copy:
+      src: config.php
+      dest: "{{ directory }}/config.php"
