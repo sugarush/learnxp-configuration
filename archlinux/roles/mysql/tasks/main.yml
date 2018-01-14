@@ -22,6 +22,13 @@
       state: started
       enabled: yes
 
+  - name: wait for mysql to start
+    wait_for:
+      port: 3306
+
+  - name: configure the tsugi database
+    shell: echo "{{ script }}" | mysql -u root
+
   - name: template mysql consul service definition
     template:
       src: mysql.service.json

@@ -8,3 +8,9 @@
     mysql-clients: mysql-clients-5.7.20-1-x86_64.pkg.tar.xz
     libmysqlclient: libmysqlclient-5.7.20-1-x86_64.pkg.tar.xz
     jemalloc: jemalloc-1:5.0.1-3-x86_64.pkg.tar.xz
+
+  script: >
+    CREATE DATABASE tsugi DEFAULT CHARACTER SET utf8;
+    GRANT ALL ON tsugi.* TO 'ltiuser'@'localhost' IDENTIFIED BY 'ltipassword';
+    GRANT ALL ON tsugi.* TO 'ltiuser'@'127.0.0.1' IDENTIFIED BY 'ltipassword';
+    GRANT ALL ON tsugi.* TO 'ltiuser'@'172.%' IDENTIFIED BY 'ltipassword';
