@@ -17,3 +17,4 @@
     git:
       repo: "{{ repository }}"
       dest: "{{ directory }}"
+      force: yes
