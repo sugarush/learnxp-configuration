@@ -9,7 +9,6 @@
     git:
       repo: "{{ repository }}"
       dest: "{{ directory }}"
-      force: yes
 
   - name: place tsugi configuration
     copy:

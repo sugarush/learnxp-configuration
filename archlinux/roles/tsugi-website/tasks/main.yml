@@ -1,9 +1,19 @@
 ---
 
+  - name: remove destination directory
+    file:
+      path: "{{ directory }}"
+      state: absent
+
   - name: create destination directory
     file:
       path: "{{ directory }}"
       state: directory
+
+  - name: clone tsugi website
+    git:
+      repo: "{{ repository }}"
+      dest: "{{ directory }}"
 
   - name: create grav directories
     file:
@@ -12,9 +22,3 @@
       owner: http
       group: http
     with_items: "{{ grav_directories }}"
-
-  - name: clone tsugi website
-    git:
-      repo: "{{ repository }}"
-      dest: "{{ directory }}"
-      force: yes
