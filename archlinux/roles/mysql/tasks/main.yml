@@ -28,6 +28,7 @@
 
   - name: configure the tsugi database
     shell: echo "{{ script }}" | mysql -u root
+    ignore_errors: yes
 
   - name: template mysql consul service definition
     template:
