@@ -18,4 +18,4 @@
   - name: initialize tsugi database
     shell: >
       cd "{{ directory }}/admin";
-      php upgrade.php
+      php upgrade.php |& tee /tmp/debug.txt
