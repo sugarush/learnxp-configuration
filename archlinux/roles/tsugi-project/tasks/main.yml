@@ -14,3 +14,8 @@
     copy:
       src: config.php
       dest: "{{ directory }}/config.php"
+
+  - name: initialize tsugi database
+    shell: >
+      cd "{{ directory }}/admin";
+      php upgrade.php
