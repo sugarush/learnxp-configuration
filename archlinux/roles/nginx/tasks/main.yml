@@ -1,5 +1,9 @@
 ---
 
+  - name: update pacman cache
+    pacman:
+      update_cache: yes
+
   - name: copy nginx-mainline
     aws_s3:
       bucket: "{{ bucket }}"
@@ -28,7 +32,7 @@
       name: consul-template@nginx
       state: started
       enabled: yes
-      
+
   - name: start and enable nginx
     systemd:
       name: nginx
