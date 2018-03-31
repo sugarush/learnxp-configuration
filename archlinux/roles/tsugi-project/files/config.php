@@ -13,7 +13,7 @@ register_shutdown_function('__the_end');
 
 // If we just are using Tsugi but not part of another site
 $apphome = false;
-$wwwroot = "http://34.216.235.6/tsugi";
+$wwwroot = "http://52.37.243.137/tsugi";
 // $wwwroot = 'http://localhost:8888/tsugi';
 // $wwwroot = "https://fb610139.ngrok.io/tsugi";
 
