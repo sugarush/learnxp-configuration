@@ -7,7 +7,10 @@
 
       - role: bootstrap
 
-    post_tasks:
+  - hosts: localhost
+    connection: local
+
+    tasks:
 
       - name: start configure
         systemd:
