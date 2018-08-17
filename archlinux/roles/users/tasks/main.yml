@@ -3,19 +3,19 @@
   - name: set root user shell to zshell
     command: chsh -s /usr/bin/zsh root
 
-  - name: clone satan-shell repository
+  - name: clone sugar-shell repository
     git:
-      repo: "{{ satan_shell }}"
-      dest: /usr/local/etc/satan-shell
+      repo: "{{ sugar_shell }}"
+      dest: /usr/local/etc/sugar-shell
 
-  - name: place satan-shell settings file
+  - name: place sugar-shell settings file
     copy:
       src: settings.conf
-      dest: /usr/local/etc/satan-shell/zsh.d/settings.conf
+      dest: /usr/local/etc/sugar-shell/zsh.d/settings.conf
 
-  - name: install satan-shell for root user
+  - name: install sugar-shell for root user
     shell: |
-      cd /usr/local/etc/satan-shell
+      cd /usr/local/etc/sugar-shell
       ./install.sh
 
   - name: add users
