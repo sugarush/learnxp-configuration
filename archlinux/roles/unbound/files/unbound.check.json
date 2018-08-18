@@ -2,7 +2,7 @@
   "check": {
     "id": "unbound",
     "name": "Unbound DNS",
-    "script": "systemctl is-active unbound",
+    "args": [ "systemctl", "is-active", "unbound" ],
     "interval": "10s"
   }
 }

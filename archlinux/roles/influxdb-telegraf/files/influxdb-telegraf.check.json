@@ -2,7 +2,7 @@
   "check": {
     "id": "influxdb-telegraf",
     "name": "InfluxDB Telegraf",
-    "script": "systemctl is-active telegraf",
+    "args": [ "systemctl", "is-active", "telegraf" ],
     "interval": "10s"
   }
 }
