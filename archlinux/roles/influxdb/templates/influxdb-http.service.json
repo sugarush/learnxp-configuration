@@ -9,7 +9,7 @@
     "port": 8085,
     "checks": [
       {
-        "script": "systemctl is-active influxdb",
+        "args": [ "systemctl", "is-active", "influxdb" ],
         "interval": "30s"
       },
       {
