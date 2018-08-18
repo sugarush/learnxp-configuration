@@ -12,6 +12,11 @@
 
     tasks:
 
+      - name: wait for external connectivity
+        wait_for:
+          host: google.com
+          port: 80
+
       - name: start configure
         systemd:
           name: configure
