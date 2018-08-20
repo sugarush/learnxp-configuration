@@ -5,7 +5,7 @@
       src: server.json
       dest: /etc/consul/agent/server.json
 
-  - name: copy consul bootstrap configuration
-    copy:
+  - name: template consul bootstrap configuration
+    template:
       src: bootstrap.json
       dest: /etc/consul/agent/bootstrap.json
