@@ -1,7 +1,7 @@
 ---
 
-  - name: copy consul client configuration
-    copy:
+  - name: template consul client configuration
+    template:
       src: client.json
       dest: /etc/consul/agent/client.json
 

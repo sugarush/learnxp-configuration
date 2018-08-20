@@ -2,7 +2,9 @@
   "bootstrap": false,
   "server": false,
   "enable_script_checks": true,
-  "datacenter": "misc",
+  "client_addr": "0.0.0.0",
+  "advertise_addr": "{{ lookup('env', 'HOST_IP') }}",
+  "datacenter": "{{ lookup('env', 'REGION') }}",
   "data_dir": "/var/consul",
   "log_level": "INFO",
   "start_join": [
