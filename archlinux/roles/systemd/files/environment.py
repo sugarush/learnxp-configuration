@@ -16,9 +16,9 @@ host = netifaces.ifaddresses(interface)[netifaces.AF_INET][0]['addr']
 
 for line in resolv.readlines():
 
-    domain_match = re.search(r"domain (.*)", line)
-    search_match = re.search(r"search (.*)", line)
-    server_match = re.search(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", line)
+    domain_match = re.search(r"^domain (.*)", line)
+    search_match = re.search(r"^search (.*)", line)
+    server_match = re.search(r"^nameserver (.*)", line)
 
     if search_match:
         domain = search_match.group(1)
@@ -31,7 +31,7 @@ for line in resolv.readlines():
         continue
 
     if server_match:
-        server = server_match.group(0)
+        server = server_match.group(1)
         if not server in [ "127.0.0.1" ]:
             servers.append(server)
 
