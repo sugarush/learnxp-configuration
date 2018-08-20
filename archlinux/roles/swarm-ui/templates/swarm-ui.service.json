@@ -9,7 +9,7 @@
     "port": 9000,
     "checks": [
       {
-        "script": "systemctl is-active swarm-ui",
+        "args": [ "systemctl", "is-active", "swarm-ui" ],
         "interval": "20s"
       },
       {
