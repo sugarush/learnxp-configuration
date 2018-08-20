@@ -1,4 +1,3 @@
 ---
 
-  - include: bootstrap/consul.yml
-  - include: bootstrap/swarm.yml
+  - import_playbook: bootstrap/consul.yml
