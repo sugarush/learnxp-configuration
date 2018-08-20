@@ -9,7 +9,7 @@
     "port": 9092,
     "checks": [
       {
-        "script": "systemctl is-active kapacitor",
+        "args": [ "systemctl", "is-active", "kapacitor" ],
         "interval": "30s"
       },
       {

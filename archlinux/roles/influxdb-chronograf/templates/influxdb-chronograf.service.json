@@ -9,7 +9,7 @@
     "port": 8888,
     "checks": [
       {
-        "script": "systemctl is-active chronograf",
+        "args": [ "systemctl", "is-active", "chronograf" ],
         "interval": "30s"
       },
       {
