@@ -19,21 +19,24 @@
       - restart influxdb
 
   - name: enable and start influxdb
-    command: systemctl enable --now influxdb
+    systemd:
+      name: influxdb
+      enabled: yes
+      state: started
 
   - name: wait until influxdb has started
     wait_for:
       host: "{{ lookup('env', 'HOST_IP') }}"
-      port: 8085
+      port: 8086
       delay: 5
 
   - name: create influxdb telegraf database
-    command: influx -host {{ lookup('env', 'HOST_IP') }} -port 8085 -execute "create database telegraf"
+    command: influx -host {{ lookup('env', 'HOST_IP') }} -port 8086 -execute "create database telegraf"
 
   - name: template influxdb consul service
     template:
-      src: influxdb-http.service.json
-      dest: /etc/consul/service/influxdb-http.service.json
+      src: influxdb.service.json
+      dest: /etc/consul/service/influxdb.service.json
     notify:
       - daemon-reload
       - reload consul@client

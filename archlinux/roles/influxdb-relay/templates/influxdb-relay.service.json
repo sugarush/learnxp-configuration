@@ -1,7 +1,7 @@
 {
   "service": {
-    "id": "influxdb-http",
-    "name": "influxdb-http",
+    "id": "influxdb-relay",
+    "name": "influxdb-relay",
     "tags": [
       "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
@@ -9,7 +9,7 @@
     "port": 8085,
     "checks": [
       {
-        "args": [ "systemctl", "is-active", "influxdb" ],
+        "args": [ "systemctl", "is-active", "influxdb-relay" ],
         "interval": "30s"
       },
       {

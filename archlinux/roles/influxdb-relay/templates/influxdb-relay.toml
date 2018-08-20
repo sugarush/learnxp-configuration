@@ -1,9 +1,9 @@
 [[http]]
 # Name of the HTTP server, used for display purposes only.
-name = "{{ lookup('env', 'HOSTNAME') }}-http"
+name = "{{ lookup('env', 'HOSTNAME') }}"
 
 # TCP address to bind to, for HTTP server.
-bind-addr = "{{ lookup('env', 'HOST_IP') }}:8086"
+bind-addr = "{{ lookup('env', 'HOST_IP') }}:8085"
 
 # Enable HTTPS requests.
 #ssl-combined-pem = "/etc/ssl/influxdb-relay.pem"
@@ -15,7 +15,7 @@ bind-addr = "{{ lookup('env', 'HOST_IP') }}:8086"
     # skip-tls-verification: skip verification for HTTPS location. WARNING: it's insecure. Don't use in production.
 output = [
     {% raw %}
-    {{ range service "influxdb-http" }}
+    {{ range service "influxdb" }}
     { name="{{ .Name }}", location="http://{{ .Address }}:{{ .Port }}/write", timeout="10s" },
     {{ end }}
     {% endraw %}

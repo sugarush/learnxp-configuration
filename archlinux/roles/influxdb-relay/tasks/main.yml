@@ -46,23 +46,21 @@
       - reload consul-template@influxdb-relay
 
   - name: start and enable consul-template@influxdb-relay
-    #command: systemctl enable --now consul-template@influxdb-relay
     systemd:
       name: consul-template@influxdb-relay
       enabled: yes
       state: started
 
   - name: start and enable influxdb-relay
-    #command: systemctl enable --now influxdb-relay
     systemd:
       name: influxdb-relay
       enabled: yes
       state: started
 
-  - name: template influxdb-relay http consul service files
+  - name: template influxdb-relay consul service files
     template:
-      src: influxdb-relay-http.service.json
-      dest: /etc/consul/service/influxdb-relay-http.service.json
+      src: influxdb-relay.service.json
+      dest: /etc/consul/service/influxdb-relay.service.json
     notify:
       - reload consul@client
       - reload consul@server
