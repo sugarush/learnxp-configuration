@@ -30,3 +30,4 @@
 
       - name: clear raft data
         shell: rm -rf /var/consul/raft/*
+        warn: false
