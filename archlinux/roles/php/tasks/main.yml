@@ -1,5 +1,11 @@
 ---
 
+  - name: install php-fpm
+    pacman:
+      name: php-fpm
+      state: present
+      update_cache: yes
+
   - name: place php www.conf
     copy:
       src: www.conf
