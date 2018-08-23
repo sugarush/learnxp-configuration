@@ -1,7 +1,7 @@
 ---
 
   - name: place php www.conf
-    template:
+    copy:
       src: www.conf
       dest: /etc/php/php-fpm.d/www.conf
     notify:
