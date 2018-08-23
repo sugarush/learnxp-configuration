@@ -20,6 +20,14 @@
     notify:
       - reload php-fpm
 
+  - name: create php directory
+    file:
+      path: /srv/php
+      state: directory
+      owner: http
+      group: http
+      mode: 0755
+
   - name: enable and start php-fpm
     systemd:
       name: php-fpm
