@@ -1,8 +1,0 @@
----
-
-  - name: template web consul service
-    template:
-      src: web.service.json
-      dest: /etc/consul/service/web.service.json
-    notify:
-      - reload consul@client

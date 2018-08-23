@@ -1,7 +1,7 @@
 ---
 
   - name: place php www.conf
-    copy:
+    template:
       src: www.conf
       dest: /etc/php/php-fpm.d/www.conf
     notify:
@@ -19,3 +19,10 @@
       name: php-fpm
       enabled: yes
       state: started
+
+  - name: template php consul service files
+    template:
+      src: php.service.json
+      dest: /etc/consul/service/php.service.json
+    notify:
+      - reload consul@client

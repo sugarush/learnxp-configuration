@@ -10,16 +10,11 @@
 
       # meta roles
       - { role: admin, tags: [ "admin" ] }
+      - { role: application, tags: [ "application"] }
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
-      - { role: mysql, tags: [ "mysql" ] }
-      - { role: nginx, tags: [ "nginx"] }
       - { role: proxy, tags: [ "proxy"] }
       - { role: web, tags: [ "web"] }
-      #- { role: database, tags: [ "database" ] }
-      #- { role: fleet, tags: [ "fleet" ] }
-      #- { role: hub, tags: [ "hub" ] }
-      #- { role: monitor, tags: [ "monitor" ] }
 
     post_tasks:
 

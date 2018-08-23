@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "php",
+    "name": "php",
+    "tags": [
+      "{{ lookup('env', 'ENVIRONMENT') }}"
+    ],
+    "address": "{{ lookup('env', 'HOST_IP') }}",
+    "port": 9000,
+    "checks": [
+      {
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:80",
+        "interval": "30s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}

@@ -3,8 +3,4 @@
   dependencies:
 
     - { role: consul-client, meta: web }
-
-    - { role: apache, meta: web }
-    - { role: php, meta: web }
-    - { role: tsugi-website, meta: web }
-    - { role: tsugi-project, meta: web }
+    - { role: nginx, meta: web }

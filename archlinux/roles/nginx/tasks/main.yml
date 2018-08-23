@@ -38,3 +38,10 @@
       name: nginx
       state: started
       enabled: yes
+      
+  - name: template nginx consul service files
+    template:
+      src: nginx.service.json
+      dest: /etc/consul/service/nginx.service.json
+    notify:
+      - reload consul@client
