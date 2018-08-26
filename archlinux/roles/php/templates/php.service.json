@@ -3,7 +3,8 @@
     "id": "php",
     "name": "php",
     "tags": [
-      "{{ lookup('env', 'ENVIRONMENT') }}"
+      "{{ lookup('env', 'ENVIRONMENT') }}",
+      "application"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
     "port": 9000,
