@@ -15,5 +15,5 @@ listener "tcp" {
   tls_disable = true
 }
 
-api_addr = "{{ lookup('env', 'HOST_IP') }}"
-cluster_addr = "{{ lookup('env', 'HOST_IP') }}"
+api_addr = "{{ lookup('env', 'HOST_IP') }}:8200"
+cluster_addr = "{{ lookup('env', 'HOST_IP') }}:8201"
