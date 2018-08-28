@@ -38,6 +38,8 @@
       owner: vault
       group: vault
       mode: 0770
+    notify:
+      - reload vault
 
   - name: copy vault systemd service
     copy:
