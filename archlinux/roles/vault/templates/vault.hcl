@@ -6,11 +6,14 @@ storage "consul" {
 }
 
 listener "tcp" {
-  address = "{{ lookup('env', 'HOST_IP') }}:8200"
+  address = "127.0.0.1:8200"
   tls_disable = true
 }
 
 listener "tcp" {
-  address = "127.0.0.1:8200"
+  address = "{{ lookup('env', 'HOST_IP') }}:8200"
   tls_disable = true
 }
+
+api_addr = "{{ lookup('env', 'HOST_IP') }}"
+cluster_addr = "{{ lookup('env', 'HOST_IP') }}"
