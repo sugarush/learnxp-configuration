@@ -1,0 +1,52 @@
+---
+
+  - name: get vault package from s3
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ vault }}"
+      dest: /tmp/vault.pkg.tar.xz
+      mode: get
+
+  - name: install vault package
+    command: pacman --noconfirm -U /tmp/vault.pkg.tar.xz
+
+  - name: remove default vault configuration
+    file:
+      path: /etc/vault.hcl
+      state: absent
+
+  - name: remove default vault systemd service
+    file:
+      path: /usr/lib/systemd/system/vault.service
+      state: absent
+
+  - name: create vault directories
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: 0770
+      owner: vault
+      group: vault
+    with_items:
+      - /etc/vault
+      - /var/run/vault
+
+  - name: template vault configuration
+    template:
+      src: vault.hcl
+      dest: /etc/vault/vault.hcl
+      owner: vault
+      group: vault
+      mode: 0770
+
+  - name: copy vault systemd service
+    copy:
+      src: vault.service
+      dest: /etc/systemd/system/vault.service
+
+  - name: enable and start vault systemd service
+    systemd:
+      name: vault
+      enabled: yes
+      state: started
+      daemon_reload: yes
