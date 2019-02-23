@@ -1,4 +1,4 @@
 ---
 
   bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  influxdb: influxdb-1.4.2-1-x86_64.pkg.tar.xz
+  influxdb: influxdb-bin-1.5.1-1-x86_64.pkg.tar.xz
