@@ -1,4 +1,4 @@
 ---
 
   bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  kapacitor: kapacitor-1.4.0-1-x86_64.pkg.tar.xz
+  kapacitor: kapacitor-1.5.1-1-x86_64.pkg.tar.xz
