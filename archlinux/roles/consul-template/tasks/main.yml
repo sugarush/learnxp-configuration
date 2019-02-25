@@ -1,15 +1,5 @@
 ---
 
-  - name: copy consul-template from s3
-    aws_s3:
-      bucket: "{{ bucket }}"
-      object: "{{ consul_template }}"
-      dest: /tmp/consul-template.pkg.tar.xz
-      mode: get
-
-  - name: install consul-template
-    command: pacman --noconfirm -U /tmp/consul-template.pkg.tar.xz
-
   - name: remove config file
     file:
       path: /etc/consul-template/config.hcl
