@@ -1,4 +1,0 @@
----
-
-  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
-  vault: vault-bin-0.10.4-1-x86_64.pkg.tar.xz

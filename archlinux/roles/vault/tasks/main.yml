@@ -1,15 +1,5 @@
 ---
 
-  - name: get vault package from s3
-    aws_s3:
-      bucket: "{{ bucket }}"
-      object: "{{ vault }}"
-      dest: /tmp/vault.pkg.tar.xz
-      mode: get
-
-  - name: install vault package
-    command: pacman --noconfirm -U /tmp/vault.pkg.tar.xz
-
   - name: remove default vault configuration
     file:
       path: /etc/vault.hcl
