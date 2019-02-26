@@ -16,7 +16,6 @@
 
       - name: clear raft data
         shell: rm -rf /var/consul/raft/*
-        warn: false
 
       - name: bootstrap consul cluster
         service:
