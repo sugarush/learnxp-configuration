@@ -26,20 +26,29 @@
       state: directory
     with_items:
       - /etc/systemd/journald.conf.d
+      - /etc/systemd/resolved.conf.d
       - /etc/systemd/system/systemd-journal-gatewayd.socket.d
 
   - name: place persistent journal configuration
     copy:
-      src: journald.conf.d/00-persistent.conf
-      dest: /etc/systemd/journald.conf.d/00-persistent.conf
+      src: journald.conf.d/persistent.conf
+      dest: /etc/systemd/journald.conf.d/persistent.conf
     notify:
       - daemon-reload
       - restart systemd-journald
 
+  - name: place disable DNSSEC configuration
+    copy:
+      src: resolved.conf.d/dnssec.conf
+      dest: /etc/systemd/resolved.conf.d/dnssec.conf
+    notify:
+      - daemon-reload
+      - resart systemd-resolved
+
   - name: place systemd-journal-gatewayd socket configuration
     copy:
-      src: systemd-journal-gatewayd.socket.d/00-socket.conf
-      dest: /etc/systemd/system/systemd-journal-gatewayd.socket.d/00-socket.conf
+      src: systemd-journal-gatewayd.socket.d/socket.conf
+      dest: /etc/systemd/system/systemd-journal-gatewayd.socket.d/socket.conf
     notify:
       - daemon-reload
       - restart systemd-journal-gatewayd.socket
