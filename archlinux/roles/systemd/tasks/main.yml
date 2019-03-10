@@ -25,8 +25,8 @@
       dest: "{{ item }}"
       state: directory
     with_items:
+      - /etc/dnssec-trust-anchors.d
       - /etc/systemd/journald.conf.d
-      - /etc/systemd/resolved.conf.d
       - /etc/systemd/system/systemd-journal-gatewayd.socket.d
 
   - name: place persistent journal configuration
@@ -37,10 +37,10 @@
       - daemon-reload
       - restart systemd-journald
 
-  - name: place disable DNSSEC configuration
+  - name: place disable DNSSEC for consul configuration
     copy:
-      src: resolved.conf.d/dnssec.conf
-      dest: /etc/systemd/resolved.conf.d/dnssec.conf
+      src: dnssec-trust-anchors.d/consul.negative
+      dest: /etc/dnssec-trust-anchors.d/consul.negative
     notify:
       - daemon-reload
       - restart systemd-resolved
