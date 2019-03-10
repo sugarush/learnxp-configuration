@@ -9,5 +9,5 @@
   - name: add build user
     user:
       name: build
-      group: wheel
-      groups: docker
+      group: users
+      groups: wheel,docker
