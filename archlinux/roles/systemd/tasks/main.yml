@@ -43,7 +43,7 @@
       dest: /etc/systemd/resolved.conf.d/dnssec.conf
     notify:
       - daemon-reload
-      - resart systemd-resolved
+      - restart systemd-resolved
 
   - name: place systemd-journal-gatewayd socket configuration
     copy:
