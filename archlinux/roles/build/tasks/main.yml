@@ -5,3 +5,9 @@
 
   - name: install aws-cli
     command: pip install awscli
+
+  - name: add build user
+    user:
+      name: build
+      group: wheel
+      groups: docker
