@@ -37,10 +37,13 @@
       - daemon-reload
       - restart systemd-journald
 
-  - name: place disable DNSSEC for consul configuration
+  - name: place DNSSEC negative trust anchors
     copy:
-      src: dnssec-trust-anchors.d/consul.negative
-      dest: /etc/dnssec-trust-anchors.d/consul.negative
+      src: "dnssec-trust-anchors.d/{{ item }}"
+      dest: "/etc/dnssec-trust-anchors.d/{{ item }}"
+    with_items:
+      - consul.negative
+      - local.negative
     notify:
       - daemon-reload
       - restart systemd-resolved
