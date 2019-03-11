@@ -44,6 +44,7 @@
     with_items:
       - consul.negative
       - local.negative
+      - aws.negative
     notify:
       - daemon-reload
       - restart systemd-resolved
