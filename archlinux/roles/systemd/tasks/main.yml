@@ -38,6 +38,7 @@
       - daemon-reload
       - restart systemd-journald
 
+  # This isn't the best way to disable dnssec, see below.
   - name: place DNSSEC disable configuration
     copy:
       src: resolved.conf.d/dnssec.conf
@@ -46,9 +47,9 @@
       - daemon-reload
       - restart systemd-resolved
 
-  # This isn't needed because of the above task.
-  # It is included because it is another way of
+  # This is included because it is another way of
   # of disabling dnssec.
+  # Per-domain method of disabling dnssec.
   - name: place DNSSEC negative trust anchors
     copy:
       src: "dnssec-trust-anchors.d/{{ item }}"
