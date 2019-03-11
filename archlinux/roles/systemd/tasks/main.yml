@@ -27,6 +27,7 @@
     with_items:
       - /etc/dnssec-trust-anchors.d
       - /etc/systemd/journald.conf.d
+      - /etc/systemd/resolved.conf.d
       - /etc/systemd/system/systemd-journal-gatewayd.socket.d
 
   - name: place persistent journal configuration
@@ -37,6 +38,17 @@
       - daemon-reload
       - restart systemd-journald
 
+  - name: place DNSSEC disable configuration
+    copy:
+      src: resolved.conf.d/dnssec.conf
+      dest: /etc/systemd/resolved.conf.d/dnssec.conf
+    notify:
+      - daemon-reload
+      - restart systemd-resolved
+
+  # This isn't needed because of the above task.
+  # It is included because it is another way of
+  # of disabling dnssec.
   - name: place DNSSEC negative trust anchors
     copy:
       src: "dnssec-trust-anchors.d/{{ item }}"
