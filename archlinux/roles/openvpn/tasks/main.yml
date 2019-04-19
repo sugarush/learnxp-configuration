@@ -5,3 +5,9 @@
       name: openvpn
       state: present
       update_cache: yes
+
+  - name: install easy-rsa
+    pacman:
+      name: easy-rsa
+      state: present
+      update_cache: yes
