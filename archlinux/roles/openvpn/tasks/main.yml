@@ -1,0 +1,7 @@
+---
+
+  - name: install openvpn
+    pacman:
+      name: openvpn
+      state: present
+      update_cache: yes
