@@ -3,3 +3,4 @@
   dependencies:
 
   - { name: consul-client, meta: proxy }
+  - { name: openvpn, meta: proxy }
