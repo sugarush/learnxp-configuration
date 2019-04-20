@@ -14,5 +14,5 @@
 
   - name: template openvpn configuration
     template:
-      src: openvpn.conf
-      dest: /etc/openvpn/server/openvpn.conf
+      src: server.conf
+      dest: /etc/openvpn/server/server.conf
