@@ -11,3 +11,8 @@
       name: easy-rsa
       state: present
       update_cache: yes
+
+  - name: template openvpn configuration
+    template:
+      src: openvpn.conf
+      dest: /etc/openvpn/server/openvpn.conf
