@@ -4,3 +4,12 @@
     copy:
       src: zlogin
       dest: /root/.zlogin
+
+  - name: template admin consul service
+    template:
+      src: admin.service.json
+      dest: /etc/consul/service/admin.service.json
+    notify:
+      - daemon-reload
+      - reload consul@client
+      - reload consul@server

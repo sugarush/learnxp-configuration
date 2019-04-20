@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "admin",
+    "name": "admin",
+    "tags": [
+      "{{ lookup('env', 'ENVIRONMENT') }}"
+    ],
+    "address": "{{ lookup('env', 'HOST_IP') }}",
+    "port": 22,
+    "checks": [
+      {
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:22",
+        "interval": "30s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
