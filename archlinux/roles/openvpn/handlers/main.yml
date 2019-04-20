@@ -1,0 +1,4 @@
+---
+
+  - name: reload iptables
+    command: systemctl reload iptables

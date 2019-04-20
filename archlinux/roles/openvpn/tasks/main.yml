@@ -16,3 +16,13 @@
     template:
       src: server.conf
       dest: /etc/openvpn/server/server.conf
+
+  - name: enable and start iptables
+    command: systemctl enable --now iptables
+
+  - name: copy iptables configuration
+    copy:
+      src: iptables.rules
+      dest: /etc/iptables/iptables.rules
+    notify:
+      - reload iptables
