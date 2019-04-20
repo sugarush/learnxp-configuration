@@ -1,5 +1,5 @@
 *nat
--t nat -A POSTROUTING -o eth0 -j MASQUERADE
+-A POSTROUTING -o eth0 -j MASQUERADE
 COMMIT
 
 *filter
