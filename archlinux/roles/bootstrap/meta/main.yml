@@ -5,6 +5,7 @@
     - { role: systemd, meta: bootstrap }
 
     - { role: ansible-modules, meta: bootstrap }
+    - { role: ec2-metadata, meta: bootstrap }
     - { role: hostname, meta: bootstrap }
     - { role: sudo, meta: bootstrap }
     - { role: users, meta: bootstrap }
