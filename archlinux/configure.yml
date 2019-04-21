@@ -16,6 +16,8 @@
       - { role: proxy, tags: [ "proxy"] }
       - { role: web, tags: [ "web"] }
 
+      - { role: tsugi-green, tags: [ "tsugi-green" ] }
+
     post_tasks:
 
       - name: restart systemd-resolved
