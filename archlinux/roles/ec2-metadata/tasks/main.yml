@@ -15,4 +15,4 @@
       region: "{{ lookup('env', 'REGION') }}"
       resource: "{{ ansible_ec2_instance_id }}"
       tags:
-        Cluster: "{{ lookup('env', 'ROLE') }}"
+        Cluster: "{{ lookup('env', 'ENVORINMENT')}}-{{ lookup('env', 'ROLE') }}"
