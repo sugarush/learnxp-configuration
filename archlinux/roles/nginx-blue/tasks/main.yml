@@ -1,0 +1,30 @@
+---
+
+  - name: place nginx-blue consul-template
+    copy:
+      src: nginx-blue.conf
+      dest: /etc/consul-template/template/nginx-blue.conf
+
+  - name: place nginx-blue consul-template configuration
+    copy:
+      src: nginx-blue.toml
+      dest: /etc/consul-template/config/nginx-blue.toml
+
+  - name: start and enable consul-template@nginx-blue
+    systemd:
+      name: consul-template@nginx-blue
+      state: started
+      enabled: yes
+
+  - name: start and enable nginx
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: template nginx-blue consul service file
+    template:
+      src: nginx-blue.service.json
+      dest: /etc/consul/service/nginx-blue.service.json
+    notify:
+      - reload consul@client
