@@ -1,7 +1,7 @@
 {
   "service": {
-    "id": "influxdb-kapacitor",
-    "name": "influxdb-kapacitor",
+    "id": "kapacitor",
+    "name": "kapacitor",
     "tags": [
       "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
