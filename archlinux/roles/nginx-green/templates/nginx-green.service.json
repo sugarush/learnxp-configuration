@@ -1,9 +1,11 @@
 {
   "service": {
-    "id": "nginx",
-    "name": "nginx",
+    "id": "nginx-green",
+    "name": "nginx-green",
     "tags": [
-      "{{ lookup('env', 'ENVIRONMENT') }}"
+      "{{ lookup('env', 'ENVIRONMENT') }}",
+      "nginx",
+      "green"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
     "port": 80,

@@ -1,6 +1,6 @@
 template {
   command = "systemctl reload nginx"
 
-  source = "/etc/consul-template/template/nginx.conf"
+  source = "/etc/consul-template/template/nginx-green.conf"
   destination = "/etc/nginx/nginx.conf"
 }

@@ -1,0 +1,30 @@
+---
+
+  - name: place nginx-green consul-template
+    copy:
+      src: nginx-green.conf
+      dest: /etc/consul-template/template/nginx-green.conf
+
+  - name: place nginx-green consul-template configuration
+    copy:
+      src: nginx-green.toml
+      dest: /etc/consul-template/config/nginx-green.toml
+
+  - name: start and enable consul-template@nginx-green
+    systemd:
+      name: consul-template@nginx-green
+      state: started
+      enabled: yes
+
+  - name: start and enable nginx
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: template nginx-green consul service file
+    template:
+      src: nginx-green.service.json
+      dest: /etc/consul/service/nginx-green.service.json
+    notify:
+      - reload consul@client

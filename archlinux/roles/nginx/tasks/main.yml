@@ -1,9 +1,5 @@
 ---
 
-  - name: update pacman cache
-    pacman:
-      update_cache: yes
-
   - name: create nginx package directory
     file:
       state: directory
@@ -19,32 +15,3 @@
 
   - name: install nginx packages
     shell: pacman --noconfirm -U /tmp/nginx/*
-
-  - name: place nginx.conf consul-template
-    copy:
-      src: nginx.conf
-      dest: /etc/consul-template/template/nginx.conf
-
-  - name: place nginx.conf consul-template configuration
-    copy:
-      src: nginx.toml
-      dest: /etc/consul-template/config/nginx.toml
-
-  - name: start and enable consul-template@nginx
-    systemd:
-      name: consul-template@nginx
-      state: started
-      enabled: yes
-
-  - name: start and enable nginx
-    systemd:
-      name: nginx
-      state: started
-      enabled: yes
-
-  - name: template nginx consul service file
-    template:
-      src: nginx.service.json
-      dest: /etc/consul/service/nginx.service.json
-    notify:
-      - reload consul@client
