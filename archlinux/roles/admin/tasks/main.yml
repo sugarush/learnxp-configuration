@@ -5,10 +5,10 @@
       src: zlogin
       dest: /root/.zlogin
 
-  - name: template ssh consul service
+  - name: template admin consul service
     template:
-      src: ssh.service.json
-      dest: /etc/consul/service/ssh.service.json
+      src: admin.service.json
+      dest: /etc/consul/service/admin.service.json
     notify:
       - daemon-reload
       - reload consul@client
