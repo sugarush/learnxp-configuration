@@ -4,18 +4,21 @@
     pacman:
       update_cache: yes
 
-  - name: copy nginx-mainline
+  - name: create nginx package directory
+    file:
+      state: directory
+      path: /tmp/nginx
+
+  - name: copy packages
     aws_s3:
       bucket: "{{ bucket }}"
       object: "{{ item.value }}"
-      dest: /tmp/{{ item.key }}.pkg.tar.xz
+      dest: /tmp/nginx/{{ item.key }}.pkg.tar.xz
       mode: get
     with_dict: "{{ packages }}"
 
-  - name: install nginx-mainline
-    command: pacman --noconfirm -U /tmp/{{ item }}.pkg.tar.xz
-    with_items:
-      - nginx-mainline
+  - name: install nginx packages
+    command: pacman --noconfirm -U /tmp/nginx/*
 
   - name: place nginx.conf consul-template
     copy:
@@ -38,7 +41,7 @@
       name: nginx
       state: started
       enabled: yes
-      
+
   - name: template nginx consul service files
     template:
       src: nginx.service.json

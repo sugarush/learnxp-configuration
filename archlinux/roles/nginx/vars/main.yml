@@ -4,4 +4,7 @@
 
   packages:
 
-    nginx-mainline: nginx-mainline-1.13.8-1-x86_64.pkg.tar.xz
+    nginx: nginx-1.14.2-1-x86_64.pkg.tar.xz
+    geoip: geoip-1.6.12-1-x86_64.pkg.tar.xz
+    geoip-database: geoip-database-20180403-1-any.pkg.tar.xz
+    mailcap: mailcap-2.1.48+14+g5811758-1-any.pkg.tar.xz
