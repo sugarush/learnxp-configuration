@@ -1,7 +1,7 @@
 {
   "service": {
-    "id": "influxdb-chronograf",
-    "name": "influxdb-chronograf",
+    "id": "chronograf",
+    "name": "chronograf",
     "tags": [
       "{{ lookup('env', 'ENVIRONMENT') }}"
     ],

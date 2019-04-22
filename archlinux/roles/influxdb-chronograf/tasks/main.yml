@@ -52,10 +52,10 @@
   #  notify:
   #    - daemon-reload
 
-  - name: template influxdb-chronograf consul service definition
+  - name: template chronograf consul service definition
     template:
-      src: influxdb-chronograf.service.json
-      dest: /etc/consul/service/influxdb-chronograf.service.json
+      src: chronograf.service.json
+      dest: /etc/consul/service/chronograf.service.json
     notify:
       - reload consul@client
       - reload consul@server
