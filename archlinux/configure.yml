@@ -13,7 +13,9 @@
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
       - { role: proxy, tags: [ "proxy"] }
-      - { role: web, tags: [ "web"] }
+
+      - { role: nginx-blue, tags: [ "nginx-blue" ] }
+      - { role: nginx-green, tags: [ "nginx-green" ] }
 
       - { role: tsugi-blue, tags: [ "tsugi-blue" ] }
       - { role: tsugi-green, tags: [ "tsugi-green" ] }
