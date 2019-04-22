@@ -1,0 +1,8 @@
+---
+
+  - name: template tsugi-green consul service definition
+    template:
+      src: tsugi-green.service.json
+      dest: /etc/consul/service/tsugi-green.service.json
+    notify:
+      - reload consul@client
