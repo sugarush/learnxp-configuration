@@ -34,9 +34,9 @@
       enabled: yes
       state: started
 
-  - name: template php consul service files
-    template:
-      src: php.service.json
-      dest: /etc/consul/service/php.service.json
+  - name: copy php-fpm consul check
+    copy:
+      src: php-fpm.check.json
+      dest: /etc/consul/check/php-fpm.check.json
     notify:
       - reload consul@client

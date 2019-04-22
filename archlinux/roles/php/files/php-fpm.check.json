@@ -1,0 +1,8 @@
+{
+  "check": {
+    "id": "php-fpm",
+    "name": "php-fpm",
+    "args": [ "systemctl", "is-active", "php-fpm" ],
+    "interval": "10s"
+  }
+}
