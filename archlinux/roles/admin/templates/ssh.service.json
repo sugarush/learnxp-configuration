@@ -1,7 +1,7 @@
 {
   "service": {
-    "id": "admin",
-    "name": "admin",
+    "id": "ssh",
+    "name": "ssh",
     "tags": [
       "{{ lookup('env', 'ENVIRONMENT') }}"
     ],
