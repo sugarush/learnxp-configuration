@@ -42,7 +42,7 @@
       state: started
       enabled: yes
 
-  - name: template nginx consul service files
+  - name: template nginx consul service file
     template:
       src: nginx.service.json
       dest: /etc/consul/service/nginx.service.json
