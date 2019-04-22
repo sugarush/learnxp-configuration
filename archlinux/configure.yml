@@ -10,12 +10,12 @@
 
       # meta roles
       - { role: admin, tags: [ "admin" ] }
-      - { role: application, tags: [ "application"] }
       - { role: build, tags: [ "build" ] }
       - { role: control, tags: [ "control" ] }
       - { role: proxy, tags: [ "proxy"] }
       - { role: web, tags: [ "web"] }
 
+      - { role: tsugi-blue, tags: [ "tsugi-blue" ] }
       - { role: tsugi-green, tags: [ "tsugi-green" ] }
 
     post_tasks:
