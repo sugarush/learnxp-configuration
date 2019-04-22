@@ -1,6 +1,0 @@
----
-
-  dependencies:
-
-    - { role: consul-client, meta: application }
-    - { role: php, meta: application }
