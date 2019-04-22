@@ -3,4 +3,5 @@
   dependencies:
 
     - { role: consul-client, meta: nginx-green }
+    - { role: consul-template, meta: nginx-green }
     - { role: nginx, meta: nginx-green }
