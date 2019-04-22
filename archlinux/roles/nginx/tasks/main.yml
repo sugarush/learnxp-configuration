@@ -18,7 +18,7 @@
     with_dict: "{{ packages }}"
 
   - name: install nginx packages
-    command: pacman --noconfirm -U /tmp/nginx/*
+    shell: pacman --noconfirm -U /tmp/nginx/*
 
   - name: place nginx.conf consul-template
     copy:
