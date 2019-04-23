@@ -1,0 +1,11 @@
+---
+
+  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
+
+  packages:
+
+    ding-libs: ding-libs-0.6.1-2-x86_64.pkg.tar.xz
+    gssproxy: gssproxy-0.8.0-1-x86_64.pkg.tar.xz
+    nfsidmap: nfsidmap-2.3.3-1-x86_64.pkg.tar.xz
+    rpcbind: rpcbind-1.2.5-2-x86_64.pkg.tar.xz
+    nfs-utils: nfs-utils-2.3.3-1-x86_64.pkg.tar.xz

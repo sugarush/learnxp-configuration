@@ -1,0 +1,17 @@
+---
+
+  - name: create nfs-utils package directory
+    file:
+      state: directory
+      path: /tmp/nfs-utils
+
+  - name: copy nfs-utils packages
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: "/tmp/nfs-utils/{{ item.key }}.pkg.tar.xz"
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install nfs-utils packages
+    shell: pacman --noconfirm -U /tmp/nfs-utils/*
