@@ -1,4 +1,4 @@
 ---
 
   repository: https://github.com/tsugiproject/tsugi.git
-  directory: /srv/http/website/tsugi
+  directory: /srv/php
