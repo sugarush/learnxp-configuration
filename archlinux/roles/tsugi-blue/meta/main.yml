@@ -3,4 +3,5 @@
   dependencies:
 
     - { role: consul-client, meta: tsugi-blue }
+    - { role: nfs, meta: tsugi-blue }
     - { role: php, meta: tsugi-blue }
