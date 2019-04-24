@@ -71,9 +71,9 @@ unset($apphome);
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 $CFG->pdo       = 'mysql:host={{ aurora[lookup('env', 'ENVIRONMENT')] }};dbname=tsugi';
 #$CFG->dbuser    = 'ltiuser';
-$CFG->dbuser    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT')/db:user token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
+$CFG->dbuser    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:user token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
 #$CFG->dbpass    = 'ltipassword';
-$CFG->dbpass    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT')/db:pass token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
+$CFG->dbpass    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:pass token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
 
 // These URLs are used in your app store, they are optional but
 // strongly recommended - you can borrow from the samples below
