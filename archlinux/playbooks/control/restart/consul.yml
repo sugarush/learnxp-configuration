@@ -1,0 +1,16 @@
+---
+
+  - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
+
+    serial: 1
+
+    tasks:
+
+      - name: restart consul@server
+        service:
+          name: consul@server
+          state: restarted
+
+      - name: allow cluster to settle
+        pause:
+          seconds: 15
