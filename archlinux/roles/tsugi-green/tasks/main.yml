@@ -7,7 +7,7 @@
     notify:
       - reload consul@client
 
-  - name:
+  - name: mount efs partition
     mount:
       src: "{{ efs[lookup('env', 'ENVIRONMENT')] }}:/"
       path: /mnt
