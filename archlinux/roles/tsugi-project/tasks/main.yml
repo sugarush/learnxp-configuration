@@ -10,12 +10,17 @@
       repo: "{{ repository }}"
       dest: "{{ directory }}"
 
-  - name: place tsugi configuration
-    copy:
+  - name: template tsugi configuration
+    template:
       src: config.php
-      dest: "{{ directory }}/config.php"
+      dest: /tmp/config.php
 
-  - name: initialize tsugi database
-    shell: >
-      cd "{{ directory }}/admin";
-      php upgrade.php |& tee /tmp/debug.txt
+#  - name: place tsugi configuration
+#    copy:
+#      src: config.php
+#      dest: "{{ directory }}/config.php"
+#
+#  - name: initialize tsugi database
+#    shell: >
+#      cd "{{ directory }}/admin";
+#      php upgrade.php |& tee /tmp/debug.txt

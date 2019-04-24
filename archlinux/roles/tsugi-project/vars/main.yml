@@ -2,3 +2,11 @@
 
   repository: https://github.com/tsugiproject/tsugi.git
   directory: /srv/php
+
+  aurora:
+
+    alpha: aurora-serverless.cluster-cnk4nhblavpb.us-west-2.rds.amazonaws.com
+
+  vault_token:
+
+    alpha: s.mennqrzI9Y7h44eftzh30qEK
