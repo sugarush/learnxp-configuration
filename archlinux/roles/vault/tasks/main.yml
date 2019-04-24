@@ -1,5 +1,21 @@
 ---
 
+  - name: create vault package directory
+    file:
+      state: directory
+      path: /tmp/vault
+
+  - name: copy packages
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: "/tmp/vault/{{ item.key }}.pkg.tar.xz"
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install vault packages
+    shell: pacman --noconfirm -U /tmp/vault/*
+
   - name: remove default vault configuration
     file:
       path: /etc/vault.hcl
