@@ -21,7 +21,7 @@ $dirroot = realpath(dirname(__FILE__));
 $loader = require_once($dirroot."/vendor/autoload.php");
 
 // If we just are using Tsugi but not part of another site
-$apphome = true;
+$apphome = 'http://nginx-blue.service.consul';
 // $apphome = "https://www.tsugicloud.org";
 // $apphome = "http://localhost:8888/tsugi-org";
 
