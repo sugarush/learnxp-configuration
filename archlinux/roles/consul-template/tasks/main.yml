@@ -1,5 +1,21 @@
 ---
 
+  - name: create consul-template package directory
+    file:
+      state: directory
+      path: /tmp/consul-template
+
+  - name: copy consul-template packages
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: "/tmp/consul-template/{{ item.key }}.pkg.tar.xz"
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install consul-template packages
+    shell: pacman --noconfirm -U /tmp/consul-template/*
+
   - name: remove config file
     file:
       path: /etc/consul-template/config.hcl

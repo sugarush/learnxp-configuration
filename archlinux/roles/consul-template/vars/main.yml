@@ -1,0 +1,7 @@
+---
+
+  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
+
+  packages:
+
+    consul-template: consul-template-0.20.0-1-x86_64.pkg.tar.xz
