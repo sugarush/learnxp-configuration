@@ -13,13 +13,8 @@
   - name: template tsugi configuration
     template:
       src: config.php
-      dest: /tmp/config.php
+      dest: "{{ directory }}/config.php"
 
-#  - name: place tsugi configuration
-#    copy:
-#      src: config.php
-#      dest: "{{ directory }}/config.php"
-#
 #  - name: initialize tsugi database
 #    shell: >
 #      cd "{{ directory }}/admin";
