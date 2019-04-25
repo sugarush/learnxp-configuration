@@ -8,10 +8,10 @@
       "green"
     ],
     "address": "{{ lookup('env', 'HOST_IP') }}",
-    "port": 9000,
+    "port": 80,
     "checks": [
       {
-        "tcp": "{{ lookup('env', 'HOST_IP') }}:9000",
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:80",
         "interval": "30s",
         "timeout": "1s"
       }
