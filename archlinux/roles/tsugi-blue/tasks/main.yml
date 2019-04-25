@@ -2,8 +2,8 @@
 
   - name: template tsugi-blue consul service definition
     template:
-      src: tsugi-blue.service.consul
-      dest: /etc/consul/service/tsugi-blue.service.consul
+      src: tsugi-blue.service.json
+      dest: /etc/consul/service/tsugi-blue.service.json
     notify:
       - reload consul@client
 
