@@ -1,0 +1,4 @@
+---
+
+  - name: reload apache
+    command: systemctl reload httpd
