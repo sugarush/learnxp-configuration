@@ -1,5 +1,12 @@
 ---
 
+  - name: template tsugi-blue consul service definition
+    template:
+      src: tsugi-blue.service.consul
+      dest: /etc/consul/service/tsugi-blue.service.consul
+    notify:
+      - reload consul@client
+
   - name: create efs directory
     file:
       state: directory
