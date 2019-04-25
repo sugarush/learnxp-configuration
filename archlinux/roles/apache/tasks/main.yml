@@ -1,0 +1,17 @@
+---
+
+  - name: create apache packages directory
+    file:
+      state: directory
+      path: /tmp/apache
+
+  - name: copy apache packages
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: "/tmp/apache/{{ item.key }}.pkg.tar.xz"
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install apache packages
+    shell: pacman --noconfirm -U /tmp/apache/*
