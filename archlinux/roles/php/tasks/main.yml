@@ -30,3 +30,19 @@
       line: "LoadModule php7_module modules/libphp7.so"
     notify:
       - reload apache
+
+  - name: disable mpm_event_module
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "LoadModule mpm_event_module modules/mod_mpm_event.so$"
+      line: "#LoadModule mpm_event_module modules/mod_mpm_event.so"
+    notify:
+      - reload apache
+
+  - name: enable mpm_prefork_module
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so$"
+      line: "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so"
+    notify:
+      - reload apache
