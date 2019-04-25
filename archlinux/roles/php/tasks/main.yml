@@ -31,6 +31,15 @@
     notify:
       - reload apache
 
+  - name: render php files with apache
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      insertafter: "LoadModule php7_module modules/libphp7.so"
+      line: >
+        <FilesMatch \.php$>
+          SetHandler application/x-httpd-php
+        </FilesMatch>
+
   - name: disable mpm_event_module
     lineinfile:
       path: /etc/httpd/conf/httpd.conf
