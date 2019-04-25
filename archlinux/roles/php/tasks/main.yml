@@ -1,17 +1,20 @@
 ---
 
-  - name: install php-fpm
-    pacman:
-      name: php-fpm
-      state: present
-      update_cache: yes
+  - name: create php packages directory
+    file:
+      state: directory
+      path: /tmp/php
 
-  - name: place php www.conf
-    copy:
-      src: www.conf
-      dest: /etc/php/php-fpm.d/www.conf
-    notify:
-      - reload php-fpm
+  - name: copy php packages
+    aws_s3:
+      bucket: "{{ bucket }}"
+      object: "{{ item.value }}"
+      dest: "/tmp/php/{{ item.key }}.pkg.tar.xz"
+      mode: get
+    with_dict: "{{ packages }}"
+
+  - name: install php packages
+    shell: pacman --noconfirm -U /tmp/php/*
 
   - name: place php.ini
     copy:
@@ -19,24 +22,3 @@
       dest: /etc/php/php.ini
     notify:
       - reload php-fpm
-
-  - name: create php directory
-    file:
-      path: /srv/php
-      state: directory
-      owner: http
-      group: http
-      mode: 0755
-
-  - name: enable and start php-fpm
-    systemd:
-      name: php-fpm
-      enabled: yes
-      state: started
-
-  - name: copy php-fpm consul check
-    copy:
-      src: php-fpm.check.json
-      dest: /etc/consul/check/php-fpm.check.json
-    notify:
-      - reload consul@client

@@ -1,0 +1,9 @@
+---
+
+  bucket: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}-archlinux-repository"
+
+  packages:
+
+    php: php-7.3.4-2-x86_64.pkg.tar.xz
+    php-apache: php-apache-7.3.4-2-x86_64.pkg.tar.xz
+    libzip: libzip-1.5.2-1-x86_64.pkg.tar.xz
