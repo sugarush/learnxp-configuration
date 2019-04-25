@@ -21,4 +21,4 @@
       src: php.ini
       dest: /etc/php/php.ini
     notify:
-      - reload php-fpm
+      - reload apache
