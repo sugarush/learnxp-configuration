@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import re, netifaces
 
@@ -35,14 +35,24 @@ for line in resolv.readlines():
         if not server in [ "127.0.0.1" ]:
             servers.append(server)
 
-network = open("/etc/environment.network", "w+")
+with open("/etc/environment.network", "w+") as network:
 
-for i in range(len(domains)):
-    network.write("HOST_DOMAIN_%s=%s\n" % (i + 1, domains[i]))
+    for i in range(len(domains)):
+        network.write("HOST_DOMAIN_%s=%s\n" % (i + 1, domains[i]))
 
-for i in range(len(servers)):
-    network.write("HOST_DNS_%s=%s\n" % (i + 1, servers[i]))
+    for i in range(len(servers)):
+        network.write("HOST_DNS_%s=%s\n" % (i + 1, servers[i]))
 
-network.write("HOST_IP=%s\n" % host)
+    network.write("HOST_IP=%s\n" % host)
 
-network.close()
+#network = open("/etc/environment.network", "w+")
+
+#for i in range(len(domains)):
+#    network.write("HOST_DOMAIN_%s=%s\n" % (i + 1, domains[i]))
+
+#for i in range(len(servers)):
+#    network.write("HOST_DNS_%s=%s\n" % (i + 1, servers[i]))
+
+#network.write("HOST_IP=%s\n" % host)
+
+#network.close()
