@@ -25,6 +25,8 @@
     copy:
       src: restart-on-failure.conf
       dest: /etc/systemd/system/httpd.service.d/restart-on-failure.conf
+    notify:
+      - daemon-reload
 
   - name: enable and start apache
     service:
