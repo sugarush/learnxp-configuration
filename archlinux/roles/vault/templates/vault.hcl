@@ -1,12 +1,12 @@
 ui = true
 
 storage "consul" {
-  address = "consul.service.consul:8500"
+  address = "{{ lookup('env', 'HOST_IP') }}:8500"
   path = "vault/"
 }
 
 listener "tcp" {
-  address = "0.0.0.0:8200"
+  address = "{{ lookup('env', 'HOST_IP') }}:8200"
   cluster_address = "{{ lookup('env', 'HOST_IP') }}:8201"
   tls_disable = true
 }
