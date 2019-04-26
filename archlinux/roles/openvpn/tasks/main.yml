@@ -26,3 +26,12 @@
       dest: /etc/iptables/iptables.rules
     notify:
       - reload iptables
+
+  - name: enable forwarding in the kernel
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: 1
+      state: present
+      reload: yes
+      sysctl_set: yes
+      sysctl_file: /etc/sysctl.d/ipforward.conf
