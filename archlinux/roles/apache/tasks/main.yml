@@ -16,6 +16,16 @@
   - name: install apache packages
     shell: pacman --noconfirm -U /tmp/apache/*
 
+  - name: create systemd drop-in directory
+    file:
+      state: directory
+      path: /etc/systemd/system/httpd.service.d
+
+  - name: place restart on failure drop-in
+    copy:
+      src: restart-on-failure.conf
+      dest: /etc/systemd/system/httpd.service.d/restart-on-failure.conf
+
   - name: enable and start apache
     service:
       name: httpd
