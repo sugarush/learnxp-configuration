@@ -1,7 +1,7 @@
 ---
 
   repository: https://github.com/tsugiproject/tsugi.git
-  directory: /srv/php
+  directory: /srv/http
 
   aurora:
 
@@ -9,4 +9,4 @@
 
   vault_token:
 
-    alpha: s.mennqrzI9Y7h44eftzh30qEK
+    alpha: s.GigN7UMO5IjLl7J4iCc6u0kF

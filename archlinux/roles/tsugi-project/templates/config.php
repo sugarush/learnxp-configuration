@@ -71,9 +71,9 @@ unset($apphome);
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 $CFG->pdo       = 'mysql:host={{ aurora[lookup('env', 'ENVIRONMENT')] }};dbname=tsugi';
 #$CFG->dbuser    = 'ltiuser';
-$CFG->dbuser    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:user token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
+$CFG->dbuser    = '{{ lookup("hashi_vault", "secret=kv/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:user token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
 #$CFG->dbpass    = 'ltipassword';
-$CFG->dbpass    = '{{ lookup("hashi_vault", "secret=secret/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:pass token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
+$CFG->dbpass    = '{{ lookup("hashi_vault", "secret=kv/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:pass token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
 
 // These URLs are used in your app store, they are optional but
 // strongly recommended - you can borrow from the samples below
@@ -277,7 +277,7 @@ $CFG->DEVELOPER = true;
 // backed up and not in the document root hierarchy.
 //    mkdir /backedup/tsugi_blobs
 // You can turn this on and off (false or unset means store in the database)
-// $CFG->dataroot = '/backedup/tsugi_blobs';
+$CFG->dataroot = '/efs/tsugi_blobs';
 
 // An array of keys that go into blob_blob regardless of the setting of
 // dataroot for easy removal, you can override this.  Default if not
