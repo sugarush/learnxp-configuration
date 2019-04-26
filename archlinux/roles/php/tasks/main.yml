@@ -44,7 +44,7 @@
     lineinfile:
       path: /etc/httpd/conf/httpd.conf
       regexp: "DirectoryIndex index\\."
-      line: "DirectoryIndex index.php"
+      line: "    DirectoryIndex index.php"
     notify:
       - reload apache
 
