@@ -1,0 +1,7 @@
+---
+
+  - name: copy consul-backup script
+    copy:
+      src: consul-backup.sh
+      dest: /usr/local/bin/consul-backup.sh
+      mode: 0544
