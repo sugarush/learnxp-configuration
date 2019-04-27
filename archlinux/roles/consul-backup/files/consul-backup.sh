@@ -3,8 +3,8 @@
 source /etc/environment
 
 DATE="$(%F+%T)"
-FILE="/tmp/${DATE}.snap"
+SNAPSHOT="/tmp/${DATE}.snap"
 
-consul snapshot save "${FILE}"
+consul snapshot save "${SNAPSHOT}"
 
-aws s3 cp "${FILE}" "s3://${IDENTIFIER}-${ENVIRONMENT}-consul-backup"
+aws s3 cp "${SNAPSHOT}" "s3://${IDENTIFIER}-${ENVIRONMENT}-consul-backup"
