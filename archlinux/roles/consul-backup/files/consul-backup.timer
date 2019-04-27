@@ -1,0 +1,6 @@
+[Unit]
+Description=Consul Backup Timer
+
+[Timer]
+OnBootSec=60
+OnCalendar=*:0/15
