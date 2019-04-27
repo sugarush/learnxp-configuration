@@ -1,8 +1,5 @@
 ---
 
-  - name: install pip
-    command: easy_install-2.7 pip
-
   - name: install aws-cli
     command: pip install awscli
 
