@@ -71,7 +71,7 @@ unset($apphome);
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 $CFG->pdo       = 'mysql:host={{ key "tsugi/aurora" }};dbname=tsugi';
 {{ with secret "kv/tsugi/db" }}
-  $CFG->dbuser    = '{{ .Data.user }}';
+  $CFG->dbuser    = '{{ .Data.data.user }}';
 {{ end }}
 #$CFG->dbpass    = 'ltipassword';
 
