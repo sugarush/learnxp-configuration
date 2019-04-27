@@ -10,3 +10,8 @@
     copy:
       src: consul-backup.service
       dest: /etc/systemd/system/consul-backup.service
+
+  - name: copy consul-backup systemd timer
+    copy:
+      src: consul-backup.timer
+      dest: /etc/systemd/system/consul-backup.timer
