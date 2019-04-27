@@ -53,6 +53,11 @@
         pause:
           seconds: 5
 
+      - name: restart unbound
+        systemd:
+          name: unbound
+          state: restarted
+
 
   - hosts: tag_Cluster_{{ lookup('env', 'ENVIRONMENT') }}_control
 
