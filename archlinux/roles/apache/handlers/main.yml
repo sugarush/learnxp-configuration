@@ -1,4 +1,11 @@
 ---
 
   - name: reload apache
-    command: systemctl reload httpd
+    service:
+      name: httpd
+      state: reloaded
+
+  - name: restart apache
+    service:
+      name: httpd
+      state: restarted
