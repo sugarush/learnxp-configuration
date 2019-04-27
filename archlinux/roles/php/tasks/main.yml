@@ -55,7 +55,7 @@
       regexp: "LoadModule mpm_event_module modules/mod_mpm_event.so$"
       line: "#LoadModule mpm_event_module modules/mod_mpm_event.so"
     notify:
-      - reload apache
+      - restart apache
 
   - name: enable mpm_prefork_module
     lineinfile:
@@ -63,4 +63,4 @@
       regexp: "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so$"
       line: "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so"
     notify:
-      - reload apache
+      - restart apache
