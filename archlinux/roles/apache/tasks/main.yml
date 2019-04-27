@@ -42,3 +42,10 @@
       name: httpd
       state: started
       enabled: yes
+
+  - name: template apache telegraf configuration
+    template:
+      src: apache.telegraf.conf
+      dest: /etc/telegraf/telegraf.d/apache.telegraf.conf
+    notify:
+      - reload influxdb-telegraf
