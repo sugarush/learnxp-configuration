@@ -5,3 +5,8 @@
       src: consul-backup.sh
       dest: /usr/local/bin/consul-backup.sh
       mode: 0544
+
+  - name: copy consul-backup systemd service
+    copy:
+      src: consul-backup.service
+      dest: /etc/systemd/system/consul-backup.service
