@@ -19,7 +19,7 @@
   - name: add server status handler to apache configuration
     blockinfile:
       path: /etc/httpd/conf/httpd.conf
-      marker: Server Status
+      marker: "# Server Status"
       block: >
         <Location "/server-status">
           SetHandler server-status
