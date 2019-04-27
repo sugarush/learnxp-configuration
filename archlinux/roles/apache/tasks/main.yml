@@ -32,8 +32,8 @@
         <Location "/server-status">
           SetHandler server-status
         </Location>
-      notify:
-        - reload apache
+    notify:
+      - reload apache
 
   - name: create systemd drop-in directory
     file:
