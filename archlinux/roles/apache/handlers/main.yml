@@ -1,11 +1,11 @@
 ---
 
   - name: restart apache
-    service:
+    systemd:
       name: httpd
       state: restarted
 
   - name: reload apache
-    service:
+    systemd:
       name: httpd
       state: reloaded
