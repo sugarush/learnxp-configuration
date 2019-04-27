@@ -2,8 +2,7 @@
 
 source /etc/environment
 
-DATE="$(date +%F-%T)"
-SNAPSHOT="/tmp/${DATE}.snap"
+SNAPSHOT="/tmp/snapshot"
 
 consul snapshot save "${SNAPSHOT}"
 
