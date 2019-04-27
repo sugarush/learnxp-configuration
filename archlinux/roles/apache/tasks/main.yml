@@ -16,6 +16,12 @@
   - name: install apache packages
     shell: pacman --noconfirm -U /tmp/apache/*
 
+  - name: set server name
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "ServerName .*:80"
+      line: "ServerName {{ lookup('env', 'HOST_IP') }}:80"
+
   - name: add server status handler to apache configuration
     blockinfile:
       path: /etc/httpd/conf/httpd.conf
