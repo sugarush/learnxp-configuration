@@ -15,3 +15,10 @@
     copy:
       src: consul-backup.timer
       dest: /etc/systemd/system/consul-backup.timer
+
+  - name: enable consul-backup systemd timer
+    systemd:
+      name: consul-backup.timer
+      daemon_reload: yes
+      enabled: yes
+      state: started
