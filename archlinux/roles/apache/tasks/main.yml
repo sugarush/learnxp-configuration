@@ -16,6 +16,14 @@
   - name: install apache packages
     shell: pacman --noconfirm -U /tmp/apache/*
 
+  - name: add server status handler to apache configuration
+    blockinfile:
+      path: /etc/httpd/conf/httpd.conf
+      block: >
+        <Location "/server-status">
+          SetHandler server-status
+        </Location>
+
   - name: create systemd drop-in directory
     file:
       state: directory
