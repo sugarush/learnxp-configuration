@@ -11,3 +11,8 @@
       name: consul@client
       state: started
       enabled: yes
+
+  - name: restart unbound
+    systemd:
+      name: unbound
+      state: restarted
