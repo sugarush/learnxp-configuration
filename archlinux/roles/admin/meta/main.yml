@@ -3,6 +3,7 @@
   dependencies:
 
     - { role: consul-client, meta: admin }
+    - { role: consul-backup, meta: admin }
     - { role: influxdb-chronograf, meta: admin }
     - { role: influxdb-kapacitor, meta: admin }
     - { role: vault, meta: control }
