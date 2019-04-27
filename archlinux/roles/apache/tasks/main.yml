@@ -19,8 +19,10 @@
   - name: set server name
     lineinfile:
       path: /etc/httpd/conf/httpd.conf
-      regexp: "ServerName .*:80"
+      regexp: "ServerName .*:80$"
       line: "ServerName {{ lookup('env', 'HOST_IP') }}:80"
+    notify:
+      - reload apache
 
   - name: add server status handler to apache configuration
     blockinfile:
@@ -30,6 +32,8 @@
         <Location "/server-status">
           SetHandler server-status
         </Location>
+      notify:
+        - reload apache
 
   - name: create systemd drop-in directory
     file:
