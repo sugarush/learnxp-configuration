@@ -5,5 +5,5 @@ template {
 
 vault {
   address = "http://vault.service.consul:8200"
-  token = "{{ token[lookup('env', 'ENVIRONMENT')] }}"
+  token = "{{ vault_token[lookup('env', 'ENVIRONMENT')] }}"
 }
