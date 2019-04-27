@@ -10,10 +10,21 @@
       repo: "{{ repository }}"
       dest: "{{ directory }}"
 
-  - name: template tsugi configuration
+  - name: copy tsugi configuration template
+    copy:
+      src: tsugi-config.php
+      dest: /etc/consul-template/template/tsugi-config.php
+
+  - name: template tsugi-config consul-template configuration
     template:
-      src: config.php
-      dest: "{{ directory }}/config.php"
+      src: tsugi-config.toml
+      dest: /etc/consul-template/config/tsugi-config.toml
+
+  - name: enable tsugi configuration consul-template
+    systemd:
+      name: consul-template@tsugi-config
+      state: started
+      enabled: yes
 
 #  - name: initialize tsugi database
 #    shell: >

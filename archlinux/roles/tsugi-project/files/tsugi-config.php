@@ -69,11 +69,12 @@ unset($apphome);
 // that can create tables.   To make the initial tables go into Admin
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
-$CFG->pdo       = 'mysql:host={{ aurora[lookup('env', 'ENVIRONMENT')] }};dbname=tsugi';
+$CFG->pdo       = 'mysql:host={{ key tsugi/aurora }};dbname=tsugi';
 #$CFG->dbuser    = 'ltiuser';
-$CFG->dbuser    = '{{ lookup("hashi_vault", "secret=kv/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:user token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
+{{ with secret kv/tsugi/db }}
+  $CFG->dbuser    = '{{ .Data.user }}';
+{{ end }}
 #$CFG->dbpass    = 'ltipassword';
-$CFG->dbpass    = '{{ lookup("hashi_vault", "secret=kv/tsugi/{{ lookup('env', 'ENVIRONMENT') }}/db:pass token={{ vault_token[lookup('env', 'ENVIRONMENT')] }} url=http://vault.service.consul:8200") }}';
 
 // These URLs are used in your app store, they are optional but
 // strongly recommended - you can borrow from the samples below
