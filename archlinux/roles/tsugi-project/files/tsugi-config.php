@@ -70,7 +70,9 @@ unset($apphome);
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 $CFG->pdo       = 'mysql:host={{ key "tsugi/aurora" }};dbname=tsugi';
-#$CFG->dbuser    = 'ltiuser';
+{{ with secret "kv/tsugi/db" }}
+  $CFG->dbuser    = '{{ .Data.user }}';
+{{ end }}
 #$CFG->dbpass    = 'ltipassword';
 
 // These URLs are used in your app store, they are optional but
