@@ -62,3 +62,11 @@
       line: "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so"
     notify:
       - restart apache
+
+  - name: enable cgi_module
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "LoadModule cgi_module modules/mod_cgi.so$"
+      line: "    LoadModule cgi_module modules/mod_cgi.so"
+    notify:
+      - restart apache
