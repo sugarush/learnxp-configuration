@@ -1,6 +1,6 @@
 template {
   source = "/etc/consul-template/template/tsugi-config.php"
-  destination = "/srv/http/config.php"
+  destination = "/srv/http/tsugi/config.php"
 }
 
 vault {
