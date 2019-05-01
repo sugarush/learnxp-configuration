@@ -14,11 +14,15 @@
     copy:
       src: tsugi-config.php
       dest: /etc/consul-template/template/tsugi-config.php
+    notify:
+      - reload consul-template@tsugi-config
 
   - name: template tsugi-config consul-template configuration
     template:
       src: tsugi-config.toml
       dest: /etc/consul-template/config/tsugi-config.toml
+    notify:
+      - reload consul-template@tsugi-config
 
   - name: enable tsugi configuration consul-template
     systemd:
