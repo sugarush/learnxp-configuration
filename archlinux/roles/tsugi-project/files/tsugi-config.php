@@ -21,7 +21,7 @@ $dirroot = realpath(dirname(__FILE__));
 $loader = require_once($dirroot."/vendor/autoload.php");
 
 // If we just are using Tsugi but not part of another site
-$apphome = 'http://nginx-blue.service.consul';
+$apphome = 'http://{{ key "tsugi/apphome" }}';
 // $apphome = "https://www.tsugicloud.org";
 // $apphome = "http://localhost:8888/tsugi-org";
 
@@ -72,8 +72,8 @@ unset($apphome);
 $CFG->pdo       = 'mysql:host={{ key "tsugi/aurora" }};dbname=tsugi';
 {{ with secret "kv/tsugi/db" }}
   $CFG->dbuser    = '{{ .Data.data.user }}';
+  $CFG->dbpass    = '{{ .Data.data.pass }}';
 {{ end }}
-#$CFG->dbpass    = 'ltipassword';
 
 // These URLs are used in your app store, they are optional but
 // strongly recommended - you can borrow from the samples below
