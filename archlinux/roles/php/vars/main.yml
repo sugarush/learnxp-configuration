@@ -4,6 +4,7 @@
 
   packages:
 
-    php: php-7.3.4-2-x86_64.pkg.tar.xz
-    php-apache: php-apache-7.3.4-2-x86_64.pkg.tar.xz
+    php: php-7.3.5-1-x86_64.pkg.tar.xz
+    php-apache: php-apache-7.3.5-1-x86_64.pkg.tar.xz
+    php-apcu: php-apcu-5.1.17-1-x86_64.pkg.tar.xz
     libzip: libzip-1.5.2-1-x86_64.pkg.tar.xz

@@ -16,10 +16,11 @@
   - name: install php packages
     shell: pacman --noconfirm -U /tmp/php/*
 
-  - name: place php.ini
-    copy:
-      src: php.ini
-      dest: /etc/php/php.ini
+  - name: enable php-apcu
+    lineinfile:
+      path: /etc/php/conf.d/apcu.ini
+      regexp: "extension=apcu.so$"
+      line: "extension=apuc.so"
     notify:
       - reload apache
 
