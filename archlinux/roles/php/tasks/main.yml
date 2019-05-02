@@ -24,6 +24,20 @@
     notify:
       - reload apache
 
+  - name: enable opcache
+    copy:
+      src: opcache.ini
+      dest: /etc/php/conf.d/opcache.ini
+    notify:
+      - reload apache
+
+  - name: enable pdo_mysql
+    copy:
+      src: pdo_mysql.ini
+      dest: /etc/php/conf.d/pdo_mysql.ini
+    notify:
+      - reload apache
+
   - name: enable php-apache
     lineinfile:
       path: /etc/httpd/conf/httpd.conf
