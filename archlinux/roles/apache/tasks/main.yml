@@ -50,8 +50,8 @@
           MaxRequestWorkers 200
           MaxConnectionsPerChild 4500
         </IfModule>
-      notify:
-        - reload apache
+    notify:
+      - reload apache
 
   - name: create systemd drop-in directory
     file:
