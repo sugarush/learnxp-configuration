@@ -31,9 +31,27 @@
       block: >
         <Location "/server-status">
           SetHandler server-status
+          Order Deny,Allow
+          Deny from all
+          Allow from {{ lookup('env', 'HOST_IP') }}
         </Location>
     notify:
       - reload apache
+
+  - name: add mpm_prefork_module settings
+    blockinfile:
+      path: /etc/httpd/conf/httpd.conf
+      marker: "# mpm_prefork_module settings"
+      block: >
+        <IfModule mpm_prefork_module>
+          StartServers 1
+          MinSpareServers 20
+          MaxSpareServers 60
+          MaxRequestWorkers 200
+          MaxConnectionsPerChild 4500
+        </IfModule>
+      notify:
+        - reload apache
 
   - name: create systemd drop-in directory
     file:
