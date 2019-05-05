@@ -8,7 +8,7 @@
     user:
       name: consul
       group: consul
-      home: /etc/consul
+      create_home: no
 
   - name: create consul directories
     file:
