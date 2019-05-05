@@ -1,0 +1,7 @@
+---
+
+  dependencies:
+
+    - { role: consul, meta: consul-client }
+    #- { role: influxdb-telegraf, meta: consul-client }
+    #- { role: unbound, meta: consul-client }

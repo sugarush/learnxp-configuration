@@ -1,0 +1,18 @@
+---
+
+  - name: template consul client configuration
+    template:
+      src: client.json
+      dest: /etc/consul/agent/client.json
+
+  - name: enable and start consul@client
+    systemd:
+      daemon_reload: yes
+      name: consul@client
+      state: started
+      enabled: yes
+
+  - name: restart unbound
+    systemd:
+      name: unbound
+      state: restarted
