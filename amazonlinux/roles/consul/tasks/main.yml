@@ -8,6 +8,7 @@
     user:
       name: consul
       group: consul
+      shell: /usr/bin/false
       create_home: no
 
   - name: create consul directories
