@@ -17,7 +17,7 @@ Group=consul
 ExecStartPre=/usr/bin/touch /run/consul.pid
 ExecStartPre=/usr/bin/chown consul:consul /run/consul.pid
 
-ExecStart=/usr/bin/consul agent -ui \
+ExecStart=/usr/local/bin/consul agent -ui \
   -data-dir /var/lib/consul/ -pid-file /run/consul.pid \
   -config-file /etc/consul/agent/%i.json \
   -config-dir /etc/consul/check -config-dir /etc/consul/service
