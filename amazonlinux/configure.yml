@@ -1,0 +1,10 @@
+---
+
+  - hosts: localhost
+    connection: local
+
+    roles:
+
+      - { role: systemd, tags: [ "systemd" ] }
+
+      - { role: amazon-test, tags: [ "amazon-test" ] }
