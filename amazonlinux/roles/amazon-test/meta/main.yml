@@ -4,3 +4,4 @@
 
     - role: consul-client
     - role: consul-template
+    - role: apache
