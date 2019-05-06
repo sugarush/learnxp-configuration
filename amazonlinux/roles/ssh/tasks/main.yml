@@ -1,0 +1,7 @@
+---
+
+  - name: enable root ssh access
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: "#PermitRootLogin yes$"
+      line: "PermitRootLogin yes"
