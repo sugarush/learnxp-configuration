@@ -6,3 +6,13 @@
       dest: /root/.ssh/authorized_keys
       owner: root
       group: root
+
+  - name: remove user ec2-user
+    user:
+      name: ec2-user
+      state: absent
+
+  - name: remove group ec2-user
+    group:
+      name: ec2-user
+      state: absent
