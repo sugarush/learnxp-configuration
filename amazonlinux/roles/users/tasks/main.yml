@@ -10,6 +10,7 @@
   - name: remove user ec2-user
     user:
       name: ec2-user
+      remove: yes
       state: absent
 
   - name: remove group ec2-user
