@@ -48,7 +48,7 @@
     user:
       name: "{{ item.name }}"
       group: users
-      groups: wheel
+      groups: sudo
     with_items: "{{ users }}"
 
   - name: set users authorized keys
