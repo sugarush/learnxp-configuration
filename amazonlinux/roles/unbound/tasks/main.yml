@@ -5,7 +5,7 @@
       src: unbound.conf
       dest: /etc/unbound/unbound.conf
     notify:
-      - reload unbound
+      - restart unbound
 
   - name: create unbound drop-in directory
     file:

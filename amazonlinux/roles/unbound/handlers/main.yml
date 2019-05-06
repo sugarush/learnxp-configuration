@@ -1,10 +1,5 @@
 ---
 
-  - name: reload unbound
-    systemd:
-      name: unbound
-      state: reloaded
-
   - name: restart unbound
     systemd:
       name: unbound
