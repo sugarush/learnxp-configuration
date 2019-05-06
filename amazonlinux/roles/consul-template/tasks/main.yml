@@ -1,0 +1,27 @@
+---
+
+  - name: create /run/consul-template
+    file:
+      path: /run/consul-template
+      owner: consul
+      group: consul
+      state: directory
+      mode: 0770
+
+  - name: create /etc/consul-template/ directories
+    file:
+      path: /etc/consul-template/{{ item }}
+      owner: consul
+      group: consul
+      state: directory
+      mode: 0770
+    with_items:
+      - config
+      - template
+
+  - name: template consul-template systemd service
+    template:
+      src: consul-template@.service
+      dest: /etc/systemd/system/consul-template@.service
+    notify:
+      - daemon-reload
