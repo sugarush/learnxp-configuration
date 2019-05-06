@@ -1,5 +1,12 @@
 ---
 
+  - name: copy unbound systemd service
+    copy:
+      src: unbound.service
+      dest: /etc/systemd/system/unbound.service
+    notify:
+      - daemon-reload
+
   - name: template config
     template:
       src: unbound.conf
