@@ -1,0 +1,8 @@
+---
+
+  - name: copy ec2-user authorized keys to root
+    copy:
+      src: /home/ec2-user/.ssh/authorized_keys
+      dest: /root/.ssh/authorized_keys
+      owner: root
+      group: root
