@@ -6,3 +6,4 @@
 
     - role: ec2-metadata
     - role: hostname
+    - role: users
