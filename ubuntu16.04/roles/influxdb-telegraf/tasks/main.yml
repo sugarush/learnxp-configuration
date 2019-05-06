@@ -1,0 +1,53 @@
+---
+
+  - name: add telegraf group
+    group:
+      name: telegraf
+
+  - name: add telegraf user
+    user:
+      name: telegraf
+      group: telegraf
+      shell: /usr/bin/false
+      create_home: no
+
+  - name: create telegraf directories
+    file:
+      state: directory
+      path: "{{ item }}"
+      owner: telegraf
+      group: telegraf
+    with_items:
+      - /etc/telegraf
+      - /etc/telegraf/telegraf.d
+
+  - name: copy telegraf systemd service
+    copy:
+      src: telegraf.service
+      dest: /etc/systemd/system/telegraf.service
+    notify:
+      - daemon-reload
+      - restart influxdb-telegraf
+
+  - name: template telegraf.conf to /etc/telegraf
+    template:
+      src: telegraf.conf
+      dest: /etc/telegraf/telegraf.conf
+      owner: telegraf
+      group: telegraf
+      mode: 0770
+    notify:
+      - restart influxdb-telegraf
+
+  - name: start and enable telegraf
+    systemd:
+      name: telegraf
+      state: started
+      enabled: yes
+
+  - name: copy influxdb-telegraf consul check
+    copy:
+      src: influxdb-telegraf.check.json
+      dest: /etc/consul/check/influxdb-telegraf.check.json
+    notify:
+      - reload consul@client

@@ -1,0 +1,30 @@
+[Unit]
+Description=Consul Server
+After=environment.service
+Requires=environment.service
+
+[Service]
+PermissionsStartOnly=true
+EnvironmentFile=/etc/environment
+EnvironmentFile=/etc/environment.network
+Environment=GOMAXPROCS=4
+PIDFile=/run/consul.pid
+Restart=always
+
+User=consul
+Group=consul
+
+ExecStartPre=/usr/bin/touch /run/consul.pid
+ExecStartPre=/usr/bin/chown consul:consul /run/consul.pid
+
+ExecStart=/usr/local/bin/consul agent -ui \
+  -data-dir /var/lib/consul/ -pid-file /run/consul.pid \
+  -config-file /etc/consul/agent/%i.json \
+  -config-dir /etc/consul/check -config-dir /etc/consul/service
+
+ExecReload=/usr/bin/kill -HUP $MAINPID
+
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

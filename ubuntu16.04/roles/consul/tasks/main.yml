@@ -1,0 +1,33 @@
+---
+
+  - name: add consul group
+    group:
+      name: consul
+
+  - name: add consul user
+    user:
+      name: consul
+      group: consul
+      shell: /usr/bin/false
+      create_home: no
+
+  - name: create consul directories
+    file:
+      dest: "{{ item }}"
+      state: "directory"
+      mode: "0770"
+      owner: "consul"
+      group: "consul"
+    with_items:
+      - /etc/consul
+      - /etc/consul/agent
+      - /etc/consul/check
+      - /etc/consul/service
+      - /etc/consul/ui
+      - /run/consul
+      - /var/lib/consul
+
+  - name: copy consul@.service
+    copy:
+      dest: "/etc/systemd/system/consul@.service"
+      src: "consul@.service"
