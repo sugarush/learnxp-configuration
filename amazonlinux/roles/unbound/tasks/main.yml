@@ -1,0 +1,28 @@
+---
+
+  - name: template config
+    template:
+      src: unbound.conf
+      dest: /etc/unbound/unbound.conf
+    notify:
+      - reload unbound
+
+  - name: create unbound drop-in directory
+    file:
+      path: /etc/systemd/system/unbound.service.d
+      state: directory
+
+  - name: enable and start unbound
+    systemd:
+      name: unbound
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
+  - name: place unbound consul check definition
+    copy:
+      src: unbound.check.json
+      dest: /etc/consul/check/unbound.check.json
+    notify:
+      - reload consul@client
+      - reload consul@server
