@@ -14,7 +14,7 @@ Restart=always
 User=consul
 Group=consul
 
-ExecStartPre=/usr/bin/touch /run/consul.pid
+ExecStartPre=/bin/touch /run/consul.pid
 ExecStartPre=/usr/bin/chown consul:consul /run/consul.pid
 
 ExecStart=/usr/local/bin/consul agent -ui \
