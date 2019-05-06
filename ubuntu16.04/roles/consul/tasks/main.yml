@@ -31,3 +31,5 @@
     copy:
       dest: "/etc/systemd/system/consul@.service"
       src: "consul@.service"
+    notify:
+      - daemon-reload
