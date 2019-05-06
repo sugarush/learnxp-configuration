@@ -6,6 +6,7 @@
       dest: /root/.ssh/authorized_keys
       owner: root
       group: root
+    ignore_errors: yes
 
   - name: remove user ec2-user
     user:
