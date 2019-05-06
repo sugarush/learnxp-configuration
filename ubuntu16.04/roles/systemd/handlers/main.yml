@@ -1,0 +1,11 @@
+- name: start configure
+  command: systemctl restart configure
+
+- name: restart environment
+  command: systemctl restart environment.service
+
+- name: restart systemd-journald
+  command: systemctl restart systemd-journald
+
+- name: daemon-reload
+  command: systemctl daemon-reload

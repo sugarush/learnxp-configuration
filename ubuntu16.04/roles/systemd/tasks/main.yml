@@ -1,0 +1,36 @@
+---
+
+  - name: place environment.py
+    copy:
+      dest: /usr/local/bin/environment.py
+      src: environment.py
+      mode: 0700
+
+  - name: place environment service
+    copy:
+      src: environment.service
+      dest: /etc/systemd/system/environment.service
+    notify:
+      - daemon-reload
+
+  - name: place configure service
+    copy:
+      src: configure.service
+      dest: /etc/systemd/system/configure.service
+    notify:
+      - daemon-reload
+
+  - name: create systemd drop-in directories
+    file:
+      dest: "{{ item }}"
+      state: directory
+    with_items:
+      - /etc/systemd/journald.conf.d
+
+  - name: place persistent journal configuration
+    copy:
+      src: journald.conf.d/persistent.conf
+      dest: /etc/systemd/journald.conf.d/persistent.conf
+    notify:
+      - daemon-reload
+      - restart systemd-journald

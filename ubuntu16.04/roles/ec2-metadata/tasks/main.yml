@@ -1,0 +1,13 @@
+---
+
+  - name: get ec2 metadata
+    ec2_metadata_facts:
+
+  - name: set tags
+    ec2_tag:
+      region: "{{ lookup('env', 'REGION') }}"
+      resource: "{{ ansible_ec2_instance_id }}"
+      tags:
+        Name: "{{ lookup('env', 'HOSTNAME') }}"
+        Cluster: "{{ lookup('env', 'ENVIRONMENT')}}-{{ lookup('env', 'ROLE') }}"
+        Environent: "{{ lookup('env', 'ENVIRONMENT') }}"

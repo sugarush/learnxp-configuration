@@ -1,0 +1,8 @@
+---
+
+  dependencies:
+
+    - role: systemd
+
+    - role: ec2-metadata
+    - role: hostname
