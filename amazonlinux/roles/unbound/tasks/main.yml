@@ -25,4 +25,3 @@
       dest: /etc/consul/check/unbound.check.json
     notify:
       - reload consul@client
-      - reload consul@server
