@@ -6,3 +6,5 @@
     roles:
 
       - { role: systemd, tags: [ "systemd" ] }
+
+      - { role: ubuntu-test, tags: [ "ubuntu-test" ] }
