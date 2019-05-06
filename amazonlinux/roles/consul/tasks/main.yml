@@ -25,6 +25,7 @@
       - /etc/consul/service
       - /etc/consul/ui
       - /run/consul
+      - /var/lib/consul
 
   - name: copy consul@.service
     copy:
