@@ -1,0 +1,5 @@
+---
+
+  - name: install nfs common
+    apt:
+      name: nfs-common
