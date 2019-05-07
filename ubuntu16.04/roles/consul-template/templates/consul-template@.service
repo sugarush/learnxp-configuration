@@ -13,7 +13,7 @@ ExecStart=/usr/local/bin/consul-template \
   --config /etc/consul-template/config/%i.toml \
   --consul-addr {{ lookup('env', 'HOST_IP') }}:8500
 
-ExecReload=/usr/bin/kill -HUP $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
 WantedBy=multi-user.target
