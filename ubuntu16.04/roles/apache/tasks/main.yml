@@ -13,3 +13,5 @@
     copy:
       src: apache.service
       dest: /etc/systemd/system/apache.service
+    notify:
+      - daemon-reload

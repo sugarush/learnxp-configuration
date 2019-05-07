@@ -4,9 +4,9 @@ After=network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/apache2 -k start -DFOREGROUND
-ExecStop=/usr/bin/apache2 -k graceful-stop
-ExecReload=/usr/bin/apache2 -k graceful
+ExecStart=/usr/sbin/apache2 -k start -DFOREGROUND
+ExecStop=/usr/sbin/apache2 -k graceful-stop
+ExecReload=/usr/sbin/apache2 -k graceful
 PrivateTmp=true
 LimitNOFILE=infinity
 KillMode=mixed
