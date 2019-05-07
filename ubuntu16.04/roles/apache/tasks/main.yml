@@ -8,3 +8,8 @@
   - name: install apache
     apt:
       name: apache2
+
+  - name: place apache systemd service definition
+    copy:
+      src: apache.service
+      dest: /etc/systemd/system/apache.service
