@@ -9,9 +9,8 @@
     apt:
       name: apache2
 
-  - name: place apache systemd service definition
-    copy:
-      src: apache.service
-      dest: /etc/systemd/system/apache.service
-    notify:
-      - daemon-reload
+  - name: enable and start apache
+    systemd:
+      name: apache2
+      state: started
+      enabled: yes
