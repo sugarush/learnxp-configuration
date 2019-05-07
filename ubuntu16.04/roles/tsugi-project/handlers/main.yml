@@ -1,0 +1,6 @@
+---
+
+  - name: reload consul-template@tsugi-config
+    systemd:
+      name: consul-template@tsugi-config
+      state: reloaded

@@ -1,0 +1,10 @@
+template {
+  source = "/etc/consul-template/template/tsugi-config.php"
+  destination = "/var/www/html/tsugi/config.php"
+}
+
+vault {
+  address = "http://vault.service.consul:8200"
+  token = "{{ vault_token[lookup('env', 'ENVIRONMENT')] }}"
+  renew_token = false
+}

@@ -1,0 +1,36 @@
+---
+
+  - name: create destination directory
+    file:
+      path: "{{ directory }}"
+      state: directory
+
+  - name: clone tsugi project
+    git:
+      repo: "{{ repository }}"
+      dest: "{{ directory }}"
+
+  - name: copy tsugi configuration template
+    copy:
+      src: tsugi-config.php
+      dest: /etc/consul-template/template/tsugi-config.php
+    notify:
+      - reload consul-template@tsugi-config
+
+  - name: template tsugi-config consul-template configuration
+    template:
+      src: tsugi-config.toml
+      dest: /etc/consul-template/config/tsugi-config.toml
+    notify:
+      - reload consul-template@tsugi-config
+
+  - name: enable tsugi configuration consul-template
+    systemd:
+      name: consul-template@tsugi-config
+      state: started
+      enabled: yes
+
+#  - name: initialize tsugi database
+#    shell: >
+#      cd "{{ directory }}/admin";
+#      php upgrade.php |& tee /tmp/debug.txt

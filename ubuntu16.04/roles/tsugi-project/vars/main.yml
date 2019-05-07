@@ -1,0 +1,12 @@
+---
+
+  repository: https://github.com/tsugiproject/tsugi.git
+  directory: /var/www/html/tsugi
+
+  aurora:
+
+    alpha: aurora-serverless.cluster-cnk4nhblavpb.us-west-2.rds.amazonaws.com
+
+  vault_token:
+
+    alpha: s.GigN7UMO5IjLl7J4iCc6u0kF
