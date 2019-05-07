@@ -1,0 +1,28 @@
+---
+
+  - name: add php repository
+    apt_repository:
+      repo: ppa:ondrej/php
+      update_cache: yes
+
+  - name: install php
+    apt:
+      name: php7.1
+
+  - name: install apache mod php
+    apt:
+      name: libapache2-mod-php7.1
+
+  - name: install php modules
+    apt:
+      name: php7.1-{{ item }}
+    with_items:
+      - mysql
+      - curl
+      - json
+      - mbstring
+      - zip
+      - xml
+      - gd
+      - apc
+      - intl
