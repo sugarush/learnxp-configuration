@@ -7,35 +7,21 @@
 
   - name: install php
     apt:
-      name: php7.1
+      name: php7.3
 
   - name: install apache mod php
     apt:
-      name: libapache2-mod-php7.1
-
-  #- name: install php modules
-  #  apt:
-  #    name: php7.1-{{ item }}
-  #  with_items:
-  #    - mysql
-  #    - curl
-  #    - json
-  #    - mbstring
-  #    - zip
-  #    - xml
-  #    - gd
-  #    - apc
-  #    - intl
+      name: libapache2-mod-php7.3
 
   - name: install php modules
     apt:
       name:
-        - php7.1-mysql
-        - php7.1-curl
-        - php7.1-json
-        - php7.1-mbstring
-        - php7.1-zip
-        - php7.1-xml
-        - php7.1-gd
-        #- php7.1-apc
-        - php7.1-intl
+        - php7.3-mysql
+        - php7.3-curl
+        - php7.3-json
+        - php7.3-mbstring
+        - php7.3-zip
+        - php7.3-xml
+        - php7.3-gd
+        #- php7.3-apc
+        - php7.3-intl
