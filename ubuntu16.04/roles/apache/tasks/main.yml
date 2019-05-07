@@ -17,3 +17,8 @@
 
   - name: enable apache modules
     command: a2enmod -q rewrite dir expires headers
+
+  - name: remove index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
