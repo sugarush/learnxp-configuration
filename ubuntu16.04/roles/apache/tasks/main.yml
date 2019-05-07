@@ -1,0 +1,10 @@
+---
+
+  - name: add apache repository
+    apt_repository:
+      repo: ppa:ondrej/apache2
+      update_cache: yes
+
+  - name: install apache
+    apt:
+      name: apache2
