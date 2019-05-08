@@ -1,7 +1,5 @@
 ---
 
-  satan_shell: https://github.com/luciferavada/satan-shell.git
-
   users:
 
     - name: csev

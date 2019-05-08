@@ -24,26 +24,6 @@
       name: root
       shell: /usr/bin/zsh
 
-  - name: clone satan-shell repository
-    git:
-      repo: "{{ satan_shell }}"
-      dest: /usr/local/etc/satan-shell
-
-  - name: place satan-shell settings file
-    copy:
-      src: settings.conf
-      dest: /usr/local/etc/satan-shell/zsh.d/settings.conf
-
-  - name: place satan-shell modules file
-    copy:
-      src: modules.conf
-      dest: /usr/local/etc/satan-shell/zsh.d/modules.conf
-
-  - name: install satan-shell for root user
-    shell: |
-      cd /usr/local/etc/satan-shell
-      ./install.sh
-
   - name: add users
     user:
       name: "{{ item.name }}"
