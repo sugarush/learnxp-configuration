@@ -22,7 +22,7 @@ ExecStart=/usr/local/bin/consul agent -ui \
   -config-file /etc/consul/agent/%i.json \
   -config-dir /etc/consul/check -config-dir /etc/consul/service
 
-ExecReload=/usr/bin/kill -HUP $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
 
 KillSignal=SIGINT
 
