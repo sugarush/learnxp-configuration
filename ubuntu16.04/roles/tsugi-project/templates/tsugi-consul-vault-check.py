@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 
 import consul as python_consul
