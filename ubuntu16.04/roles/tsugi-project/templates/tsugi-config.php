@@ -21,7 +21,9 @@ $dirroot = realpath(dirname(__FILE__));
 $loader = require_once($dirroot."/vendor/autoload.php");
 
 // If we just are using Tsugi but not part of another site
-$apphome = false;
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $apphome = {{ .Data.data.apphome }};
+{{ end }}
 // $apphome = "https://www.tsugicloud.org";
 // $apphome = "http://localhost:8888/tsugi-org";
 
@@ -33,10 +35,6 @@ if ( $apphome ) {
 } else {
     $wwwroot = "http://localhost/tsugi";
 }
-
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $wwwroot = 'http://{{ .Data.data.wwwroot }}';
-{{ end }}
 
 // Once you are on a real server delete the above if statement
 // and set the wwwroot directly.  This must be the actual URL used
@@ -75,9 +73,9 @@ unset($apphome);
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->pdo       = 'mysql:host={{ .Data.data.database_host }};dbname={{ .Data.data.database_name }}';
-  $CFG->dbuser    = '{{ .Data.data.database_user }}';
-  $CFG->dbpass    = '{{ .Data.data.database_password }}';
+  $CFG->pdo       = {{ .Data.data.database }};
+  $CFG->dbuser    = {{ .Data.data.database_user }};
+  $CFG->dbpass    = {{ .Data.data.database_password }};
 {{ end }}
 
 // These URLs are used in your app store, they are optional but
@@ -106,7 +104,9 @@ $CFG->storehide = false; // A regex like - '/dev/sample|test|beta/';
 
 // The slow_query setting indicated when we want PDOX to log a query for
 // being too slow.  Set to -1 to log all queries.
-$CFG->slow_query = 10.0;   //  Set to zero for no logging at all
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->slow_query = {{ .Data.data.slow_query }};   //  Set to zero for no logging at all
+{{ end }}
 
 // The dbprefix allows you to give all the tables a prefix
 // in case your hosting only gives you one database.  This
@@ -121,29 +121,27 @@ $CFG->dbprefix  = '';
 // or a sha256 hash of the admin password.  Please don't use either
 // the 'tsugi' or the sha256 of 'tsugi' example values below.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->adminpw = '{{ .Data.data.admin_password }}';
+  $CFG->adminpw = {{ .Data.data.admin_password }};
 {{ end }}
 // $CFG->adminpw = 'tsugi';
 // $CFG->adminpw = 'sha256:9c0ccb0d53dd71b896cde69c78cf977acbcb36546c96bedec1619406145b5e9e';
 
 // Some styles from Bootswatch
-// $CFG->bootswatch = 'cerulean';
-// $CFG->bootswatch_color = rand(0,52);  // Fun color changing navigation for cerulian :)
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->bootswatch = {{ .Data.data.bootswatch }};
+  $CFG->bootswatch_color = {{ .Data.data.bootswatch_color }};  // Fun color changing navigation for cerulian :)
+{{ end }}
 
 // If we are running Embedded Tsugi we need to set the
 // "course title" for the course that represents
 // the "local" students that log in through Google.
-// $CFG->context_title = "Web Applications for Everybody";
-
-// Path to the images for badges...
-// $CFG->badge_path = $CFG->dirroot . '/../bimages';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->context_title = {{ .Data.data.context_title }};
+{{ end }}
 
 // If we are going to use the lessons tool and/or badges, we need to
 // create and point to a lessons.json file
-// $CFG->lessons = $CFG->dirroot.'/../lessons.json';
-
-// This is used as a URL to a "preview logo in Google Classroom"
-// $CFG->logo_url = 'https://www.wa4e.com/logo.png';
+$CFG->lessons = $CFG->dirroot.'/../lessons.json';
 
 // This allows you to include various tool folders.  These are scanned
 // for register.php, database.php and index.php files to do automatic
@@ -170,27 +168,33 @@ if ( isset($CFG->apphome) ) {
 
 // Set to true to redirect to the upgrading.php script
 // Also copy upgrading-dist.php to upgrading.php and add your message
-$CFG->upgrading = false;
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->upgrading = {{ .Data.data.upgrading }};
+{{ end }}
 
 // This is how the system will refer to itself.
-$CFG->servicename = 'TSUGI';
-$CFG->servicedesc = false;
-
-// A logo for the site, this works best if it is a real URL
-// $CFG->logo_url = 'https://www.wa4e.com/logo.png';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->servicename = {{ .Data.data.service_name }};
+  $CFG->servicedesc = {{ .Data.data.service_description }};
+{{ end }}
 
 // Information on the owner of this system and whether we
 // allow folks to request keys for the service
-$CFG->ownername = false;  // 'Charles Severance'
-$CFG->owneremail = false; // 'csev@example.com'
-$CFG->providekeys = false;  // true
-$CFG->autoapprovekeys = false; // A regex like - '/.+@gmail\\.com/'
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->ownername = {{ .Data.data.owner_name }};  // 'Charles Severance'
+  $CFG->owneremail = {{ .Data.data.owner_email }}; // 'csev@example.com'
+  $CFG->providekeys = {{ .Data.data.provide_keys }};  // true
+  $CFG->autoapprovekeys = {{ .Data.data.auto_approve_keys }}; // A regex like - '/.+@gmail\\.com/'
+{{ end }}
 
 // Go to https://console.developers.google.com/apis/credentials
 // create a new OAuth 2.0 credential for a web application,
 // get the key and secret, and put them here:
-$CFG->google_client_id = false; // '96041-nljpjj8jlv4.apps.googleusercontent.com';
-$CFG->google_client_secret = false; // '6Q7w_x4ESrl29a';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->google_client_id = {{ .Data.data.google_client_id }}; // '96041-nljpjj8jlv4.apps.googleusercontent.com';
+  $CFG->google_client_secret = {{ .Data.data.google_client_secret }}; // '6Q7w_x4ESrl29a';
+  $CFG->google_translate = {{ .Data.data.google_translate }};
+{{ end }}
 
 // Alpha: Google Classroom support
 // First, Go to https://console.developers.google.com/apis/credentials
@@ -203,7 +207,9 @@ $CFG->google_client_secret = false; // '6Q7w_x4ESrl29a';
 
 // This should be an absolute URL that will be used to generate previews
 // in Google Classroom
-// $CFG->logo_url = 'https://www.wa4e.com/logo.png';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->logo_url = {{ .Data.data.logo_url }};
+{{ end }}
 
 // Indicate whether the PHP on this server wants to verify SSL or not
 // It seems that PHP > 7 and curl > 7.53 or above want this to be true
@@ -214,21 +220,11 @@ $CFG->verifypeer = false;
 // and LTI launches
 $CFG->unify = true;
 
-// Whether to record launches as activities - make sure tables exist
-$CFG->launchactivity = false;
-
-// Controlling the event FIFO
-// If eventcheck is false, no events will be logged and no cleanup will be done.
-$CFG->eventcheck = 1000;       // How many launches between FIFO truncation (probabilistic)
-$CFG->eventtime = 7*24*60*60;  // Length in seconds of the FIFO
-
-// Set eventpushtime to zero to suppress auto-push from the FIFO
-$CFG->eventpushtime = 2;      // Maximum number of seconds to push during heartbeat
-$CFG->eventpushcount = 50;    // Maximum number of events to push during heartbeat
-
 // Go to https://console.developers.google.com/apis/credentials
 // Create and configure an API key and enter it here
-$CFG->google_map_api_key = false; // 'Ve8eH490843cIA9IGl8';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->google_map_api_key = {{ .Data.data.google_map_api_key }}; // 'Ve8eH490843cIA9IGl8';
+{{ end }}
 
 // Badge generation settings - once you set these values to something
 // other than false and start issuing badges - don't change these or
@@ -286,7 +282,9 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 // backed up and not in the document root hierarchy.
 //    mkdir /backedup/tsugi_blobs
 // You can turn this on and off (false or unset means store in the database)
-$CFG->dataroot = '/efs/tsugi_blobs';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->dataroot = {{ .Data.data.data_root }};
+{{ end }}
 
 // An array of keys that go into blob_blob regardless of the setting of
 // dataroot for easy removal, you can override this.  Default if not
@@ -316,15 +314,15 @@ if ( $CFG->DEVELOPER && ! isset($CFG->dataroot) ) {
 // login in a long-lived encrypted cookie.   Look at the library
 // code createSecureCookie() for more detail on how these operate.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->cookiesecret = '{{ .Data.data.cookie_secret }}';
+  $CFG->cookiesecret = {{ .Data.data.cookie_secret }};
+  $CFG->cookiepad = {{ .Data.data.cookie_pad }};
 {{ end }}
 $CFG->cookiename = 'TSUGIAUTO';
-$CFG->cookiepad = '390b246ea9';
 
 // Where the bulk mail comes from - should be a real address with a wildcard box you check
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->maildomain = '{{ .Data.data.mail_domain }}'; // 'mail.example.com';
-  $CFG->mailsecret = '{{ .Data.data.mail_secret }}';
+  $CFG->maildomain = {{ .Data.data.mail_domain }}; // 'mail.example.com';
+  $CFG->mailsecret = {{ .Data.data.mail_secret }};
 {{ end }}
 $CFG->maileol = "\n";  // Depends on your mailer - may need to be \r\n
 
@@ -337,10 +335,12 @@ $CFG->noncetime = 1800;
 // predictable or guessable.   Just make this a long random string.
 // See LTIX::getCompositeKey() for detail on how this operates.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->sessionsalt = "{{ .Data.data.session_salt }}";
+  $CFG->sessionsalt = {{ .Data.data.session_salt }};
 {{ end }}
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
 // Timezone
-$CFG->timezone = 'Pacific/Honolulu'; // Nice for due dates
+  $CFG->timezone = {{ .Data.data.timezone }}; // Nice for due dates
+{{ end }}
 
 // Universal Analytics
 $CFG->universal_analytics = false; // "UA-57880800-1";
@@ -380,7 +380,9 @@ $CFG->prefer_lti1_for_grade_send = true;
 // then git is not setup in your path
 // (Control Panel > System and Security > System > Advanced System Settings > Environment Variables)
 // (3) Then here in "config.php":
-// $CFG->git_command = 'git'
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->git_command = {{ .Data.data.git_command }};
+{{ end }}
 
 // In order to run git from the a PHP script, we may need a setuid version
 // of git - example commands if you are not root:
@@ -405,10 +407,14 @@ $CFG->prefer_lti1_for_grade_send = true;
 // $CFG->git_command = '/home/csev/git';
 
 // Should we record launch activity - multi-bucket lossy historgram
-$CFG->launchactivity = true;
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->launchactivity = {{ .Data.data.launch_activity }};
+{{ end }}
 
 // how many launches between event cleanups (probabilistic)
-$CFG->eventcheck = 200;        // Set to false to suspend event recording
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->eventcheck = {{ .Data.data.event_check }};        // Set to false to suspend event recording
+{{ end }}
 $CFG->eventtime = 7*24*60*60;  // Length in seconds of the event buffer
 
 // Maximum events to push in a batch
@@ -420,6 +426,9 @@ $CFG->eventpushtime = 2;       // Maximum length in seconds to push events
 // http://php.net/manual/en/memcached.sessions.php
 
 // $CFG->memcache = 'tcp://memcache-tsugi.4984vw.cfg.use2.cache.amazonaws.com:11211';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->memcache = {{ .Data.data.memcache }};
+{{ end }}
 if ( isset($CFG->memcache) && strlen($CFG->memcache) > 0 ) {
     ini_set('session.save_handler', 'memcache');
     ini_set('session.save_path', $CFG->memcache);
@@ -454,6 +463,8 @@ if ( isset($CFG->sessions_in_db) && $CFG->sessions_in_db ) {
 // $CFG->dynamodb_key = 'AKIISDIUSDOUISDHFBUQ';
 // $CFG->dynamodb_secret = 'zFKsdkjhkjskhjSAKJHsakjhSAKJHakjhdsasYaZ';
 // $CFG->dynamodb_region = 'us-east-2';
+
+$CFG->dynamodb_key = false;
 
 if ( isset($CFG->dynamodb_key) && isset($CFG->dynamodb_secret) && isset($CFG->dynamodb_region) &&
      strlen($CFG->dynamodb_key) > 0 && strlen($CFG->dynamodb_secret) > 0 &&

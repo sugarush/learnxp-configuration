@@ -18,17 +18,39 @@ consul_keys_missing = [ ]
 vault_mount_point = 'kv'
 vault_path = 'tsugi/{{ lookup('env', 'DEPLOYMENT') }}'
 vault_keys = [
+    'apphome',
     'admin_password',
-    'database_host',
-    'database_name',
+    'auto_approve_keys',
+    'bootswatch',
+    'bootswatch_color',
+    'context_title',
+    'cookie_pad',
+    'cookie_secret',
+    'database',
     'database_password',
     'database_user',
-    'cookie_secret',
+    'data_root',
     'developer_mode',
+    'event_check',
+    'git_command',
+    'google_client_id',
+    'google_client_secret',
+    'google_map_api_key',
+    'google_translate',
+    'launch_activity',
+    'logo_url',
     'mail_domain',
     'mail_secret',
+    'memcache',
+    'owner_email',
+    'owner_name',
+    'provide_keys',
+    'service_name',
+    'service_description',
     'session_salt',
-    'wwwroot'
+    'slow_query',
+    'timezone',
+    'upgrading'
 ]
 vault_keys_missing = [ ]
 
