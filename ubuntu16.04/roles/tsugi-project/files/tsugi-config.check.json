@@ -1,0 +1,8 @@
+{
+  "check": {
+    "id": "tsugi-config",
+    "name": "Tsugi Config",
+    "args": [ "/usr/local/bin/tsugi-consul-vault-check.py" ],
+    "interval": "60s"
+  }
+}

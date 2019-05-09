@@ -1,8 +1,0 @@
-{
-  "check": {
-    "id": "tsugi-config-{{ lookup('env', 'DEPLOYMENT') }}",
-    "name": "Tsugi Config {{ lookup('env', 'DEPLOYMENT') }}",
-    "args": [ "/usr/local/bin/tsugi-consul-vault-check.py" ],
-    "interval": "60s"
-  }
-}

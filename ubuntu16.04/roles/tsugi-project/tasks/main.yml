@@ -45,9 +45,9 @@
       dest: /usr/local/bin/tsugi-consul-vault-check.py
       mode: 0755
 
-  - name: template tsugi-config consul check definition
-    template:
+  - name: copy tsugi-config consul check definition
+    copy:
       src: tsugi-config.check.json
-      dest: /etc/consul/check/tsugi-config-{{ lookup('env', 'DEPLOYMENT') }}.check.json
+      dest: /etc/consul/check/tsugi-config.check.json
     notify:
       - reload consul@client
