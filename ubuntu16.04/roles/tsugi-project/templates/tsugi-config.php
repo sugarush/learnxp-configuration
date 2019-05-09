@@ -73,9 +73,9 @@ unset($apphome);
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->pdo       = {{ .Data.data.database }};
-  $CFG->dbuser    = {{ .Data.data.database_user }};
-  $CFG->dbpass    = {{ .Data.data.database_password }};
+  $CFG->pdo       = {{ .Data.data.pdo }};
+  $CFG->dbuser    = {{ .Data.data.dbuser }};
+  $CFG->dbpass    = {{ .Data.data.dbpassword }};
 {{ end }}
 
 // These URLs are used in your app store, they are optional but
@@ -121,7 +121,7 @@ $CFG->dbprefix  = '';
 // or a sha256 hash of the admin password.  Please don't use either
 // the 'tsugi' or the sha256 of 'tsugi' example values below.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->adminpw = {{ .Data.data.admin_password }};
+  $CFG->adminpw = {{ .Data.data.adminpw }};
 {{ end }}
 // $CFG->adminpw = 'tsugi';
 // $CFG->adminpw = 'sha256:9c0ccb0d53dd71b896cde69c78cf977acbcb36546c96bedec1619406145b5e9e';
@@ -174,17 +174,17 @@ if ( isset($CFG->apphome) ) {
 
 // This is how the system will refer to itself.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->servicename = {{ .Data.data.service_name }};
-  $CFG->servicedesc = {{ .Data.data.service_description }};
+  $CFG->servicename = {{ .Data.data.servicename }};
+  $CFG->servicedesc = {{ .Data.data.servicedesc }};
 {{ end }}
 
 // Information on the owner of this system and whether we
 // allow folks to request keys for the service
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->ownername = {{ .Data.data.owner_name }};  // 'Charles Severance'
-  $CFG->owneremail = {{ .Data.data.owner_email }}; // 'csev@example.com'
-  $CFG->providekeys = {{ .Data.data.provide_keys }};  // true
-  $CFG->autoapprovekeys = {{ .Data.data.auto_approve_keys }}; // A regex like - '/.+@gmail\\.com/'
+  $CFG->ownername = {{ .Data.data.ownername }};  // 'Charles Severance'
+  $CFG->owneremail = {{ .Data.data.owneremail }}; // 'csev@example.com'
+  $CFG->providekeys = {{ .Data.data.providekeys }};  // true
+  $CFG->autoapprovekeys = {{ .Data.data.autoapprovekeys }}; // A regex like - '/.+@gmail\\.com/'
 {{ end }}
 
 // Go to https://console.developers.google.com/apis/credentials
@@ -263,7 +263,7 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 // set to false so these non-end-user features are less prominent in the
 // navigation.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->DEVELOPER = {{ .Data.data.developer_mode }};
+  $CFG->DEVELOPER = {{ .Data.data.DEVELOPER }};
 {{ end}}
 
 // Is this is true, Tsugi will do a translation log into the table
@@ -283,7 +283,7 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 //    mkdir /backedup/tsugi_blobs
 // You can turn this on and off (false or unset means store in the database)
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->dataroot = {{ .Data.data.data_root }};
+  $CFG->dataroot = {{ .Data.data.dataroot }};
 {{ end }}
 
 // An array of keys that go into blob_blob regardless of the setting of
@@ -314,15 +314,15 @@ if ( $CFG->DEVELOPER && ! isset($CFG->dataroot) ) {
 // login in a long-lived encrypted cookie.   Look at the library
 // code createSecureCookie() for more detail on how these operate.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->cookiesecret = {{ .Data.data.cookie_secret }};
-  $CFG->cookiepad = {{ .Data.data.cookie_pad }};
+  $CFG->cookiesecret = {{ .Data.data.cookiesecret }};
+  $CFG->cookiepad = {{ .Data.data.cookiepad }};
 {{ end }}
 $CFG->cookiename = 'TSUGIAUTO';
 
 // Where the bulk mail comes from - should be a real address with a wildcard box you check
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->maildomain = {{ .Data.data.mail_domain }}; // 'mail.example.com';
-  $CFG->mailsecret = {{ .Data.data.mail_secret }};
+  $CFG->maildomain = {{ .Data.data.maildomain }}; // 'mail.example.com';
+  $CFG->mailsecret = {{ .Data.data.mailsecret }};
 {{ end }}
 $CFG->maileol = "\n";  // Depends on your mailer - may need to be \r\n
 
@@ -335,7 +335,7 @@ $CFG->noncetime = 1800;
 // predictable or guessable.   Just make this a long random string.
 // See LTIX::getCompositeKey() for detail on how this operates.
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->sessionsalt = {{ .Data.data.session_salt }};
+  $CFG->sessionsalt = {{ .Data.data.sessionsalt }};
 {{ end }}
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
 // Timezone
@@ -408,12 +408,12 @@ $CFG->prefer_lti1_for_grade_send = true;
 
 // Should we record launch activity - multi-bucket lossy historgram
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->launchactivity = {{ .Data.data.launch_activity }};
+  $CFG->launchactivity = {{ .Data.data.launchactivity }};
 {{ end }}
 
 // how many launches between event cleanups (probabilistic)
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-  $CFG->eventcheck = {{ .Data.data.event_check }};        // Set to false to suspend event recording
+  $CFG->eventcheck = {{ .Data.data.eventcheck }};        // Set to false to suspend event recording
 {{ end }}
 $CFG->eventtime = 7*24*60*60;  // Length in seconds of the event buffer
 
