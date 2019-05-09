@@ -10,10 +10,14 @@
       repo: "{{ repository }}"
       dest: "{{ directory }}"
 
-  - name: copy tsugi configuration template
-    copy:
+  - name: template tsugi configuration template
+    template:
       src: tsugi-config.php
       dest: /etc/consul-template/template/tsugi-config.php
+      variable_start_string: '<<'
+      variable_end_string: '>>'
+      block_start_string: '<%'
+      block_end_string: '%>'
     notify:
       - reload consul-template@tsugi-config
 
@@ -34,3 +38,16 @@
 #    shell: >
 #      cd "{{ directory }}/admin";
 #      php upgrade.php |& tee /tmp/debug.txt
+
+  - name: template tusgi-consul-vault-check.py
+    template:
+      src: tsugi-consul-vault-check.py
+      dest: /usr/local/bin/tsugi-consul-vault-check.py
+      mode: 0755
+
+  - name: template tsugi-config consul check definition
+    template:
+      src: tsugi-config.check.json
+      dest: /etc/consul/check/tsugi-config-{{ lookup('env', 'DEPLOYMENT') }}.check.json
+    notify:
+      - reload consul@client

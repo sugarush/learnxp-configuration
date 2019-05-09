@@ -21,7 +21,7 @@ $dirroot = realpath(dirname(__FILE__));
 $loader = require_once($dirroot."/vendor/autoload.php");
 
 // If we just are using Tsugi but not part of another site
-$apphome = 'http://{{ key "tsugi/apphome" }}';
+$apphome = false;
 // $apphome = "https://www.tsugicloud.org";
 // $apphome = "http://localhost:8888/tsugi-org";
 
@@ -33,6 +33,11 @@ if ( $apphome ) {
 } else {
     $wwwroot = "http://localhost/tsugi";
 }
+
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $wwwroot = 'http://{{ .Data.data.wwwroot }}';
+{{ end }}
+
 // Once you are on a real server delete the above if statement
 // and set the wwwroot directly.  This must be the actual URL used
 // on the Internet for LTI signatures to compute correctly
@@ -69,10 +74,10 @@ unset($apphome);
 // that can create tables.   To make the initial tables go into Admin
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
-$CFG->pdo       = 'mysql:host={{ key "tsugi/aurora" }};dbname=tsugi';
-{{ with secret "kv/tsugi/db" }}
-  $CFG->dbuser    = '{{ .Data.data.user }}';
-  $CFG->dbpass    = '{{ .Data.data.pass }}';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+$CFG->pdo       = 'mysql:host={{ .Data.data.database_host }};dbname={{ .Data.data.database_name }}';
+  $CFG->dbuser    = '{{ .Data.data.database_user }}';
+  $CFG->dbpass    = '{{ .Data.data.database_password }}';
 {{ end }}
 
 // These URLs are used in your app store, they are optional but
@@ -115,7 +120,9 @@ $CFG->dbprefix  = '';
 // features of this application. It can be the plaintext password
 // or a sha256 hash of the admin password.  Please don't use either
 // the 'tsugi' or the sha256 of 'tsugi' example values below.
-$CFG->adminpw = '{{ key "tsugi/adminpw" }}';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->adminpw = '{{ .Data.data.admin_password }}';
+{{ end }}
 // $CFG->adminpw = 'tsugi';
 // $CFG->adminpw = 'sha256:9c0ccb0d53dd71b896cde69c78cf977acbcb36546c96bedec1619406145b5e9e';
 
@@ -259,7 +266,9 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 // menus will feature prominently in the UI.  In production, this should be
 // set to false so these non-end-user features are less prominent in the
 // navigation.
-$CFG->DEVELOPER = true;
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->DEVELOPER = {{ .Data.data.developer_mode }};
+{{ end}}
 
 // Is this is true, Tsugi will do a translation log into the table
 // tsugi_string while the application is being executed.  This allows
@@ -306,13 +315,17 @@ if ( $CFG->DEVELOPER && ! isset($CFG->dataroot) ) {
 // These values configure the cookie used to record the overall
 // login in a long-lived encrypted cookie.   Look at the library
 // code createSecureCookie() for more detail on how these operate.
-$CFG->cookiesecret = 'warning:please-change-cookie-secret-a289b543';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->cookiesecret = '{{ .Data.data.cookie_secret }}';
+{{ end }}
 $CFG->cookiename = 'TSUGIAUTO';
 $CFG->cookiepad = '390b246ea9';
 
 // Where the bulk mail comes from - should be a real address with a wildcard box you check
-$CFG->maildomain = false; // 'mail.example.com';
-$CFG->mailsecret = 'warning:please-change-mailsecret-92ds29';
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->maildomain = '{{ .Data.data.mail_domain }}'; // 'mail.example.com';
+  $CFG->mailsecret = '{{ .Data.data.mail_secret }}';
+{{ end }}
 $CFG->maileol = "\n";  // Depends on your mailer - may need to be \r\n
 
 // Set the nonce clearing factor and expiry time
@@ -323,8 +336,9 @@ $CFG->noncetime = 1800;
 // based on resource_link_id, oauth_consumer_key, etc are not
 // predictable or guessable.   Just make this a long random string.
 // See LTIX::getCompositeKey() for detail on how this operates.
-$CFG->sessionsalt = "warning:please-change-sessionsalt-89b543";
-
+{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+  $CFG->sessionsalt = "{{ .Data.data.session_salt }}";
+{{ end }}
 // Timezone
 $CFG->timezone = 'Pacific/Honolulu'; // Nice for due dates
 

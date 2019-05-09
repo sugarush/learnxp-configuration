@@ -10,17 +10,23 @@ vault = hvac.Client(url='http://vault.service.consul:8200')
 vault.token = '{{ vault_token[lookup('env', 'ENVIRONMENT')] }}'
 
 consul_prefix = 'tsugi/{{ lookup('env', 'DEPLOYMENT') }}'
-consul_keys = [
-    'apphome',
-    'aurora',
-    'developer '
-]
+consul_keys = [ ]
 consul_keys_missing = [ ]
 
 vault_mount_point = 'kv'
 vault_path = 'tsugi/{{ lookup('env', 'DEPLOYMENT') }}'
 vault_keys = [
-    'password'
+    'admin_password',
+    'database_host',
+    'database_name',
+    'database_password',
+    'database_user',
+    'cookie_secret',
+    'developer_mode',
+    'mail_domain',
+    'mail_secret',
+    'session_salt',
+    'wwwroot'
 ]
 vault_keys_missing = [ ]
 
