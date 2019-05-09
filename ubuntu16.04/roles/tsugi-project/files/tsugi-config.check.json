@@ -2,7 +2,7 @@
   "check": {
     "id": "tsugi-config",
     "name": "Tsugi Config",
-    "args": [ "/usr/local/bin/tsugi-consul-vault-check.py" ],
+    "args": [ "/usr/bin/python", "/usr/local/bin/tsugi-consul-vault-check.py" ],
     "interval": "60s"
   }
 }
