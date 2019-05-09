@@ -75,7 +75,7 @@ unset($apphome);
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
-$CFG->pdo       = 'mysql:host={{ .Data.data.database_host }};dbname={{ .Data.data.database_name }}';
+  $CFG->pdo       = 'mysql:host={{ .Data.data.database_host }};dbname={{ .Data.data.database_name }}';
   $CFG->dbuser    = '{{ .Data.data.database_user }}';
   $CFG->dbpass    = '{{ .Data.data.database_password }}';
 {{ end }}
