@@ -75,7 +75,7 @@ unset($apphome);
 {{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
   $CFG->pdo       = {{ .Data.data.pdo }};
   $CFG->dbuser    = {{ .Data.data.dbuser }};
-  $CFG->dbpass    = {{ .Data.data.dbpassword }};
+  $CFG->dbpass    = {{ .Data.data.dbpass }};
 {{ end }}
 
 // These URLs are used in your app store, they are optional but

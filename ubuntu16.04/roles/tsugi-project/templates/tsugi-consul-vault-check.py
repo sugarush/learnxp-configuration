@@ -26,7 +26,7 @@ vault_keys = [
     'context_title',
     'cookiepad',
     'cookiesecret',
-    'dbpassword',
+    'dbpass',
     'dbuser',
     'dataroot',
     'DEVELOPER',
