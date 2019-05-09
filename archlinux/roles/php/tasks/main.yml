@@ -20,7 +20,7 @@
     lineinfile:
       path: /etc/php/conf.d/apcu.ini
       regexp: "extension=apcu.so$"
-      line: "extension=apuc.so"
+      line: "extension=apcu.so"
     notify:
       - reload apache
 
