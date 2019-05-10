@@ -21,7 +21,7 @@ $dirroot = realpath(dirname(__FILE__));
 $loader = require_once($dirroot."/vendor/autoload.php");
 
 // If we just are using Tsugi but not part of another site
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $apphome = {{ .Data.data.apphome }};
 {{ end }}
 // $apphome = "https://www.tsugicloud.org";
@@ -72,7 +72,7 @@ unset($apphome);
 // that can create tables.   To make the initial tables go into Admin
 // to run the upgrade.php script which auto-creates the tables.
 // $CFG->pdo       = 'mysql:host=127.0.0.1;port=8889;dbname=tsugi'; // MAMP
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->pdo       = {{ .Data.data.pdo }};
   $CFG->dbuser    = {{ .Data.data.dbuser }};
   $CFG->dbpass    = {{ .Data.data.dbpass }};
@@ -104,7 +104,7 @@ $CFG->storehide = false; // A regex like - '/dev/sample|test|beta/';
 
 // The slow_query setting indicated when we want PDOX to log a query for
 // being too slow.  Set to -1 to log all queries.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->slow_query = {{ .Data.data.slow_query }};   //  Set to zero for no logging at all
 {{ end }}
 
@@ -120,14 +120,14 @@ $CFG->dbprefix  = '';
 // features of this application. It can be the plaintext password
 // or a sha256 hash of the admin password.  Please don't use either
 // the 'tsugi' or the sha256 of 'tsugi' example values below.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->adminpw = {{ .Data.data.adminpw }};
 {{ end }}
 // $CFG->adminpw = 'tsugi';
 // $CFG->adminpw = 'sha256:9c0ccb0d53dd71b896cde69c78cf977acbcb36546c96bedec1619406145b5e9e';
 
 // Some styles from Bootswatch
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->bootswatch = {{ .Data.data.bootswatch }};
   $CFG->bootswatch_color = {{ .Data.data.bootswatch_color }};  // Fun color changing navigation for cerulian :)
 {{ end }}
@@ -135,7 +135,7 @@ $CFG->dbprefix  = '';
 // If we are running Embedded Tsugi we need to set the
 // "course title" for the course that represents
 // the "local" students that log in through Google.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->context_title = {{ .Data.data.context_title }};
 {{ end }}
 
@@ -168,19 +168,19 @@ if ( isset($CFG->apphome) ) {
 
 // Set to true to redirect to the upgrading.php script
 // Also copy upgrading-dist.php to upgrading.php and add your message
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->upgrading = {{ .Data.data.upgrading }};
 {{ end }}
 
 // This is how the system will refer to itself.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->servicename = {{ .Data.data.servicename }};
   $CFG->servicedesc = {{ .Data.data.servicedesc }};
 {{ end }}
 
 // Information on the owner of this system and whether we
 // allow folks to request keys for the service
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->ownername = {{ .Data.data.ownername }};  // 'Charles Severance'
   $CFG->owneremail = {{ .Data.data.owneremail }}; // 'csev@example.com'
   $CFG->providekeys = {{ .Data.data.providekeys }};  // true
@@ -190,7 +190,7 @@ if ( isset($CFG->apphome) ) {
 // Go to https://console.developers.google.com/apis/credentials
 // create a new OAuth 2.0 credential for a web application,
 // get the key and secret, and put them here:
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->google_client_id = {{ .Data.data.google_client_id }}; // '96041-nljpjj8jlv4.apps.googleusercontent.com';
   $CFG->google_client_secret = {{ .Data.data.google_client_secret }}; // '6Q7w_x4ESrl29a';
   $CFG->google_translate = {{ .Data.data.google_translate }};
@@ -207,7 +207,7 @@ if ( isset($CFG->apphome) ) {
 
 // This should be an absolute URL that will be used to generate previews
 // in Google Classroom
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->logo_url = {{ .Data.data.logo_url }};
 {{ end }}
 
@@ -222,7 +222,7 @@ $CFG->unify = true;
 
 // Go to https://console.developers.google.com/apis/credentials
 // Create and configure an API key and enter it here
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->google_map_api_key = {{ .Data.data.google_map_api_key }}; // 'Ve8eH490843cIA9IGl8';
 {{ end }}
 
@@ -262,7 +262,7 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 // menus will feature prominently in the UI.  In production, this should be
 // set to false so these non-end-user features are less prominent in the
 // navigation.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->DEVELOPER = {{ .Data.data.DEVELOPER }};
 {{ end}}
 
@@ -282,7 +282,7 @@ $CFG->casa_originator_id = md5($CFG->product_instance_guid);
 // backed up and not in the document root hierarchy.
 //    mkdir /backedup/tsugi_blobs
 // You can turn this on and off (false or unset means store in the database)
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->dataroot = {{ .Data.data.dataroot }};
 {{ end }}
 
@@ -313,14 +313,14 @@ if ( $CFG->DEVELOPER && ! isset($CFG->dataroot) ) {
 // These values configure the cookie used to record the overall
 // login in a long-lived encrypted cookie.   Look at the library
 // code createSecureCookie() for more detail on how these operate.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->cookiesecret = {{ .Data.data.cookiesecret }};
   $CFG->cookiepad = {{ .Data.data.cookiepad }};
 {{ end }}
 $CFG->cookiename = 'TSUGIAUTO';
 
 // Where the bulk mail comes from - should be a real address with a wildcard box you check
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->maildomain = {{ .Data.data.maildomain }}; // 'mail.example.com';
   $CFG->mailsecret = {{ .Data.data.mailsecret }};
 {{ end }}
@@ -334,10 +334,10 @@ $CFG->noncetime = 1800;
 // based on resource_link_id, oauth_consumer_key, etc are not
 // predictable or guessable.   Just make this a long random string.
 // See LTIX::getCompositeKey() for detail on how this operates.
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->sessionsalt = {{ .Data.data.sessionsalt }};
 {{ end }}
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
 // Timezone
   $CFG->timezone = {{ .Data.data.timezone }}; // Nice for due dates
 {{ end }}
@@ -380,7 +380,7 @@ $CFG->prefer_lti1_for_grade_send = true;
 // then git is not setup in your path
 // (Control Panel > System and Security > System > Advanced System Settings > Environment Variables)
 // (3) Then here in "config.php":
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->git_command = {{ .Data.data.git_command }};
 {{ end }}
 
@@ -407,12 +407,12 @@ $CFG->prefer_lti1_for_grade_send = true;
 // $CFG->git_command = '/home/csev/git';
 
 // Should we record launch activity - multi-bucket lossy historgram
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->launchactivity = {{ .Data.data.launchactivity }};
 {{ end }}
 
 // how many launches between event cleanups (probabilistic)
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->eventcheck = {{ .Data.data.eventcheck }};        // Set to false to suspend event recording
 {{ end }}
 $CFG->eventtime = 7*24*60*60;  // Length in seconds of the event buffer
@@ -426,7 +426,7 @@ $CFG->eventpushtime = 2;       // Maximum length in seconds to push events
 // http://php.net/manual/en/memcached.sessions.php
 
 // $CFG->memcache = 'tcp://memcache-tsugi.4984vw.cfg.use2.cache.amazonaws.com:11211';
-{{ with secret "kv/tsugi/<< lookup('env', 'DEPLOYMENT') >>" }}
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
   $CFG->memcache = {{ .Data.data.memcache }};
 {{ end }}
 if ( isset($CFG->memcache) && strlen($CFG->memcache) > 0 ) {
