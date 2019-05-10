@@ -8,3 +8,5 @@
       - { role: systemd, tags: [ "systemd" ] }
 
       - { role: ubuntu-test, tags: [ "ubuntu-test" ] }
+      
+      - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
