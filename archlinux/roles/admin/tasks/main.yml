@@ -1,5 +1,9 @@
 ---
 
+  - name: install awscli
+    pip:
+      name: awscli
+
   - name: copy zlogin
     copy:
       src: zlogin
