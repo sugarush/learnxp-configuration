@@ -49,6 +49,11 @@
   - name: setup postfix main_mailer_type
     shell: echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
+  - name: reload postfix
+    systemd:
+      name: postfix
+      state: reloaded
+
   - name: create efs directory
     file:
       state: directory
