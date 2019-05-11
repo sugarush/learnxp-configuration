@@ -1,0 +1,29 @@
+---
+
+  - name: remove /etc/resolv.conf
+    file:
+      path: /etc/resolv.conf
+      state: absent
+
+  - name: touch /etc/resolv.conf
+    file:
+      path: /etc/resolv.conf
+      state: touch
+
+  - name: add localhost nameserver to /etc/resolv.conf
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "nameserver 127.0.0.1$"
+      line: "nameserver 127.0.0.1"
+
+  - name: add aws nameserver to /etc/resolv.conf
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "nameserver 172.16.0.2$"
+      line: "nameserver 172.16.0.2"
+
+  - name: add aws search to /etc/resolv.conf
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}.{{ lookup('env', 'REGION') }}.aws$"
+      line: "{{ lookup('env', 'IDENTIFIER') }}-{{ lookup('env', 'ENVIRONMENT') }}.{{ lookup('env', 'REGION') }}.aws"
