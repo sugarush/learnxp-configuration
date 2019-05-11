@@ -70,7 +70,7 @@
 
   - name: update tsugi tools
     shell: >
-      cd "{{ directory }}/admin";
+      cd "{{ directory }}/admin/install";
       php update.php
 
   - name: template tusgi-consul-vault-check.py
