@@ -51,8 +51,8 @@
     file:
       state: directory
       path: /efs
-      owner: http
-      group: http
+      owner: www-data
+      group: www-data
       recurse: yes
 
   - name: copy git to gitx
