@@ -6,8 +6,8 @@
 # is /etc/mailname.
 
 # myhostname = tsugicloud.org
-myorigin = POSTFIX_ORIGIN_DOMAIN
-myhostname = POSTFIX_ORIGIN_DOMAIN
+myorigin = {{ postfix_origin_domain['data']['Value'] }}
+myhostname = {{ postfix_origin_domain['data']['Value'] }}
 mail_name = Tsugi
 
 smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
@@ -43,7 +43,7 @@ inet_interfaces = all
 inet_protocols = all
 
 # relayhost = [email-smtp.us-east-1.amazonaws.com]:587
-relayhost = POSTFIX_RELAYHOST
+relayhost = {{ postfix_relayhost['data']['Value'] }}
 smtp_sasl_auth_enable = yes
 smtp_sasl_security_options = noanonymous
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
@@ -51,4 +51,3 @@ smtp_use_tls = yes
 smtp_tls_security_level = encrypt
 smtp_tls_note_starttls_offer = yes
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
-
