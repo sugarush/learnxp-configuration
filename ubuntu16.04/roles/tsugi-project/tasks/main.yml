@@ -34,6 +34,21 @@
       state: started
       enabled: yes
 
+  - name: install mailutils
+    apt:
+      name: mailutils
+
+  - name: get tsugi mail domain from consul
+    consul_kv:
+      key: tsugi/{{ lookup('env', 'ROLE') }}/tsugi_mail_domain
+    register: tsugi_mail_domain
+
+  - name: setup postfix mailname
+    shell: \"postfix postfix/mailname string {{ tsugi_mail_domain['data']['Value'] }}\" | debconf-set-selections
+
+  - name: setup postfix main_mailer_type
+    shell: \"postfix postfix/main_mailer_type string 'Internet Site'\" | debconf-set-selections
+
   - name: create efs directory
     file:
       state: directory
