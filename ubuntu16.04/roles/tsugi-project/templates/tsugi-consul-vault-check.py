@@ -12,7 +12,12 @@ vault = hvac.Client(url='http://vault.service.consul:8200')
 vault.token = '{{ vault_token[lookup('env', 'ENVIRONMENT')] }}'
 
 consul_prefix = 'tsugi/{{ lookup('env', 'ROLE') }}'
-consul_keys = [ ]
+consul_keys = [
+    'tsugi_mail_domain',
+    'postfix_origin_domain',
+    'postfix_relayhost',
+    'postfix_sasl_password'
+]
 consul_keys_missing = [ ]
 
 vault_mount_point = 'kv'
