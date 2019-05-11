@@ -66,12 +66,12 @@
   - name: initialize tsugi database
     shell: >
       cd "{{ directory }}/admin";
-      php upgrade.php |& tee /tmp/debug_upgrade.txt
+      php upgrade.php
 
   - name: update tsugi tools
     shell: >
       cd "{{ directory }}/admin";
-      php update.php |& tee /tmp/debug_update.txt
+      php update.php
 
   - name: template tusgi-consul-vault-check.py
     template:
