@@ -6,3 +6,7 @@
   vault_token:
 
     development: s.GigN7UMO5IjLl7J4iCc6u0kF
+
+  efs:
+
+    development: 10.0.1.88
