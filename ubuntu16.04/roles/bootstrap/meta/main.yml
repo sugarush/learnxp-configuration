@@ -4,6 +4,7 @@
 
     - role: systemd
 
+    - role: resolvconf
     - role: ec2-metadata
     - role: hostname
     - role: users
