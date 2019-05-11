@@ -38,7 +38,7 @@
     apt:
       name: mailutils
 
-  - name: get tsugi mail domain from consul
+  - name: get tsugi_mail_domain from consul
     consul_kv:
       key: tsugi/{{ lookup('env', 'ROLE') }}/tsugi_mail_domain
     register: tsugi_mail_domain
@@ -48,6 +48,31 @@
 
   - name: setup postfix main_mailer_type
     shell: echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
+
+  - name: get postfix_origin_domain from consul
+    consul_kv:
+      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_origin_domain
+    register: postfix_origin_domain
+
+  - name: get postfix_relayhost from consul
+    consul_kv:
+      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_relayhost
+    register: postfix_relayhost
+
+  - name: template postfix configuration
+    template:
+      src: main.cf
+      dest: /etc/postfix/main.cf
+
+  - name: get postfix_sasl_password from consul
+    consul_kv:
+      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_sasl_password
+    register: postfix_sasl_password
+
+  - name: write sasl_passwd file
+    shell: >
+      echo "{{ postfix_sasl_password['data']['Value'] }}" > /etc/postfix/sasl_passwd;
+      postmap hash:/etc/postfix/sasl_passwd
 
   - name: reload postfix
     systemd:
