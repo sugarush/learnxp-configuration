@@ -34,10 +34,44 @@
       state: started
       enabled: yes
 
-#  - name: initialize tsugi database
-#    shell: >
-#      cd "{{ directory }}/admin";
-#      php upgrade.php |& tee /tmp/debug.txt
+  - name: create efs directory
+    file:
+      state: directory
+      path: /efs
+
+  - name: mount efs partition
+    mount:
+      src: "{{ efs[lookup('env', 'ENVIRONMENT')] }}:/"
+      path: /efs
+      opts: nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2
+      fstype: nfs4
+      state: mounted
+
+  - name: set efs owner and group
+    file:
+      state: directory
+      path: /efs
+      owner: http
+      group: http
+      recurse: yes
+
+  - name: copy git to gitx
+    copy:
+      src: /usr/bin/git
+      dest: /usr/local/bin/gitx
+      mode: a+s
+      owner: www-data
+      group: www-data
+
+  - name: initialize tsugi database
+    shell: >
+      cd "{{ directory }}/admin";
+      php upgrade.php |& tee /tmp/debug_upgrade.txt
+
+  - name: update tsugi tools
+    shell: >
+      cd "{{ directory }}/admin";
+      php update.php |& tee /tmp/debug_update.txt
 
   - name: template tusgi-consul-vault-check.py
     template:
