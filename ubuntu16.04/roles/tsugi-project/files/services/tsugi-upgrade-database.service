@@ -2,4 +2,4 @@
 Description=Upgrade Tsugi Database
 
 [Service]
-ExecStart=/bin/bash /usr/local/bin/tsugi_upgrade_database.sh
+ExecStart=/bin/bash /usr/local/bin/tsugi-upgrade-database.sh

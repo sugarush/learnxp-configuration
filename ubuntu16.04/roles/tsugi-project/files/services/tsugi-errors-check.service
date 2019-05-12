@@ -2,4 +2,4 @@
 Description=Check Tsugi Logs For Errors
 
 [Service]
-ExecStart=/bin/bash /usr/local/bin/tsugi_errors_check.sh
+ExecStart=/bin/bash /usr/local/bin/tsugi-errors-check.sh

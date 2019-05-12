@@ -2,4 +2,4 @@
 Description=Update Tsugi Tools
 
 [Service]
-ExecStart=/bin/bash /usr/local/bin/tsugi_update_tools.sh
+ExecStart=/bin/bash /usr/local/bin/tsugi-update-tools.sh

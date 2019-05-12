@@ -2,4 +2,4 @@
 Description=Update Tsugi
 
 [Service]
-ExecStart=/bin/bash /usr/local/bin/tsugi_update.sh
+ExecStart=/bin/bash /usr/local/bin/tsugi-update.sh
