@@ -129,6 +129,7 @@
       dest: /etc/systemd/system/tsugi-errors-check.service
 
   - name: copy tsugi-errors-check systemd timer definition
+    copy:
       src: timers/tsugi-errors-check.timer
       dest: /etc/systemd/system/tsugi-errors-check.timer
 
