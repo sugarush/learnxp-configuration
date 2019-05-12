@@ -206,6 +206,28 @@
       enabled: yes
       daemon_reload: yes
 
+  - name: copy tsugi-upgrade-database script
+    copy:
+      src: scripts/tsugi-upgrade-database.sh
+      dest: /usr/local/bin/tsugi-upgrade-database.sh
+
+  - name: copy tsugi-upgrade-database systemd service definition
+    copy:
+      src: services/tsugi-upgrade-database.service
+      dest: /etc/systemd/system/tsugi-upgrade-database.service
+
+  - name: copy tsugi-upgrade-database systemd timer definition
+    copy:
+      src: timers/tsugi-upgrade-database.timer
+      dest: /etc/systemd/system/tsugi-upgrade-database.timer
+
+  - name: enable and start tsugi-upgrade-database systemd timer
+    systemd:
+      name: tsugi-upgrade-database.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
   - name: template tusgi-consul-vault-check.py
     template:
       src: tsugi-consul-vault-check.py
