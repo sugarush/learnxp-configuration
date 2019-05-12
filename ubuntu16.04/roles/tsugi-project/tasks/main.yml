@@ -240,3 +240,10 @@
       dest: /etc/consul/check/tsugi-config.check.json
     notify:
       - reload consul@client
+
+  - name: template tsugi consul service definition
+    template:
+      src: tsugi.service.json
+      dest: /etc/consul/service/tsugi.service.json
+    notify:
+      - reload consul@client

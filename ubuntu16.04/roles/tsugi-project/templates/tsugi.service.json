@@ -1,0 +1,19 @@
+{
+  "service": {
+    "id": "{{ lookup('env', 'ROLE') }}",
+    "name": "{{ lookup('env', 'ROLE') }}",
+    "tags": [
+      "{{ lookup('env', 'ENVIRONMENT') }}",
+      "tsugi"
+    ],
+    "address": "{{ lookup('env', 'HOST_IP') }}",
+    "port": 80,
+    "checks": [
+      {
+        "tcp": "{{ lookup('env', 'HOST_IP') }}:80",
+        "interval": "30s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
