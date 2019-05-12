@@ -162,6 +162,28 @@
       enabled: yes
       daemon_reload: yes
 
+  - name: copy tsugi-update-tools script
+    copy:
+      src: scripts/tsugi-update-tools.sh
+      dest: /usr/local/bin/tsugi-update-tools.sh
+
+  - name: copy tsugi-update-tools systemd service definition
+    copy:
+      src: services/tsugi-update-tools.service
+      dest: /etc/systemd/system/tsugi-update-tools.service
+
+  - name: copy tsugi-update-tools systemd timer definition
+    copy:
+      src: timers/tsugi-update-tools.timer
+      dest: /etc/systemd/system/tsugi-update-tools.timer
+
+  - name: start and enable tsugi-update-tools systemd timer
+    systemd:
+      name: tsugi-update-tools.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
   - name: template tusgi-consul-vault-check.py
     template:
       src: tsugi-consul-vault-check.py
