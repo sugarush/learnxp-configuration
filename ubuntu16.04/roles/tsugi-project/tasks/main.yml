@@ -155,7 +155,7 @@
       src: timers/tsugi-update-main-page.timer
       dest: /etc/systemd/system/tsugi-update-main-page.timer
 
-  - name: start and enable tsugi-update-main-page systemd timer
+  - name: enable and start tsugi-update-main-page systemd timer
     systemd:
       name: tsugi-update-main-page.timer
       state: started
@@ -177,9 +177,31 @@
       src: timers/tsugi-update-tools.timer
       dest: /etc/systemd/system/tsugi-update-tools.timer
 
-  - name: start and enable tsugi-update-tools systemd timer
+  - name: enable and start tsugi-update-tools systemd timer
     systemd:
       name: tsugi-update-tools.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
+  - name: copy tsugi-update script
+    copy:
+      src: scripts/tsugi-update.sh
+      dest: /usr/local/bin/tsugi-update.sh
+
+  - name: copy tsugi-update systemd service definition
+    copy:
+      src: services/tsugi-update.service
+      dest: /etc/systemd/system/tsugi-update.service
+
+  - name: copy tsugi-update systemd timer definition
+    copy:
+      src: timers/tsugi-update.timer
+      dest: /etc/systemd/system/tsugi-update.timer
+
+  - name: enable and start tsugi-update systemd timer
+    systemd:
+      name: tsugi-update.timer
       state: started
       enabled: yes
       daemon_reload: yes
