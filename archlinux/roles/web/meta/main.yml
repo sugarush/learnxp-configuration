@@ -1,0 +1,7 @@
+---
+
+  dependencies:
+
+    - { role: consul-client, meta: web }
+    - { role: consul-template, meta: web }
+    - { role: nginx, meta: web }

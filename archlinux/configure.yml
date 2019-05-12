@@ -16,6 +16,7 @@
 
       - { role: nginx-blue, tags: [ "nginx-blue" ] }
       - { role: nginx-green, tags: [ "nginx-green" ] }
+      - { role: web, tags: [ "web" ] }
 
       - { role: tsugi-blue, tags: [ "tsugi-blue" ] }
       - { role: tsugi-green, tags: [ "tsugi-green" ] }

@@ -1,0 +1,30 @@
+---
+
+  - name: place nginx consul-template
+    copy:
+      src: nginx.conf
+      dest: /etc/consul-template/template/nginx.conf
+
+  - name: place nginx consul-template configuration
+    copy:
+      src: nginx.toml
+      dest: /etc/consul-template/config/nginx.toml
+
+  - name: start and enable consul-template@nginx
+    systemd:
+      name: consul-template@nginx
+      state: started
+      enabled: yes
+
+  - name: start and enable nginx
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: template web consul service file
+    template:
+      src: web.service.json
+      dest: /etc/consul/service/web.service.json
+    notify:
+      - reload consul@client
