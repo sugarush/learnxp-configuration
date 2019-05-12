@@ -1,0 +1,5 @@
+[Unit]
+Description=Tsugi Check Errors Timer
+
+[Timer]
+OnCalendar=*:0/30

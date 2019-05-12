@@ -1,0 +1,5 @@
+[Unit]
+Description=Update Tsugi Main Page
+
+[Service]
+ExecStart=/bin/bash /usr/local/bin/tsugi_update_main_page.sh

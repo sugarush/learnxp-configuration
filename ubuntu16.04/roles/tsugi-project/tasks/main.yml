@@ -1,5 +1,9 @@
 ---
 
+  - name: install mailutils
+    apt:
+      name: mailutils
+
   - name: create destination directory
     file:
       path: "{{ directory }}"
@@ -33,10 +37,6 @@
       name: consul-template@tsugi-config
       state: started
       enabled: yes
-
-  - name: install mailutils
-    apt:
-      name: mailutils
 
   - name: get tsugi_mail_domain from consul
     consul_kv:
@@ -117,6 +117,27 @@
     shell: >
       cd "{{ directory }}/admin/install";
       php update.php
+
+  - name: copy tsugi-errors-check script
+    copy:
+      src: scripts/tsugi-errors-check.sh
+      dest: /usr/local/bin/tsugi-errors-check.sh
+
+  - name: copy tsugi-errors-check systemd service definition
+    copy:
+      src: services/tsugi-errors-check.service
+      dest: /etc/systemd/system/tsugi-errors-check.service
+
+  - name: copy tsugi-errors-check systemd timer definition
+      src: timers/tsugi-errors-check.timer
+      dest: /etc/systemd/system/tsugi-errors-check.timer
+
+  - name: start and enable tsugi-errors-check systemd timer
+    systemd:
+      name: tsugi-errors-check.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
 
   - name: template tusgi-consul-vault-check.py
     template:
