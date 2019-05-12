@@ -140,6 +140,28 @@
       enabled: yes
       daemon_reload: yes
 
+  - name: copy tsugi-update-main-page script
+    copy:
+      src: scripts/tsugi-update-main-page.sh
+      dest: /usr/local/bin/tsugi-update-main-page.sh
+
+  - name: copy tsugi-update-main-page systemd service definition
+    copy:
+      src: services/tsugi-update-main-page.service
+      dest: /etc/systemd/system/tsugi-update-main-page.service
+
+  - name: copy tsugi-update-main-page systemd timer definition
+    copy:
+      src: timers/tsugi-update-main-page.timer
+      dest: /etc/systemd/system/tsugi-update-main-page.timer
+
+  - name: start and enable tsugi-update-main-page systemd timer
+    systemd:
+      name: tsugi-update-main-page.timer
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
   - name: template tusgi-consul-vault-check.py
     template:
       src: tsugi-consul-vault-check.py
