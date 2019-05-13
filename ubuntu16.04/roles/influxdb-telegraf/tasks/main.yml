@@ -44,10 +44,3 @@
       name: telegraf
       state: started
       enabled: yes
-
-  - name: copy influxdb-telegraf consul check
-    copy:
-      src: influxdb-telegraf.check.json
-      dest: /etc/consul/check/influxdb-telegraf.check.json
-    notify:
-      - reload consul@client

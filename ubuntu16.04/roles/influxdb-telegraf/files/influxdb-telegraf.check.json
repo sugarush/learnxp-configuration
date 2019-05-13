@@ -1,8 +1,0 @@
-{
-  "check": {
-    "id": "influxdb-telegraf",
-    "name": "InfluxDB Telegraf",
-    "args": [ "systemctl", "is-active", "telegraf" ],
-    "interval": "10s"
-  }
-}
