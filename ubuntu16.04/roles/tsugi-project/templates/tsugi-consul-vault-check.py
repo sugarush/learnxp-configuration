@@ -13,10 +13,7 @@ vault.token = '{{ vault_token[lookup('env', 'ENVIRONMENT')] }}'
 
 consul_prefix = 'tsugi/{{ lookup('env', 'ROLE') }}'
 consul_keys = [
-    'tsugi_mail_domain',
-    'postfix_origin_domain',
-    'postfix_relayhost',
-    'postfix_sasl_password'
+    'tsugi_mail_domain'
 ]
 consul_keys_missing = [ ]
 

@@ -38,6 +38,9 @@
       state: started
       enabled: yes
 
+  - name: setup postfix main_mailer_type
+    shell: echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
+
   - name: get tsugi_mail_domain from consul
     consul_kv:
       key: tsugi/{{ lookup('env', 'ROLE') }}/tsugi_mail_domain
@@ -46,17 +49,14 @@
   - name: setup postfix mailname
     shell: echo "postfix postfix/mailname string {{ tsugi_mail_domain['data']['Value'] }}" | debconf-set-selections
 
-  - name: setup postfix main_mailer_type
-    shell: echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
-
   - name: get postfix_origin_domain from consul
     consul_kv:
-      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_origin_domain
+      key: tsugi/postfix/origin_domain
     register: postfix_origin_domain
 
   - name: get postfix_relayhost from consul
     consul_kv:
-      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_relayhost
+      key: tsugi/postfix/relayhost
     register: postfix_relayhost
 
   - name: template postfix configuration
@@ -66,7 +66,7 @@
 
   - name: get postfix_sasl_password from consul
     consul_kv:
-      key: tsugi/{{ lookup('env', 'ROLE') }}/postfix_sasl_password
+      key: tsugi/postfix/sasl_password
     register: postfix_sasl_password
 
   - name: write sasl_passwd file
