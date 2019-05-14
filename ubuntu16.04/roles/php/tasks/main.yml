@@ -33,6 +33,8 @@
         - php7.3-xml
         - php7.3-gd
         - php7.3-intl
+        - php-memchache
+        - php-memchached
         - php-apcu
 
   - name: enable php modules
