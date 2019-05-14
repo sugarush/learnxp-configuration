@@ -10,3 +10,11 @@
       repo: "{{ main_repo['data']['Value'] }}"
       dest: /var/www/html
       force: yes
+
+  - name: change ownership of html directory
+    file:
+      state: directory
+      path: /var/www/html
+      owner: www-data
+      group: www-data
+      recurse: yes
