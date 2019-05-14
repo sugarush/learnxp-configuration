@@ -13,6 +13,12 @@
         "tcp": "{{ lookup('env', 'HOST_IP') }}:80",
         "interval": "30s",
         "timeout": "1s"
+      },
+      {
+        "http": "http://localhost/tsugi/store/",
+        "method": "GET",
+        "interval": "30s",
+        "timeout": "10s"
       }
     ]
   }
