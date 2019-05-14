@@ -112,7 +112,7 @@
     copy:
       src: /usr/bin/git
       dest: /usr/local/bin/gitx
-      mode: a+s
+      mode: ugo+rxs
       owner: www-data
       group: www-data
 
