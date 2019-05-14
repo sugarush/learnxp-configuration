@@ -8,3 +8,4 @@
       - { role: systemd, tags: [ "systemd" ] }
 
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
+      - { role: client-bbtsugi, tags: [ "client-bbtsugi" ] }
