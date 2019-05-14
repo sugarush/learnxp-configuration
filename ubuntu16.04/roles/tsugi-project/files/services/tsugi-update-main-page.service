@@ -2,4 +2,7 @@
 Description=Update Tsugi Main Page
 
 [Service]
+User=www-data
+Group=www-data
+
 ExecStart=/bin/bash /usr/local/bin/tsugi-update-main-page.sh

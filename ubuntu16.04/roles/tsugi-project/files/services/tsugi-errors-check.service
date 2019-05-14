@@ -2,4 +2,7 @@
 Description=Check Tsugi Logs For Errors
 
 [Service]
+User=www-data
+Group=www-data
+
 ExecStart=/bin/bash /usr/local/bin/tsugi-errors-check.sh

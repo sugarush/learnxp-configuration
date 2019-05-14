@@ -2,4 +2,7 @@
 Description=Upgrade Tsugi Database
 
 [Service]
+User=www-data
+Group=www-data
+
 ExecStart=/bin/bash /usr/local/bin/tsugi-upgrade-database.sh
