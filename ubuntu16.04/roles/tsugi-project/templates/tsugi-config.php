@@ -435,7 +435,9 @@ if ( isset($CFG->memcache) && strlen($CFG->memcache) > 0 ) {
 }
 
 // Note no "tcp://" for the memcached version of the url
-// $CFG->memcached = 'memcache-tsugi.4984vw.cfg.use2.cache.amazonaws.com:11211';
+{{ with secret "kv/tsugi/<< lookup('env', 'ROLE') >>" }}
+  $CFG->memcached = {{ .Data.data.memcached }};
+{{ end }}
 if ( isset($CFG->memcached) && strlen($CFG->memcached) > 0 ) {
     ini_set('session.save_handler', 'memcached');
     ini_set('session.save_path', $CFG->memcached);

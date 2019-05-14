@@ -43,6 +43,7 @@ vault_keys = [
     'maildomain',
     'mailsecret',
     'memcache',
+    'memcached',
     'owneremail',
     'ownername',
     'providekeys',
