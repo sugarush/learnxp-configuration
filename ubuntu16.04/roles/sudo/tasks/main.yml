@@ -3,6 +3,6 @@
 - name: add sudoers line
   lineinfile:
     dest: /etc/sudoers
-    regexp: '^%sudo .*$'
+    regexp: '^%sudo .*'
     line: "%sudo ALL=(ALL) NOPASSWD: ALL"
     state: present
