@@ -100,6 +100,11 @@
       fstype: nfs4
       state: mounted
 
+  - name: create blobs directory
+    file:
+      state: directory
+      path: /efs/blobs
+
   - name: set efs owner and group
     file:
       state: directory
