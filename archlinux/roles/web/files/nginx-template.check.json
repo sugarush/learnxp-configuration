@@ -1,0 +1,8 @@
+{
+  "check": {
+    "id": "nginx-template",
+    "name": "Nginx Template",
+    "args": [ "systemctl", "is-active", "consul-template@nginx" ],
+    "interval": "10s"
+  }
+}

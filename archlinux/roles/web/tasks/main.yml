@@ -28,3 +28,10 @@
       dest: /etc/consul/service/web.service.json
     notify:
       - reload consul@client
+
+  - name: copy nginx-template consul check file
+    copy:
+      src: nginx-template.check.json
+      dest: /etc/consul/check/nginx-template.check.json
+    notify:
+      - reload consul@client
