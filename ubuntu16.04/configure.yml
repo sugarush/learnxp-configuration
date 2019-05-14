@@ -10,3 +10,4 @@
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
       - { role: client-bbtsugi, tags: [ "client-bbtsugi" ] }
       - { role: client-cvtsugi, tags: [ "client-cvtsugi" ] }
+      - { role: client-d2tsugi, tags: [ "client-d2tsugi" ] }
