@@ -49,13 +49,13 @@
   - name: setup postfix main_mailer_type
     shell: echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
-  - name: get tsugi_mail_domain from consul
+  - name: get mail_domain from consul
     consul_kv:
-      key: tsugi/{{ lookup('env', 'ROLE') }}/tsugi_mail_domain
-    register: tsugi_mail_domain
+      key: tsugi/{{ lookup('env', 'ROLE') }}/mail_domain
+    register: mail_domain
 
   - name: setup postfix mailname
-    shell: echo "postfix postfix/mailname string {{ tsugi_mail_domain['data']['Value'] }}" | debconf-set-selections
+    shell: echo "postfix postfix/mailname string {{ mail_domain['data']['Value'] }}" | debconf-set-selections
 
   - name: get postfix_origin_domain from consul
     consul_kv:
