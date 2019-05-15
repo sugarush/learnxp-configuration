@@ -8,6 +8,6 @@
       - { role: systemd, tags: [ "systemd" ] }
 
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
-      - { role: client-bbtsugi, tags: [ "client-bbtsugi" ] }
+      - { role: client-bb-learn, tags: [ "client-bb-learn" ] }
       - { role: client-cvtsugi, tags: [ "client-cvtsugi" ] }
       - { role: client-d2tsugi, tags: [ "client-d2tsugi" ] }
