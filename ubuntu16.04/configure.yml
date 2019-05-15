@@ -10,4 +10,5 @@
       - { role: client-bb-learn, tags: [ "client-bb-learn" ] }
       - { role: client-brightspace-test, tags: [ "client-brightspace-test" ] }
       - { role: client-canvas, tags: [ "client-canvas" ] }
+      - { role: client-moodle, tags: [ "client-moodle" ] }
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
