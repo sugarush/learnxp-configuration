@@ -7,7 +7,7 @@
 
       - { role: systemd, tags: [ "systemd" ] }
 
-      - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
       - { role: client-bb-learn, tags: [ "client-bb-learn" ] }
-      - { role: client-canvas, tags: [ "client-canvas" ] }
       - { role: client-brightspace-test, tags: [ "client-brightspace-test" ] }
+      - { role: client-canvas, tags: [ "client-canvas" ] }
+      - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
