@@ -56,7 +56,7 @@ tail -n +$startpos $NEWERRORS >> $message
 
 # curl -i -X POST -H "Content-Type: multipart/form-data" -F "data=@$message" "http://www.dr-chuck.com/relay/index.php?to=csev@umich.edu&api=54321&subject=Errors:+$host"
 
-email='info@learnxp.com';
+email='email@sugarush.opsgenie.net';
 if [ -n "$TSUGI_OWNEREMAIL" ] ; then
    email=$TSUGI_OWNEREMAIL
 fi
@@ -74,4 +74,3 @@ mail $email -r $from -s "$host Errors" < $message
 cp $NEWERRORS $OLDERRORS
 
 echo Message sent.
-
