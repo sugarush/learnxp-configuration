@@ -1,10 +1,8 @@
 # !/bin/sh
 
-source /home/ubuntu/tsugi_env.sh
-
 NOW=`date +%Y%m%d`
 YEST=`expr $NOW - 1`
-host=$TSUGI_SERVICENAME
+host=`hostname`
 
 echo "Host: $host"
 
@@ -57,14 +55,8 @@ tail -n +$startpos $NEWERRORS >> $message
 # curl -i -X POST -H "Content-Type: multipart/form-data" -F "data=@$message" "http://www.dr-chuck.com/relay/index.php?to=csev@umich.edu&api=54321&subject=Errors:+$host"
 
 email='email@sugarush.opsgenie.net';
-if [ -n "$TSUGI_OWNEREMAIL" ] ; then
-   email=$TSUGI_OWNEREMAIL
-fi
 
 from='info@learnxp.com';
-if [ -n "$POSTFIX_MAIL_FROM" ] ; then
-   from=$POSTFIX_MAIL_FROM
-fi
 
 
 echo Mail sending to $email
