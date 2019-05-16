@@ -13,4 +13,4 @@
       - { role: client-moodle, tags: [ "client-moodle" ] }
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
 
-      - { role: tsugicloud-apps, tags: [ "tsugicloud-apps" ] }
+      - { role: tsugicloud-test, tags: [ "tsugicloud-test" ] }
