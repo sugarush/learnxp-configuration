@@ -12,3 +12,5 @@
       - { role: client-canvas, tags: [ "client-canvas" ] }
       - { role: client-moodle, tags: [ "client-moodle" ] }
       - { role: client-virginia-edu, tags: [ "client-virginia-edu" ] }
+
+      - { role: tsugicloud-apps, tags: [ "tsugicloud-apps" ] }
