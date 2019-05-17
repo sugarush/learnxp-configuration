@@ -2,4 +2,4 @@
 
   dependencies:
 
-    - role: client
+    - role: client-no-install
