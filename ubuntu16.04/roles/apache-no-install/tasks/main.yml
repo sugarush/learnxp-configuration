@@ -1,0 +1,27 @@
+---
+
+  - name: template apache2.conf
+    template:
+      src: apache2.conf
+      dest: /etc/apache2/apache2.conf
+
+  - name: enable apache modules
+    command: a2enmod -q rewrite dir expires headers
+
+  - name: remove index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: enable and start apache
+    systemd:
+      name: apache2
+      state: started
+      enabled: yes
+
+  - name: template apache telegraf configuration
+    template:
+      src: apache.telegraf.conf
+      dest: /etc/telegraf/telegraf.d/apache.telegraf.conf
+    notify:
+      - reload influxdb-telegraf
