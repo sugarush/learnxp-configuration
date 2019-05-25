@@ -1,6 +1,0 @@
----
-
-  - name: enable php modules
-    command: phpenmod mysqlnd pdo_mysql intl apcu
-    notify:
-      - reload apache
