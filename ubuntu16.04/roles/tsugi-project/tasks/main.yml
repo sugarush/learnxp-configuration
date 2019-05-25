@@ -1,9 +1,5 @@
 ---
 
-  - name: install mailutils
-    apt:
-      name: mailutils
-
   - name: create destination directory
     file:
       path: "{{ directory }}"
