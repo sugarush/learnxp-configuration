@@ -4,7 +4,6 @@
 
     - role: consul-client
     - role: consul-template
-    - role: nfs
     - role: apache
     - role: php
     - role: tsugi-website
