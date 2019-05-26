@@ -1,5 +1,10 @@
 ---
 
+  - name: wait for consul
+    wait_for:
+      host: localhost
+      port: 8500
+
   - name: create destination directory
     file:
       path: "{{ directory }}"
