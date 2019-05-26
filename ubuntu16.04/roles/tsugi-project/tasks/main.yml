@@ -86,7 +86,7 @@
   - name: reload postfix
     systemd:
       name: postfix
-      state: reloaded
+      state: restart
 
   - name: create efs directory
     file:
