@@ -11,3 +11,4 @@
         Name: "{{ lookup('env', 'HOSTNAME') }}"
         Cluster: "{{ lookup('env', 'ENVIRONMENT')}}-{{ lookup('env', 'ROLE') }}"
         Environent: "{{ lookup('env', 'ENVIRONMENT') }}"
+        Type: "client"
