@@ -18,7 +18,7 @@
 
   - name: set permissions on /etc/influxdb-relay
     file:
-      path: /etc/influxdb-relay/config"
+      path: /etc/influxdb-relay/config
       state: directory
       owner: influxdb
       group: influxdb
