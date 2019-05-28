@@ -62,6 +62,14 @@
       - daemon-reload
       - restart systemd-resolved
 
+  - name: template search domain configuration
+    template:
+      src: resolved.conf.d/search-domain.conf
+      dest: /etc/systemd/resolved.conf.d/search-domain.conf
+    notify:
+      - daemon-reload
+      - restart systemd-resolved
+
   - name: place systemd-journal-gatewayd socket configuration
     copy:
       src: systemd-journal-gatewayd.socket.d/socket.conf
