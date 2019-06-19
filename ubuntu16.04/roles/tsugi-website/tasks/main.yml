@@ -1,5 +1,10 @@
 ---
 
+  - name: wait for consul
+    wait_for:
+      host: localhost
+      port: 8500
+
   - name: get main_repo key from consul
     consul_kv:
       key: tsugi/{{ lookup('env', 'ROLE') }}/main_repo
