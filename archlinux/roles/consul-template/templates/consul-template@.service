@@ -8,6 +8,8 @@ PIDFile=/run/consul-template/%i.pid
 #User=consul
 #Group=consul
 
+ExecStartPre=/usr/bin/mkdir /run/consul-template
+
 ExecStart=/usr/bin/consul-template \
   --pid-file /run/consul-template/%i.pid \
   --config /etc/consul-template/config/%i.toml \
